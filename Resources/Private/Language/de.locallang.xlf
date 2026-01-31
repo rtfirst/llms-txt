@@ -27,6 +27,14 @@
                 <source>Include hidden pages in llms.txt</source>
                 <target>Versteckte Seiten in llms.txt einbeziehen</target>
             </trans-unit>
+            <trans-unit id="settings.apiKey" resname="settings.apiKey">
+                <source>API Key for protected access to ?format=clean/md endpoints</source>
+                <target>API-Schlüssel für geschützten Zugriff auf ?format=clean/md Endpunkte</target>
+            </trans-unit>
+            <trans-unit id="settings.apiKey.description" resname="settings.apiKey.description">
+                <source>If set, the ?format=clean and ?format=md endpoints require this API key. Pass via X-LLM-API-Key header or api_key query parameter. Leave empty for public access.</source>
+                <target>Wenn gesetzt, erfordern die Endpunkte ?format=clean und ?format=md diesen API-Schlüssel. Übergabe via X-LLM-API-Key Header oder api_key Query-Parameter. Leer lassen für öffentlichen Zugriff.</target>
+            </trans-unit>
             <trans-unit id="notification.robotsTxt.title" resname="notification.robotsTxt.title">
                 <source>LLMs.txt: robots.txt configuration</source>
                 <target>LLMs.txt: robots.txt-Konfiguration</target>

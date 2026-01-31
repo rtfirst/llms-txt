@@ -65,6 +65,7 @@ Add the Site Set "LLMs.txt Generator" to your site configuration, then configure
 | `llmsTxt.intro` | Website description shown in the intro section |
 | `llmsTxt.excludePages` | Comma-separated page UIDs to exclude |
 | `llmsTxt.includeHidden` | Include hidden pages (default: false) |
+| `llmsTxt.apiKey` | API key for protected access (empty = public access) |
 
 ### Page Properties (LLM Tab)
 
@@ -159,6 +160,51 @@ https://example.com/en/about/?format=md
 
 # French
 https://example.com/fr/a-propos/?format=md
+```
+
+## API Key Protection
+
+You can protect the `?format=clean` and `?format=md` endpoints with an API key. This is useful when you want to:
+
+- Restrict access to your own chatbots/RAG systems
+- Prevent external scraping of structured content
+- Control who can access your LLM-optimized content
+
+### Configuration
+
+Set the `llmsTxt.apiKey` in your Site Settings. Leave empty for public access (default).
+
+### Usage
+
+Pass the API key via **HTTP header** (recommended):
+
+```bash
+curl -H "X-LLM-API-Key: your-secret-key" https://example.com/about/?format=md
+```
+
+Or via **query parameter**:
+
+```
+https://example.com/about/?format=md&api_key=your-secret-key
+```
+
+### n8n Integration
+
+In n8n HTTP Request node, add the header:
+
+| Name | Value |
+|------|-------|
+| `X-LLM-API-Key` | `your-secret-key` |
+
+### Error Response
+
+Invalid or missing API key returns `401 Unauthorized`:
+
+```json
+{
+  "error": "Unauthorized",
+  "message": "Valid API key required. Provide via X-LLM-API-Key header or api_key query parameter."
+}
 ```
 
 ## Example llms.txt Output

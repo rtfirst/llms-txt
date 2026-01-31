@@ -27,3 +27,9 @@ settings:
     label: 'Include Hidden Pages'
     description: 'Include hidden pages in llms.txt generation'
     category: llmstxt
+  llmsTxt.apiKey:
+    type: string
+    default: ''
+    label: 'API Key for Format Access'
+    description: 'If set, ?format=clean/md requires this API key. Pass via query parameter (api_key=...) or header (X-LLM-API-Key). Leave empty for public access.'
+    category: llmstxt

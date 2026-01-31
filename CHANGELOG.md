@@ -5,6 +5,17 @@ All notable changes to the llms_txt extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-01-31
+
+### Added
+
+- **API Key Protection** for `?format=clean` and `?format=md` endpoints
+  - Optional protection via site setting `llmsTxt.apiKey`
+  - Supports header authentication: `X-LLM-API-Key: your-key`
+  - Supports query parameter: `?api_key=your-key`
+  - Returns 401 Unauthorized with JSON error for invalid/missing key
+  - Leave empty for public access (default, backward compatible)
+
 ## [1.0.0] - 2026-01-31
 
 ### Added

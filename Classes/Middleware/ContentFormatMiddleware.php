@@ -11,7 +11,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 use RTfirst\LlmsTxt\Service\CleanHtmlRendererService;
 use RTfirst\LlmsTxt\Service\MarkdownRendererService;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Http\Response;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
@@ -27,6 +29,8 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
 {
     private const FORMAT_CLEAN = 'clean';
     private const FORMAT_MARKDOWN = 'md';
+    private const API_KEY_HEADER = 'X-LLM-API-Key';
+    private const API_KEY_QUERY = 'api_key';
 
     public function __construct(
         private CleanHtmlRendererService $cleanHtmlRenderer,
@@ -42,6 +46,12 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
         // Only handle our special formats
         if ($format !== self::FORMAT_CLEAN && $format !== self::FORMAT_MARKDOWN) {
             return $handler->handle($request);
+        }
+
+        // Check API key protection
+        $authResponse = $this->checkApiKeyAuth($request);
+        if ($authResponse !== null) {
+            return $authResponse;
         }
 
         // Get page information from request (available before handler)
@@ -166,5 +176,59 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
         $languageConfig = $language->toArray();
 
         return (int)($languageConfig['languageId'] ?? 0);
+    }
+
+    /**
+     * Check API key authentication if configured.
+     *
+     * @return ResponseInterface|null Returns error response if auth fails, null if auth passes
+     */
+    private function checkApiKeyAuth(ServerRequestInterface $request): ?ResponseInterface
+    {
+        $site = $request->getAttribute('site');
+        if (!$site instanceof Site) {
+            return null;
+        }
+
+        $settings = $site->getSettings()->getAll();
+        $configuredApiKey = trim((string)($settings['llmsTxt']['apiKey'] ?? ''));
+
+        // No API key configured = public access
+        if ($configuredApiKey === '') {
+            return null;
+        }
+
+        // Get API key from request (header or query parameter)
+        $providedApiKey = $this->getApiKeyFromRequest($request);
+
+        // Check if API key matches
+        if ($providedApiKey === '' || !hash_equals($configuredApiKey, $providedApiKey)) {
+            return new JsonResponse(
+                [
+                    'error' => 'Unauthorized',
+                    'message' => 'Valid API key required. Provide via X-LLM-API-Key header or api_key query parameter.',
+                ],
+                401,
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract API key from request header or query parameter.
+     */
+    private function getApiKeyFromRequest(ServerRequestInterface $request): string
+    {
+        // Try header first (preferred)
+        $headerKey = $request->getHeaderLine(self::API_KEY_HEADER);
+        if ($headerKey !== '') {
+            return $headerKey;
+        }
+
+        // Fallback to query parameter
+        $queryParams = $request->getQueryParams();
+
+        return trim((string)($queryParams[self::API_KEY_QUERY] ?? ''));
     }
 }
