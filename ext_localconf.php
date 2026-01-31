@@ -6,8 +6,9 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 \defined('TYPO3') or die();
 
-// Exclude 'format' parameter from cHash calculation to allow ?format=clean and ?format=md
+// Exclude 'format' and 'api_key' parameters from cHash calculation
 $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'format';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'api_key';
 
 // Register cache for LLM format output (clean/md)
 // This cache stores rendered format output to reduce database load
