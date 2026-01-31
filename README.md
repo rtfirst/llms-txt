@@ -2,6 +2,8 @@
 
 Generates `llms.txt` for AI/LLM crawlers - a compact index of your website with SEO metadata and instructions for accessing page content in any language.
 
+> **Note:** This extension implements the [llmstxt.org specification](https://llmstxt.org/).
+
 ## Concept
 
 The extension provides a two-tier approach for LLM content access:

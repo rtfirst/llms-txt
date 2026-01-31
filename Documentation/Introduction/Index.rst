@@ -14,6 +14,11 @@ Language Model) crawlers with structured information about a website. Similar
 to how ``robots.txt`` guides traditional web crawlers, ``llms.txt`` helps AI
 systems understand your website's content and structure.
 
+..  tip::
+
+    This extension implements the specification from https://llmstxt.org/.
+    For detailed information about the standard, visit the official website.
+
 Concept
 =======
 
@@ -27,12 +32,13 @@ This extension provides a two-tier approach for LLM content access:
    -  Page structure with SEO descriptions and keywords
    -  Instructions for accessing full page content
 
-2. **Format Parameters**
+2. **Content Formats** (spec-compliant with https://llmstxt.org/)
 
-   Access actual page content via URL parameters:
+   Access page content in LLM-friendly formats:
 
+   -  ``.md`` suffix - Append to any URL for Markdown (e.g., ``/page.md``)
+   -  ``?format=md`` - Query parameter alternative for Markdown
    -  ``?format=clean`` - Semantic HTML without CSS/JS/navigation
-   -  ``?format=md`` - Clean Markdown with YAML frontmatter
 
 Features
 ========
@@ -51,13 +57,13 @@ language access:
 
 -  **Single llms.txt** - Contains the site structure in the default language
 -  **Language-specific content** - Access any page in any language using the
-   language URL prefix with ``?format=clean`` or ``?format=md``
+   language URL prefix with the ``.md`` suffix
 
 Examples:
 
--  Default: ``https://example.com/about/?format=md``
--  English: ``https://example.com/en/about/?format=md``
--  German: ``https://example.com/de/ueber-uns/?format=md``
+-  Default: ``https://example.com/about.md``
+-  English: ``https://example.com/en/about.md``
+-  German: ``https://example.com/de/ueber-uns.md``
 
 Page Properties
 ---------------
