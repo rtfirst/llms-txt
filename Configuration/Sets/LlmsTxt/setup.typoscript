@@ -1,0 +1,5 @@
+# LLMs.txt Header Link Tag
+# Adds <link rel="alternate"> pointing to llms.txt for all pages
+
+page.headerData.999 = TEXT
+page.headerData.999.value = <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">

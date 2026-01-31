@@ -1,0 +1,10 @@
+includes:
+    - ../../vendor/saschaegerer/phpstan-typo3/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - Classes
+    excludePaths:
+        - Tests
+    treatPhpDocTypesAsCertain: false

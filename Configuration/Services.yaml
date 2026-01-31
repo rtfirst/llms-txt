@@ -1,0 +1,72 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  RTfirst\LlmsTxt\:
+    resource: '../Classes/*'
+
+  RTfirst\LlmsTxt\EventListener\CacheFlushEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'llms-txt/cache-flush'
+
+  RTfirst\LlmsTxt\EventListener\BackendNotificationEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'llms-txt/backend-notification'
+
+  RTfirst\LlmsTxt\Service\MarkdownConverterService:
+    arguments:
+      $converters: !tagged_iterator llms_txt.content_converter
+
+  RTfirst\LlmsTxt\Converter\HeaderConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 100
+
+  RTfirst\LlmsTxt\Converter\TextConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 90
+
+  RTfirst\LlmsTxt\Converter\ImageConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 80
+
+  RTfirst\LlmsTxt\Converter\TableConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 70
+
+  RTfirst\LlmsTxt\Converter\BulletsConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 60
+
+  RTfirst\LlmsTxt\Converter\HtmlConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 50
+
+  RTfirst\LlmsTxt\Converter\MenuConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 40
+
+  RTfirst\LlmsTxt\Converter\DefaultConverter:
+    tags:
+      - name: llms_txt.content_converter
+        priority: 0
+
+  RTfirst\LlmsTxt\Middleware\ContentFormatMiddleware:
+    public: true
+    arguments:
+      $cache: '@cache.llms_txt_format'
+
+  cache.llms_txt_format:
+    class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
+    factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
+    arguments: ['llms_txt_format']

@@ -1,0 +1,5 @@
+..  This file is included in all other RST files via "include:: /Includes.rst.txt"
+
+..  You may add custom roles and directives here
+
+..  |release| replace:: 1.0.0

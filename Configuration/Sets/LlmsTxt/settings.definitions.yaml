@@ -1,0 +1,29 @@
+categories:
+  llmstxt:
+    label: 'LLMs-Text'
+
+settings:
+  llmsTxt.baseUrl:
+    type: string
+    default: ''
+    label: 'Base URL'
+    description: 'Full URL for llms.txt (e.g., https://example.com). Required for CLI generation.'
+    category: llmstxt
+  llmsTxt.intro:
+    type: text
+    default: ''
+    label: 'Website Description'
+    description: 'Description text shown in the llms.txt intro section'
+    category: llmstxt
+  llmsTxt.excludePages:
+    type: string
+    default: ''
+    label: 'Exclude Pages'
+    description: 'Comma-separated page UIDs to exclude from llms.txt'
+    category: llmstxt
+  llmsTxt.includeHidden:
+    type: bool
+    default: false
+    label: 'Include Hidden Pages'
+    description: 'Include hidden pages in llms.txt generation'
+    category: llmstxt

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2024-01-01T00:00:00Z">
+        <header/>
+        <body>
+            <trans-unit id="extension.title" resname="extension.title">
+                <source>LLMs.txt Generator</source>
+                <target>LLMs.txt Generator</target>
+            </trans-unit>
+            <trans-unit id="extension.description" resname="extension.description">
+                <source>Generates compact llms.txt files for AI/LLM crawlers with page overview and access documentation</source>
+                <target>Generiert kompakte llms.txt-Dateien für AI/LLM-Crawler mit Seitenübersicht und Zugriffsdokumentation</target>
+            </trans-unit>
+            <trans-unit id="pageStructure" resname="pageStructure">
+                <source>Page Structure</source>
+                <target>Seitenstruktur</target>
+            </trans-unit>
+            <trans-unit id="settings.intro" resname="settings.intro">
+                <source>Website description for llms.txt intro section</source>
+                <target>Website-Beschreibung für den Einleitungstext der llms.txt</target>
+            </trans-unit>
+            <trans-unit id="settings.excludePages" resname="settings.excludePages">
+                <source>Comma-separated page UIDs to exclude from llms.txt</source>
+                <target>Komma-getrennte Seiten-UIDs, die von llms.txt ausgeschlossen werden</target>
+            </trans-unit>
+            <trans-unit id="settings.includeHidden" resname="settings.includeHidden">
+                <source>Include hidden pages in llms.txt</source>
+                <target>Versteckte Seiten in llms.txt einbeziehen</target>
+            </trans-unit>
+            <trans-unit id="notification.robotsTxt.title" resname="notification.robotsTxt.title">
+                <source>LLMs.txt: robots.txt configuration</source>
+                <target>LLMs.txt: robots.txt-Konfiguration</target>
+            </trans-unit>
+            <trans-unit id="notification.robotsTxt.message" resname="notification.robotsTxt.message">
+                <source>The llms_txt extension recommends adding llms.txt references to your robots.txt file. See the extension documentation for details.</source>
+                <target>Die Extension llms_txt empfiehlt, Verweise auf llms.txt in Ihrer robots.txt-Datei hinzuzufügen. Details finden Sie in der Dokumentation der Extension.</target>
+            </trans-unit>
+            <trans-unit id="pages.tab.llm" resname="pages.tab.llm">
+                <source>LLM</source>
+                <target>LLM</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_description" resname="pages.tx_llmstxt_description">
+                <source>LLM Description</source>
+                <target>LLM-Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_description.description" resname="pages.tx_llmstxt_description.description">
+                <source>Special description for AI/LLM crawlers. If empty, the standard meta description is used.</source>
+                <target>Spezielle Beschreibung für AI/LLM-Crawler. Wenn leer, wird die Standard-Meta-Beschreibung verwendet.</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_summary" resname="pages.tx_llmstxt_summary">
+                <source>LLM Summary</source>
+                <target>LLM-Zusammenfassung</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_summary.description" resname="pages.tx_llmstxt_summary.description">
+                <source>Additional summary text for this page. Displayed as a quote block in llms.txt.</source>
+                <target>Zusätzlicher Zusammenfassungstext für diese Seite. Wird als Zitatblock in llms.txt angezeigt.</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_keywords" resname="pages.tx_llmstxt_keywords">
+                <source>LLM Keywords</source>
+                <target>LLM-Schlüsselwörter</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_keywords.description" resname="pages.tx_llmstxt_keywords.description">
+                <source>Comma-separated keywords/topics for this page, helping LLMs understand the content.</source>
+                <target>Komma-getrennte Schlüsselwörter/Themen für diese Seite, die LLMs helfen, den Inhalt zu verstehen.</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_exclude" resname="pages.tx_llmstxt_exclude">
+                <source>Exclude from llms.txt</source>
+                <target>Von llms.txt ausschließen</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_exclude.description" resname="pages.tx_llmstxt_exclude.description">
+                <source>If enabled, this page will not be included in the llms.txt file.</source>
+                <target>Wenn aktiviert, wird diese Seite nicht in die llms.txt-Datei aufgenommen.</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_priority" resname="pages.tx_llmstxt_priority">
+                <source>LLM Priority</source>
+                <target>LLM-Priorität</target>
+            </trans-unit>
+            <trans-unit id="pages.tx_llmstxt_priority.description" resname="pages.tx_llmstxt_priority.description">
+                <source>Priority for this page (0-100). Higher values appear first in llms.txt. Default is 0 (normal sorting by page tree).</source>
+                <target>Priorität für diese Seite (0-100). Höhere Werte erscheinen zuerst in llms.txt. Standard ist 0 (normale Sortierung nach Seitenbaum).</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
