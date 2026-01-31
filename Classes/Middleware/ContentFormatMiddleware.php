@@ -8,7 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use RTfirst\LlmsTxt\Service\CleanHtmlRendererService;
 use RTfirst\LlmsTxt\Service\MarkdownRendererService;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
@@ -17,24 +16,20 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
- * Middleware that provides LLM-optimized content formats.
+ * Middleware that provides LLM-optimized Markdown content format.
  *
  * Supports (spec-compliant with https://llmstxt.org/):
  * - /page.md - Markdown with YAML frontmatter (via URL suffix)
- * - ?format=md - Markdown (query parameter fallback)
- * - ?format=clean - Semantic HTML without CSS/JS/navigation
  *
  * Uses TYPO3 caching to reduce database load.
  */
 final readonly class ContentFormatMiddleware implements MiddlewareInterface
 {
-    private const FORMAT_CLEAN = 'clean';
     private const FORMAT_MARKDOWN = 'md';
     private const API_KEY_HEADER = 'X-LLM-API-Key';
     private const API_KEY_QUERY = 'api_key';
 
     public function __construct(
-        private CleanHtmlRendererService $cleanHtmlRenderer,
         private MarkdownRendererService $markdownRenderer,
         private FrontendInterface $cache,
     ) {}
@@ -96,14 +91,9 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
         // Get original HTML content
         $originalHtml = (string)$response->getBody();
 
-        // Render in requested format
-        if ($format === self::FORMAT_CLEAN) {
-            $content = $this->cleanHtmlRenderer->render($originalHtml, $pageId, $language, $baseUrl);
-            $contentType = 'text/html; charset=utf-8';
-        } else {
-            $content = $this->markdownRenderer->render($originalHtml, $pageId, $language, $baseUrl);
-            $contentType = 'text/plain; charset=utf-8';
-        }
+        // Render as Markdown
+        $content = $this->markdownRenderer->render($originalHtml, $pageId, $language, $baseUrl);
+        $contentType = 'text/plain; charset=utf-8';
 
         // Store in cache with page tag for targeted invalidation
         $this->cache->set(
@@ -124,11 +114,9 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Detect the requested format from URL suffix attribute or query parameter.
+     * Detect the requested Markdown format from URL suffix attribute.
      *
-     * Priority:
-     * 1. URL suffix (.md) via request attribute from UrlSuffixMiddleware
-     * 2. Query parameter (?format=md or ?format=clean)
+     * Only supports .md URL suffix (spec-compliant with llmstxt.org).
      */
     private function detectFormat(ServerRequestInterface $request): ?string
     {
@@ -136,14 +124,6 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
         $suffixFormat = $request->getAttribute(UrlSuffixMiddleware::REQUEST_ATTRIBUTE);
         if ($suffixFormat === self::FORMAT_MARKDOWN) {
             return self::FORMAT_MARKDOWN;
-        }
-
-        // Fallback to query parameter
-        $queryParams = $request->getQueryParams();
-        $queryFormat = $queryParams['format'] ?? null;
-
-        if ($queryFormat === self::FORMAT_CLEAN || $queryFormat === self::FORMAT_MARKDOWN) {
-            return $queryFormat;
         }
 
         return null;

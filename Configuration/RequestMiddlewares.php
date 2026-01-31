@@ -12,6 +12,16 @@ return [
                 'typo3/cms-frontend/timetracker',
             ],
         ],
+        // llms.txt middleware runs AFTER site resolver to have site context
+        'rtfirst/llms-txt/llms-txt' => [
+            'target' => \RTfirst\LlmsTxt\Middleware\LlmsTxtMiddleware::class,
+            'after' => [
+                'typo3/cms-frontend/site',
+            ],
+            'before' => [
+                'typo3/cms-frontend/page-resolver',
+            ],
+        ],
         // Content format middleware runs AFTER routing to transform content
         'rtfirst/llms-txt/content-format' => [
             'target' => \RTfirst\LlmsTxt\Middleware\ContentFormatMiddleware::class,

@@ -32,13 +32,11 @@ This extension provides a two-tier approach for LLM content access:
    -  Page structure with SEO descriptions and keywords
    -  Instructions for accessing full page content
 
-2. **Content Formats** (spec-compliant with https://llmstxt.org/)
+2. **Content Format** (spec-compliant with https://llmstxt.org/)
 
-   Access page content in LLM-friendly formats:
+   Access page content in LLM-friendly Markdown format:
 
    -  ``.md`` suffix - Append to any URL for Markdown (e.g., ``/page.md``)
-   -  ``?format=md`` - Query parameter alternative for Markdown
-   -  ``?format=clean`` - Semantic HTML without CSS/JS/navigation
 
 Features
 ========
@@ -75,11 +73,11 @@ A dedicated "LLM" tab in page properties allows editors to configure:
 -  Priority for ordering
 -  Exclusion from the index
 
-Clean Output Formats
---------------------
+Clean Markdown Output
+---------------------
 
-Both ``?format=clean`` and ``?format=md`` provide well-formatted content
-without:
+The Markdown format (``.md`` suffix or ``?format=md``) provides well-formatted
+content without:
 
 -  CSS stylesheets
 -  JavaScript code

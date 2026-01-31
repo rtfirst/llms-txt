@@ -145,6 +145,12 @@ final class MarkdownRendererService
         $content = preg_replace('/<script\b[^>]*>.*?<\/script>/is', '', $content) ?? $content;
         $content = preg_replace('/<style\b[^>]*>.*?<\/style>/is', '', $content) ?? $content;
 
+        // Remove visually-hidden spans (Bootstrap accessibility elements like "Previous" and "Next")
+        $content = preg_replace('/<span\b[^>]*class=["\'][^"\']*visually-hidden[^"\']*["\'][^>]*>.*?<\/span>/is', '', $content) ?? $content;
+
+        // Remove empty anchor tags (TYPO3 content element anchors like <a id="c1"></a>)
+        $content = preg_replace('/<a\b[^>]*id=["\'][^"\']*["\'][^>]*>\s*<\/a>/is', '', $content) ?? $content;
+
         // Remove navigation elements
         $content = preg_replace('/<nav\b[^>]*>.*?<\/nav>/is', '', $content) ?? $content;
         $content = preg_replace('/<header\b[^>]*class=["\'][^"\']*navbar[^"\']*["\'][^>]*>.*?<\/header>/is', '', $content) ?? $content;

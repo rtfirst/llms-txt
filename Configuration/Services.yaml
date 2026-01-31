@@ -8,6 +8,8 @@ services:
     resource: '../Classes/*'
 
   RTfirst\LlmsTxt\EventListener\CacheFlushEventListener:
+    arguments:
+      $cache: '@cache.llms_txt_format'
     tags:
       - name: event.listener
         identifier: 'llms-txt/cache-flush'
@@ -63,6 +65,11 @@ services:
 
   RTfirst\LlmsTxt\Middleware\UrlSuffixMiddleware:
     public: true
+
+  RTfirst\LlmsTxt\Middleware\LlmsTxtMiddleware:
+    public: true
+    arguments:
+      $cache: '@cache.llms_txt_format'
 
   RTfirst\LlmsTxt\Middleware\ContentFormatMiddleware:
     public: true

@@ -61,7 +61,7 @@ the extension via Site Settings.
     :type: string
     :default: (empty)
 
-    Optional API key to protect ``?format=clean`` and ``?format=md`` endpoints.
+    Optional API key to protect ``/llms.txt`` and the ``.md`` suffix endpoint.
 
     When set, requests to these endpoints require authentication via:
 

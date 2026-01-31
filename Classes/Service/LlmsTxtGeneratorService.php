@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace RTfirst\LlmsTxt\Service;
 
-use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Main service for generating llms.txt files.
+ * Main service for generating llms.txt content.
+ *
+ * Content is served dynamically via LlmsTxtMiddleware with API key protection.
  */
 final readonly class LlmsTxtGeneratorService
 {
@@ -25,55 +25,21 @@ final readonly class LlmsTxtGeneratorService
     ) {}
 
     /**
-     * Generate llms.txt files for all sites and languages.
-     */
-    public function generate(): void
-    {
-        $sites = $this->siteFinder->getAllSites();
-
-        foreach ($sites as $site) {
-            $this->generateForSite($site);
-        }
-    }
-
-    /**
-     * Generate llms.txt for a specific site (default language only).
+     * Get llms.txt content for a specific site.
      *
-     * Only generates a single llms.txt file for the default language (ID 0).
-     * Multi-language content is accessible via ?format=clean or ?format=md
+     * Generates content for the default language (ID 0).
+     * Multi-language content is accessible via .md suffix
      * on any page URL with the appropriate language prefix.
      */
-    public function generateForSite(Site $site): void
+    public function getContentForSite(Site $site): string
     {
-        // Only generate for default language (ID 0)
         $defaultLanguage = $site->getDefaultLanguage();
-
-        try {
-            $this->generateForLanguage($site, $defaultLanguage);
-        } catch (Exception $e) {
-            $this->logger->log(
-                LogLevel::ERROR,
-                'Failed to generate llms.txt for site {site}: {message}',
-                [
-                    'site' => $site->getIdentifier(),
-                    'message' => $e->getMessage(),
-                    'exception' => $e,
-                ],
-            );
-        }
-    }
-
-    /**
-     * Generate llms.txt for a specific site and language.
-     */
-    private function generateForLanguage(Site $site, SiteLanguage $language): void
-    {
         $settings = $this->getSettings($site);
         $excludePages = $this->parseExcludePages($settings['excludePages'] ?? '');
         $includeHidden = (bool)($settings['includeHidden'] ?? false);
         $intro = trim((string)($settings['intro'] ?? ''));
 
-        $pages = $this->pageTreeService->getPages($site, $language, $excludePages, $includeHidden);
+        $pages = $this->pageTreeService->getPages($site, $defaultLanguage, $excludePages, $includeHidden);
 
         if ($pages === []) {
             $this->logger->log(
@@ -81,27 +47,33 @@ final readonly class LlmsTxtGeneratorService
                 'No pages found for site {site} language {language}',
                 [
                     'site' => $site->getIdentifier(),
-                    'language' => $language->getLocale()->getLanguageCode(),
+                    'language' => $defaultLanguage->getLocale()->getLanguageCode(),
                 ],
             );
 
-            return;
+            return '';
         }
 
-        $baseUrl = $this->getBaseUrl($site, $language);
+        $baseUrl = $this->getBaseUrl($site, $defaultLanguage);
 
-        $content = $this->buildContent($site, $language, $pages, $baseUrl, $intro);
-        $filename = $this->getFilename();
-        $this->writeFile($filename, $content);
+        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro);
+    }
 
-        $this->logger->log(
-            LogLevel::INFO,
-            'Generated {filename} for site {site}',
-            [
-                'filename' => $filename,
-                'site' => $site->getIdentifier(),
-            ],
-        );
+    /**
+     * Get all site identifiers for cache invalidation.
+     *
+     * @return array<string>
+     */
+    public function getAllSiteIdentifiers(): array
+    {
+        $sites = $this->siteFinder->getAllSites();
+        $identifiers = [];
+
+        foreach ($sites as $site) {
+            $identifiers[] = $site->getIdentifier();
+        }
+
+        return $identifiers;
     }
 
     /**
@@ -134,6 +106,7 @@ final readonly class LlmsTxtGeneratorService
         }
 
         // Project metadata
+        $lines[] = '**Specification:** <https://llmstxt.org/>';
         $lines[] = '**Domain:** ' . $baseUrl;
         $lines[] = '**Language:** ' . $language->getLocale()->getLanguageCode();
         $lines[] = '**Generated:** ' . date('Y-m-d H:i:s');
@@ -142,17 +115,11 @@ final readonly class LlmsTxtGeneratorService
         // LLM-optimized content access section (spec-compliant with llmstxt.org)
         $lines[] = '## LLM-Optimized Content Access';
         $lines[] = '';
-        $lines[] = 'This site provides LLM-friendly output formats for all pages:';
+        $lines[] = 'This site provides LLM-friendly Markdown output for all pages:';
         $lines[] = '';
-        $lines[] = '### Markdown (Recommended)';
+        $lines[] = '### Markdown Format';
         $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
         $lines[] = '- **Example:** `' . $baseUrl . '/page-slug.md`';
-        $lines[] = '- **Alternative:** `?format=md` query parameter';
-        $lines[] = '';
-        $lines[] = '### Clean HTML';
-        $lines[] = 'Semantic HTML without CSS/JS/navigation. Best for RAG systems.';
-        $lines[] = '- **URL-Parameter:** `?format=clean`';
-        $lines[] = '- **Example:** `' . $baseUrl . '/page-slug/?format=clean`';
         $lines[] = '';
         $lines[] = '### Multi-Language Access';
         $lines[] = 'Use language-specific URL prefixes with the `.md` suffix:';
@@ -160,6 +127,25 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '- **English:** `' . $baseUrl . '/en/page.md`';
         $lines[] = '- **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)';
         $lines[] = '';
+
+        // Add authentication section if API key is configured
+        $settings = $this->getSettings($site);
+        $apiKey = trim((string)($settings['apiKey'] ?? ''));
+        if ($apiKey !== '') {
+            $lines[] = '### Authentication';
+            $lines[] = 'This site requires API key authentication for all LLM endpoints.';
+            $lines[] = '';
+            $lines[] = '**HTTP Header (recommended):**';
+            $lines[] = '```';
+            $lines[] = 'X-LLM-API-Key: <your-api-key>';
+            $lines[] = '```';
+            $lines[] = '';
+            $lines[] = '**Query Parameter:**';
+            $lines[] = '```';
+            $lines[] = $baseUrl . '/page.md?api_key=<your-api-key>';
+            $lines[] = '```';
+            $lines[] = '';
+        }
 
         // Page structure with descriptions (sorted by priority for display)
         $lines[] = '## ' . $this->getTranslation('pageStructure');
@@ -195,7 +181,7 @@ final readonly class LlmsTxtGeneratorService
 
             // Add format access hints (spec-compliant .md suffix)
             $mdUrl = $this->buildMarkdownUrl($pageUrl);
-            $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ') | [Clean HTML](' . $pageUrl . '?format=clean)';
+            $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ')';
             $lines[] = '';
         }
 
@@ -294,14 +280,6 @@ final readonly class LlmsTxtGeneratorService
     }
 
     /**
-     * Get the filename for llms.txt (always the same, regardless of language).
-     */
-    private function getFilename(): string
-    {
-        return 'llms.txt';
-    }
-
-    /**
      * Get the base URL for a site and language.
      */
     private function getBaseUrl(Site $site, SiteLanguage $language): string
@@ -334,20 +312,6 @@ final readonly class LlmsTxtGeneratorService
 
         // 4. Fallback: use relative path only
         return $languagePrefix;
-    }
-
-    /**
-     * Write content to file in public directory.
-     * Prepends UTF-8 BOM for proper encoding detection in browsers.
-     */
-    private function writeFile(string $filename, string $content): void
-    {
-        $publicPath = Environment::getPublicPath();
-        $filePath = $publicPath . '/' . $filename;
-
-        // Add UTF-8 BOM (Byte Order Mark) for proper encoding detection
-        $utf8Bom = "\xEF\xBB\xBF";
-        GeneralUtility::writeFile($filePath, $utf8Bom . $content);
     }
 
     /**

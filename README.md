@@ -13,10 +13,8 @@ The extension provides a two-tier approach for LLM content access:
    - Page structure with SEO descriptions and keywords
    - Instructions for accessing full page content
 
-2. **Content Formats** - Access page content via (spec-compliant with llmstxt.org):
+2. **Content Format** - Access page content via (spec-compliant with llmstxt.org):
    - `.md` suffix - Clean Markdown (e.g., `/page.md`)
-   - `?format=clean` - Semantic HTML without CSS/JS/navigation
-   - `?format=md` - Markdown via query parameter (fallback)
 
 ## Multi-Language Support
 
@@ -88,45 +86,12 @@ After cache flush, `llms.txt` is created in `public/`.
 
 ## Content Access Formats
 
-### Clean HTML (`?format=clean`)
-
-Returns semantic HTML without CSS, JavaScript, or navigation. Example:
-
-```
-https://example.com/about/?format=clean
-```
-
-Output:
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>About Us</title>
-  <meta name="description" content="Learn about our company...">
-  <meta name="robots" content="noindex, nofollow">
-</head>
-<body>
-<article>
-  <h1>About Us</h1>
-  <p>Our company was founded in...</p>
-</article>
-</body>
-</html>
-```
-
-### Markdown (`.md` suffix - recommended)
+### Markdown (`.md` suffix)
 
 Returns clean Markdown with YAML frontmatter. Spec-compliant with llmstxt.org.
 
 ```
 https://example.com/about.md
-```
-
-Alternative (query parameter):
-
-```
-https://example.com/about/?format=md
 ```
 
 Output:
@@ -173,7 +138,7 @@ https://example.com/fr/a-propos.md
 
 ## API Key Protection
 
-You can protect the `.md` suffix and `?format=clean` / `?format=md` endpoints with an API key. This is useful when you want to:
+You can protect both `/llms.txt` and the `.md` suffix endpoint with an API key. This is useful when you want to:
 
 - Restrict access to your own chatbots/RAG systems
 - Prevent external scraping of structured content
@@ -188,12 +153,17 @@ Set the `llmsTxt.apiKey` in your Site Settings. Leave empty for public access (d
 Pass the API key via **HTTP header** (recommended):
 
 ```bash
+# Access llms.txt
+curl -H "X-LLM-API-Key: your-secret-key" https://example.com/llms.txt
+
+# Access page as Markdown
 curl -H "X-LLM-API-Key: your-secret-key" https://example.com/about.md
 ```
 
 Or via **query parameter**:
 
 ```
+https://example.com/llms.txt?api_key=your-secret-key
 https://example.com/about.md?api_key=your-secret-key
 ```
 
@@ -223,23 +193,18 @@ Invalid or missing API key returns `401 Unauthorized`:
 
 > Your expert for quality products and services.
 
+**Specification:** <https://llmstxt.org/>
 **Domain:** https://example.com
 **Language:** de
 **Generated:** 2026-01-31 12:00:00
 
 ## LLM-Optimized Content Access
 
-This site provides LLM-friendly output formats for all pages:
+This site provides LLM-friendly Markdown output for all pages:
 
-### Markdown (Recommended)
+### Markdown Format
 Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
 - **Example:** `https://example.com/page-slug.md`
-- **Alternative:** `?format=md` query parameter
-
-### Clean HTML
-Semantic HTML without CSS/JS/navigation. Best for RAG systems.
-- **URL-Parameter:** `?format=clean`
-- **Example:** `https://example.com/page-slug/?format=clean`
 
 ### Multi-Language Access
 Use language-specific URL prefixes with the `.md` suffix:
@@ -251,20 +216,20 @@ Use language-specific URL prefixes with the `.md` suffix:
 
 - **[Home](/)**
   Welcome to our website with all important information.
-  [Markdown](/index.html.md) | [Clean HTML](/?format=clean)
+  [Markdown](/index.html.md)
 
   - **[About](/about/)**
     Learn about our company history and values.
-    [Markdown](/about.md) | [Clean HTML](/about/?format=clean)
+    [Markdown](/about.md)
 
   - **[Services](/services/)**
     Professional services for your needs.
     *Keywords: services, consulting, support*
-    `/services/?format=clean` | `/services/?format=md`
+    [Markdown](/services.md)
 
 - **[Contact](/contact/)**
   Get in touch with us via phone or email.
-  `/contact/?format=clean` | `/contact/?format=md`
+  [Markdown](/contact.md)
 ```
 
 ## robots.txt Configuration

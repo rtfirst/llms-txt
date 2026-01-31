@@ -21,23 +21,18 @@ Example llms.txt Output
 
     > Your expert for quality products and services.
 
+    **Specification:** <https://llmstxt.org/>
     **Domain:** https://example.com
     **Language:** de
     **Generated:** 2026-01-31 12:00:00
 
     ## LLM-Optimized Content Access
 
-    This site provides LLM-friendly output formats for all pages:
+    This site provides LLM-friendly Markdown output for all pages:
 
-    ### Markdown (Recommended)
+    ### Markdown Format
     Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
     - **Example:** `https://example.com/page-slug.md`
-    - **Alternative:** `?format=md` query parameter
-
-    ### Clean HTML
-    Semantic HTML without CSS/JS/navigation. Best for RAG systems.
-    - **URL-Parameter:** `?format=clean`
-    - **Example:** `https://example.com/page-slug/?format=clean`
 
     ### Multi-Language Access
     Use language-specific URL prefixes with the `.md` suffix:
@@ -49,67 +44,19 @@ Example llms.txt Output
 
     - **[Home](/)**
       Welcome to our website with all important information.
-      [Markdown](/index.html.md) | [Clean HTML](/?format=clean)
+      [Markdown](/index.html.md)
 
       - **[About](/about/)**
         Learn about our company history and values.
-        [Markdown](/about.md) | [Clean HTML](/about/?format=clean)
+        [Markdown](/about.md)
 
       - **[Services](/services/)**
         Professional services for your needs.
         *Keywords: services, consulting, support*
-        [Markdown](/services.md) | [Clean HTML](/services/?format=clean)
+        [Markdown](/services.md)
 
-Content Access Formats
-======================
-
-Clean HTML Format
------------------
-
-Access any page with ``?format=clean`` appended to the URL:
-
-..  code-block:: text
-
-    https://example.com/about/?format=clean
-
-This returns semantic HTML without:
-
--  CSS stylesheets
--  JavaScript code
--  Navigation menus
--  Header and footer
--  Sidebar content
-
-Example output:
-
-..  code-block:: html
-
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>About Us</title>
-      <meta name="description" content="Learn about our company...">
-      <meta name="robots" content="noindex, nofollow">
-      <meta name="generator" content="TYPO3 LLMs.txt Extension">
-    </head>
-    <body>
-    <article>
-      <header>
-        <h1>About Us</h1>
-      </header>
-      <main>
-        <p>Our company was founded in 1985...</p>
-        <h2>Our Values</h2>
-        <ul>
-          <li>Quality and reliability</li>
-          <li>Fair prices</li>
-        </ul>
-      </main>
-    </article>
-    </body>
-    </html>
+Content Access Format
+=====================
 
 Markdown Format
 ---------------
@@ -119,12 +66,6 @@ Access any page by appending ``.md`` to the URL (spec-compliant with llmstxt.org
 ..  code-block:: text
 
     https://example.com/about.md
-
-Alternative: Use the ``?format=md`` query parameter:
-
-..  code-block:: text
-
-    https://example.com/about/?format=md
 
 This returns clean Markdown with YAML frontmatter:
 
@@ -167,7 +108,7 @@ To access content in different languages, use the language prefix with the ``.md
     # French
     https://example.com/fr/a-propos.md
 
-The ``.md`` suffix and ``?format=clean`` / ``?format=md`` parameters work with any language URL.
+The ``.md`` suffix works with any language URL.
 
 HTML Header Link
 ================
@@ -243,12 +184,12 @@ You can manually trigger regeneration:
 Caching Behavior
 ================
 
-The ``?format=clean`` and ``?format=md`` parameters are excluded from the
-TYPO3 cache hash calculation. This means:
+The Markdown output (``.md`` suffix) is cached separately for 24 hours to reduce
+database load. This means:
 
--  The base page is cached normally
--  Format variations share the same cache entry
--  No duplicate cache entries for different formats
+-  The base page is cached normally by TYPO3
+-  The Markdown format output is cached separately
+-  Cache is invalidated when the page content changes
 
 The response includes an ``X-Robots-Tag: noindex`` header to prevent search
-engines from indexing the alternative formats.
+engines from indexing the Markdown format.
