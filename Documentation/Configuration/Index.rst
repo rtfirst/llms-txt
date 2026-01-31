@@ -57,6 +57,27 @@ the extension via Site Settings.
 
         Use with caution. Hidden pages are typically hidden for a reason.
 
+..  confval:: llmsTxt.apiKey
+    :type: string
+    :default: (empty)
+
+    Optional API key to protect ``?format=clean`` and ``?format=md`` endpoints.
+
+    When set, requests to these endpoints require authentication via:
+
+    -  **Header**: ``X-LLM-API-Key: your-key``
+    -  **Query parameter**: ``?api_key=your-key``
+
+    Unauthenticated requests receive a 401 Unauthorized response.
+
+    ..  note::
+
+        When an API key is configured, the ``<link rel="alternate">`` header
+        tag is automatically hidden from HTML pages. This prevents exposing
+        protected endpoints to public crawlers.
+
+    Leave empty for public access (default).
+
 Page Properties
 ===============
 

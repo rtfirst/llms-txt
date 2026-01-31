@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
 \defined('TYPO3') or die();
 
 // Exclude 'format' and 'api_key' parameters from cHash calculation
@@ -21,11 +19,5 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['llms_txt_f
     'groups' => ['pages'],
 ];
 
-// Add TypoScript for headerData (link tag)
-ExtensionManagementUtility::addTypoScriptSetup('
-# LLMs.txt Header Link Tag
-# Adds <link rel="alternate"> pointing to llms.txt for all pages
-
-page.headerData.999 = TEXT
-page.headerData.999.value = <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">
-');
+// Note: Header link is added via Site Set TypoScript (setup.typoscript)
+// It includes a condition to hide the link when API key protection is enabled

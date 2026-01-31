@@ -1,5 +1,8 @@
 # LLMs.txt Header Link Tag
 # Adds <link rel="alternate"> pointing to llms.txt for all pages
+# Only shown when no API key is configured (public access)
 
-page.headerData.999 = TEXT
-page.headerData.999.value = <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">
+[siteConfiguration("settings.llmsTxt.apiKey") == ""]
+    page.headerData.999 = TEXT
+    page.headerData.999.value = <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">
+[end]
