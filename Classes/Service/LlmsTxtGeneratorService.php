@@ -139,26 +139,26 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '**Generated:** ' . date('Y-m-d H:i:s');
         $lines[] = '';
 
-        // LLM-optimized content access section
+        // LLM-optimized content access section (spec-compliant with llmstxt.org)
         $lines[] = '## LLM-Optimized Content Access';
         $lines[] = '';
-        $lines[] = 'This site provides two LLM-friendly output formats for all pages:';
+        $lines[] = 'This site provides LLM-friendly output formats for all pages:';
+        $lines[] = '';
+        $lines[] = '### Markdown (Recommended)';
+        $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
+        $lines[] = '- **Example:** `' . $baseUrl . '/page-slug.md`';
+        $lines[] = '- **Alternative:** `?format=md` query parameter';
         $lines[] = '';
         $lines[] = '### Clean HTML';
-        $lines[] = 'Semantic HTML without CSS/JS/navigation. Best for RAG systems and structured data extraction.';
+        $lines[] = 'Semantic HTML without CSS/JS/navigation. Best for RAG systems.';
         $lines[] = '- **URL-Parameter:** `?format=clean`';
         $lines[] = '- **Example:** `' . $baseUrl . '/page-slug/?format=clean`';
         $lines[] = '';
-        $lines[] = '### Markdown';
-        $lines[] = 'Plain Markdown with YAML frontmatter. Best for simple text processing.';
-        $lines[] = '- **URL-Parameter:** `?format=md`';
-        $lines[] = '- **Example:** `' . $baseUrl . '/page-slug/?format=md`';
-        $lines[] = '';
         $lines[] = '### Multi-Language Access';
-        $lines[] = 'To access content in different languages, use the language-specific URL prefix:';
-        $lines[] = '- **Default language:** `' . $baseUrl . '/page/?format=md`';
-        $lines[] = '- **English:** `' . $baseUrl . '/en/page/?format=md`';
-        $lines[] = '- **Other languages:** Use the configured language prefix (e.g., `/de/`, `/fr/`)';
+        $lines[] = 'Use language-specific URL prefixes with the `.md` suffix:';
+        $lines[] = '- **Default language:** `' . $baseUrl . '/page.md`';
+        $lines[] = '- **English:** `' . $baseUrl . '/en/page.md`';
+        $lines[] = '- **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)';
         $lines[] = '';
 
         // Page structure with descriptions (sorted by priority for display)
@@ -193,8 +193,9 @@ final readonly class LlmsTxtGeneratorService
                 $lines[] = str_repeat('  ', $indent) . '  > ' . str_replace("\n", ' ', $summary);
             }
 
-            // Add format access hints
-            $lines[] = str_repeat('  ', $indent) . '  `' . $pageUrl . '?format=clean` | `' . $pageUrl . '?format=md`';
+            // Add format access hints (spec-compliant .md suffix)
+            $mdUrl = $this->buildMarkdownUrl($pageUrl);
+            $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ') | [Clean HTML](' . $pageUrl . '?format=clean)';
             $lines[] = '';
         }
 
@@ -261,6 +262,35 @@ final readonly class LlmsTxtGeneratorService
         }
 
         return $level;
+    }
+
+    /**
+     * Build a markdown URL by appending .md suffix (spec-compliant).
+     *
+     * Transforms:
+     * - /page/ -> /page.md
+     * - /page -> /page.md
+     * - / -> /index.html.md
+     */
+    private function buildMarkdownUrl(string $pageUrl): string
+    {
+        // Parse URL to handle base URL and path separately
+        $parsedUrl = parse_url($pageUrl);
+        $path = $parsedUrl['path'] ?? '/';
+
+        // Handle root path or remove trailing slash and append .md
+        $mdPath = $path === '/' || $path === '' ? '/index.html.md' : rtrim($path, '/') . '.md';
+
+        // Reconstruct URL
+        $baseUrl = '';
+        if (isset($parsedUrl['scheme'], $parsedUrl['host'])) {
+            $baseUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
+            if (isset($parsedUrl['port'])) {
+                $baseUrl .= ':' . $parsedUrl['port'];
+            }
+        }
+
+        return $baseUrl . $mdPath;
     }
 
     /**

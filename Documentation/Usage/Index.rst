@@ -27,38 +27,38 @@ Example llms.txt Output
 
     ## LLM-Optimized Content Access
 
-    This site provides two LLM-friendly output formats for all pages:
+    This site provides LLM-friendly output formats for all pages:
+
+    ### Markdown (Recommended)
+    Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+    - **Example:** `https://example.com/page-slug.md`
+    - **Alternative:** `?format=md` query parameter
 
     ### Clean HTML
     Semantic HTML without CSS/JS/navigation. Best for RAG systems.
     - **URL-Parameter:** `?format=clean`
     - **Example:** `https://example.com/page-slug/?format=clean`
 
-    ### Markdown
-    Plain Markdown with YAML frontmatter. Best for text processing.
-    - **URL-Parameter:** `?format=md`
-    - **Example:** `https://example.com/page-slug/?format=md`
-
     ### Multi-Language Access
-    To access content in different languages, use the language-specific URL prefix:
-    - **Default language:** `https://example.com/page/?format=md`
-    - **English:** `https://example.com/en/page/?format=md`
-    - **Other languages:** Use the configured language prefix (e.g., `/de/`, `/fr/`)
+    Use language-specific URL prefixes with the `.md` suffix:
+    - **Default language:** `https://example.com/page.md`
+    - **English:** `https://example.com/en/page.md`
+    - **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)
 
     ## Page Structure
 
     - **[Home](/)**
       Welcome to our website with all important information.
-      `/?format=clean` | `/?format=md`
+      [Markdown](/index.html.md) | [Clean HTML](/?format=clean)
 
       - **[About](/about/)**
         Learn about our company history and values.
-        `/about/?format=clean` | `/about/?format=md`
+        [Markdown](/about.md) | [Clean HTML](/about/?format=clean)
 
       - **[Services](/services/)**
         Professional services for your needs.
         *Keywords: services, consulting, support*
-        `/services/?format=clean` | `/services/?format=md`
+        [Markdown](/services.md) | [Clean HTML](/services/?format=clean)
 
 Content Access Formats
 ======================
@@ -114,7 +114,13 @@ Example output:
 Markdown Format
 ---------------
 
-Access any page with ``?format=md`` appended to the URL:
+Access any page by appending ``.md`` to the URL (spec-compliant with llmstxt.org):
+
+..  code-block:: text
+
+    https://example.com/about.md
+
+Alternative: Use the ``?format=md`` query parameter:
 
 ..  code-block:: text
 
@@ -148,20 +154,20 @@ This returns clean Markdown with YAML frontmatter:
 Multi-Language Access
 ---------------------
 
-To access content in different languages, simply use the language prefix in the URL:
+To access content in different languages, use the language prefix with the ``.md`` suffix:
 
 ..  code-block:: text
 
     # German (default language)
-    https://example.com/ueber-uns/?format=md
+    https://example.com/ueber-uns.md
 
     # English
-    https://example.com/en/about/?format=md
+    https://example.com/en/about.md
 
     # French
-    https://example.com/fr/a-propos/?format=md
+    https://example.com/fr/a-propos.md
 
-The ``?format=clean`` and ``?format=md`` parameters work with any language URL.
+The ``.md`` suffix and ``?format=clean`` / ``?format=md`` parameters work with any language URL.
 
 HTML Header Link
 ================

@@ -11,19 +11,20 @@ The extension provides a two-tier approach for LLM content access:
    - Page structure with SEO descriptions and keywords
    - Instructions for accessing full page content
 
-2. **Format Parameters** - Access actual page content via:
+2. **Content Formats** - Access page content via (spec-compliant with llmstxt.org):
+   - `.md` suffix - Clean Markdown (e.g., `/page.md`)
    - `?format=clean` - Semantic HTML without CSS/JS/navigation
-   - `?format=md` - Clean Markdown with YAML frontmatter
+   - `?format=md` - Markdown via query parameter (fallback)
 
 ## Multi-Language Support
 
 Instead of generating separate llms.txt files per language, this extension uses a simpler approach:
 
 - **Single llms.txt** - Contains the site structure in the default language
-- **Language-specific content** - Access any page in any language using the language URL prefix:
-  - Default: `https://example.com/about/?format=md`
-  - English: `https://example.com/en/about/?format=md`
-  - German: `https://example.com/de/about/?format=md`
+- **Language-specific content** - Access any page in any language using the `.md` suffix with language URL prefix:
+  - Default: `https://example.com/about.md`
+  - English: `https://example.com/en/about.md`
+  - German: `https://example.com/de/about.md`
 
 This approach is cleaner and follows how multi-language sites actually work.
 
@@ -112,9 +113,15 @@ Output:
 </html>
 ```
 
-### Markdown (`?format=md`)
+### Markdown (`.md` suffix - recommended)
 
-Returns clean Markdown with YAML frontmatter. Example:
+Returns clean Markdown with YAML frontmatter. Spec-compliant with llmstxt.org.
+
+```
+https://example.com/about.md
+```
+
+Alternative (query parameter):
 
 ```
 https://example.com/about/?format=md
@@ -149,22 +156,22 @@ Our company was founded in 1985...
 
 ### Accessing Different Languages
 
-Simply use the language prefix in the URL:
+Simply use the language prefix with the `.md` suffix:
 
 ```
 # German (default)
-https://example.com/ueber-uns/?format=md
+https://example.com/ueber-uns.md
 
 # English
-https://example.com/en/about/?format=md
+https://example.com/en/about.md
 
 # French
-https://example.com/fr/a-propos/?format=md
+https://example.com/fr/a-propos.md
 ```
 
 ## API Key Protection
 
-You can protect the `?format=clean` and `?format=md` endpoints with an API key. This is useful when you want to:
+You can protect the `.md` suffix and `?format=clean` / `?format=md` endpoints with an API key. This is useful when you want to:
 
 - Restrict access to your own chatbots/RAG systems
 - Prevent external scraping of structured content
@@ -179,13 +186,13 @@ Set the `llmsTxt.apiKey` in your Site Settings. Leave empty for public access (d
 Pass the API key via **HTTP header** (recommended):
 
 ```bash
-curl -H "X-LLM-API-Key: your-secret-key" https://example.com/about/?format=md
+curl -H "X-LLM-API-Key: your-secret-key" https://example.com/about.md
 ```
 
 Or via **query parameter**:
 
 ```
-https://example.com/about/?format=md&api_key=your-secret-key
+https://example.com/about.md?api_key=your-secret-key
 ```
 
 ### n8n Integration
@@ -220,33 +227,33 @@ Invalid or missing API key returns `401 Unauthorized`:
 
 ## LLM-Optimized Content Access
 
-This site provides two LLM-friendly output formats for all pages:
+This site provides LLM-friendly output formats for all pages:
+
+### Markdown (Recommended)
+Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+- **Example:** `https://example.com/page-slug.md`
+- **Alternative:** `?format=md` query parameter
 
 ### Clean HTML
 Semantic HTML without CSS/JS/navigation. Best for RAG systems.
 - **URL-Parameter:** `?format=clean`
 - **Example:** `https://example.com/page-slug/?format=clean`
 
-### Markdown
-Plain Markdown with YAML frontmatter. Best for text processing.
-- **URL-Parameter:** `?format=md`
-- **Example:** `https://example.com/page-slug/?format=md`
-
 ### Multi-Language Access
-To access content in different languages, use the language-specific URL prefix:
-- **Default language:** `https://example.com/page/?format=md`
-- **English:** `https://example.com/en/page/?format=md`
-- **Other languages:** Use the configured language prefix (e.g., `/de/`, `/fr/`)
+Use language-specific URL prefixes with the `.md` suffix:
+- **Default language:** `https://example.com/page.md`
+- **English:** `https://example.com/en/page.md`
+- **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)
 
 ## Page Structure
 
 - **[Home](/)**
   Welcome to our website with all important information.
-  `/?format=clean` | `/?format=md`
+  [Markdown](/index.html.md) | [Clean HTML](/?format=clean)
 
   - **[About](/about/)**
     Learn about our company history and values.
-    `/about/?format=clean` | `/about/?format=md`
+    [Markdown](/about.md) | [Clean HTML](/about/?format=clean)
 
   - **[Services](/services/)**
     Professional services for your needs.

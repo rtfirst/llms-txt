@@ -19,9 +19,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 /**
  * Middleware that provides LLM-optimized content formats.
  *
- * Supports:
+ * Supports (spec-compliant with https://llmstxt.org/):
+ * - /page.md - Markdown with YAML frontmatter (via URL suffix)
+ * - ?format=md - Markdown (query parameter fallback)
  * - ?format=clean - Semantic HTML without CSS/JS/navigation
- * - ?format=md - Markdown with YAML frontmatter
  *
  * Uses TYPO3 caching to reduce database load.
  */
@@ -40,11 +41,11 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $queryParams = $request->getQueryParams();
-        $format = $queryParams['format'] ?? null;
+        // Check for format from URL suffix (.md) or query parameter (?format=)
+        $format = $this->detectFormat($request);
 
         // Only handle our special formats
-        if ($format !== self::FORMAT_CLEAN && $format !== self::FORMAT_MARKDOWN) {
+        if ($format === null) {
             return $handler->handle($request);
         }
 
@@ -120,6 +121,32 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
             ->withHeader('X-Content-Format', $format)
             ->withHeader('X-Robots-Tag', 'noindex')
             ->withHeader('X-Cache', 'MISS');
+    }
+
+    /**
+     * Detect the requested format from URL suffix attribute or query parameter.
+     *
+     * Priority:
+     * 1. URL suffix (.md) via request attribute from UrlSuffixMiddleware
+     * 2. Query parameter (?format=md or ?format=clean)
+     */
+    private function detectFormat(ServerRequestInterface $request): ?string
+    {
+        // Check for URL suffix format (set by UrlSuffixMiddleware)
+        $suffixFormat = $request->getAttribute(UrlSuffixMiddleware::REQUEST_ATTRIBUTE);
+        if ($suffixFormat === self::FORMAT_MARKDOWN) {
+            return self::FORMAT_MARKDOWN;
+        }
+
+        // Fallback to query parameter
+        $queryParams = $request->getQueryParams();
+        $queryFormat = $queryParams['format'] ?? null;
+
+        if ($queryFormat === self::FORMAT_CLEAN || $queryFormat === self::FORMAT_MARKDOWN) {
+            return $queryFormat;
+        }
+
+        return null;
     }
 
     /**

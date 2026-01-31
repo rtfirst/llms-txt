@@ -5,6 +5,23 @@ All notable changes to the llms_txt extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-01-31
+
+### Added
+
+- **Spec-compliant URL format** per [llmstxt.org](https://llmstxt.org/)
+  - Markdown via `.md` URL suffix: `/page.md` instead of `?format=md`
+  - Root page: `/index.html.md`
+  - New `UrlSuffixMiddleware` for URL rewriting before routing
+- Query parameter `?format=md` remains as fallback for compatibility
+
+### Changed
+
+- Updated `llms.txt` output to use `.md` suffix URLs
+- API key protection works with both URL formats:
+  - `/page.md?api_key=xxx`
+  - Header: `X-LLM-API-Key: xxx`
+
 ## [1.2.0] - 2026-01-31
 
 ### Changed
