@@ -59,18 +59,11 @@ final class TableConverter extends AbstractContentConverter
             $maxColumns = max($maxColumns, \count($cells));
         }
 
-        if ($maxColumns === 0) {
-            return '';
-        }
-
         // Build Markdown table
         $lines = [];
 
-        // First row (header)
+        // First row (header) - always exists since $rows was non-empty after filter
         $firstRow = array_shift($tableRows);
-        if ($firstRow === null) {
-            return '';
-        }
 
         // Pad first row to max columns
         while (\count($firstRow) < $maxColumns) {
