@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-\defined('TYPO3') or die();
+\defined('TYPO3') || die();
 
 // Exclude 'format' and 'api_key' parameters from cHash calculation
 $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'format';

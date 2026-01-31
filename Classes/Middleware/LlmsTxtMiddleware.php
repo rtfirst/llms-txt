@@ -46,7 +46,7 @@ final readonly class LlmsTxtMiddleware implements MiddlewareInterface
 
         // Check API key protection (via ApiKeyAuthenticationTrait)
         $authResponse = $this->checkApiKeyAuth($request, $site);
-        if ($authResponse !== null) {
+        if ($authResponse instanceof ResponseInterface) {
             return $authResponse;
         }
 
