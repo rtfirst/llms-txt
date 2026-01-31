@@ -1,5 +1,5 @@
 includes:
-    - ../../vendor/saschaegerer/phpstan-typo3/extension.neon
+    - vendor/saschaegerer/phpstan-typo3/extension.neon
 
 parameters:
     level: 8

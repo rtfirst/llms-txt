@@ -50,7 +50,7 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
 
         // Check API key protection
         $authResponse = $this->checkApiKeyAuth($request);
-        if ($authResponse !== null) {
+        if ($authResponse instanceof ResponseInterface) {
             return $authResponse;
         }
 
