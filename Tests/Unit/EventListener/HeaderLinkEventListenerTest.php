@@ -10,17 +10,25 @@ use Psr\Http\Message\ServerRequestInterface;
 use RTfirst\LlmsTxt\EventListener\HeaderLinkEventListener;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteSettings;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 
+/**
+ * Tests for HeaderLinkEventListener.
+ *
+ * Note: These tests use different approaches for TYPO3 13 and 14 due to
+ * the removal of TypoScriptFrontendController in TYPO3 14.
+ */
 final class HeaderLinkEventListenerTest extends TestCase
 {
     private HeaderLinkEventListener $subject;
+    private bool $isTypo3v14;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->subject = new HeaderLinkEventListener();
+        // TYPO3 14 has getContent()/setContent() on the event
+        $this->isTypo3v14 = method_exists(AfterCacheableContentIsGeneratedEvent::class, 'getContent');
     }
 
     #[Test]
@@ -36,21 +44,13 @@ final class HeaderLinkEventListenerTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getAttribute')->with('site')->willReturn($site);
 
-        $controller = $this->createMock(TypoScriptFrontendController::class);
-        $controller->content = '<html><head><title>Test</title></head><body></body></html>';
-
-        $event = new AfterCacheableContentIsGeneratedEvent(
-            $request,
-            $controller,
-            'test-cache-id',
-            true,
-        );
+        $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
 
         ($this->subject)($event);
 
         self::assertStringContainsString(
             '<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">',
-            $controller->content,
+            $this->getContentFromEvent($event),
         );
     }
 
@@ -67,21 +67,13 @@ final class HeaderLinkEventListenerTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getAttribute')->with('site')->willReturn($site);
 
-        $controller = $this->createMock(TypoScriptFrontendController::class);
-        $controller->content = '<html><head><title>Test</title></head><body></body></html>';
-
-        $event = new AfterCacheableContentIsGeneratedEvent(
-            $request,
-            $controller,
-            'test-cache-id',
-            true,
-        );
+        $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
 
         ($this->subject)($event);
 
         self::assertStringNotContainsString(
             '<link rel="alternate"',
-            $controller->content,
+            $this->getContentFromEvent($event),
         );
     }
 
@@ -91,20 +83,12 @@ final class HeaderLinkEventListenerTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getAttribute')->with('site')->willReturn(null);
 
-        $controller = $this->createMock(TypoScriptFrontendController::class);
         $originalContent = '<html><head><title>Test</title></head><body></body></html>';
-        $controller->content = $originalContent;
-
-        $event = new AfterCacheableContentIsGeneratedEvent(
-            $request,
-            $controller,
-            'test-cache-id',
-            true,
-        );
+        $event = $this->createEvent($request, $originalContent);
 
         ($this->subject)($event);
 
-        self::assertSame($originalContent, $controller->content);
+        self::assertSame($originalContent, $this->getContentFromEvent($event));
     }
 
     #[Test]
@@ -120,21 +104,13 @@ final class HeaderLinkEventListenerTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getAttribute')->with('site')->willReturn($site);
 
-        $controller = $this->createMock(TypoScriptFrontendController::class);
-        $controller->content = '<html><head><title>Test</title></head><body></body></html>';
-
-        $event = new AfterCacheableContentIsGeneratedEvent(
-            $request,
-            $controller,
-            'test-cache-id',
-            true,
-        );
+        $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
 
         ($this->subject)($event);
 
         self::assertMatchesRegularExpression(
             '/<link rel="alternate"[^>]+>\n<\/head>/',
-            $controller->content,
+            $this->getContentFromEvent($event),
         );
     }
 
@@ -151,19 +127,52 @@ final class HeaderLinkEventListenerTest extends TestCase
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getAttribute')->with('site')->willReturn($site);
 
-        $controller = $this->createMock(TypoScriptFrontendController::class);
         $originalContent = '<html><body>No head tag</body></html>';
-        $controller->content = $originalContent;
+        $event = $this->createEvent($request, $originalContent);
 
-        $event = new AfterCacheableContentIsGeneratedEvent(
+        ($this->subject)($event);
+
+        self::assertSame($originalContent, $this->getContentFromEvent($event));
+    }
+
+    /**
+     * Creates an event instance compatible with both TYPO3 13 and 14.
+     */
+    private function createEvent(ServerRequestInterface $request, string $content): AfterCacheableContentIsGeneratedEvent
+    {
+        if ($this->isTypo3v14) {
+            // TYPO3 14: Event has getContent()/setContent()
+            return new AfterCacheableContentIsGeneratedEvent(
+                $request,
+                $content,
+                'test-cache-id',
+                true,
+            );
+        }
+
+        // TYPO3 13: Event uses TypoScriptFrontendController
+        // @phpstan-ignore-next-line Class exists in TYPO3 13
+        $controller = $this->createMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class);
+        $controller->content = $content;
+
+        return new AfterCacheableContentIsGeneratedEvent(
             $request,
             $controller,
             'test-cache-id',
             true,
         );
+    }
 
-        ($this->subject)($event);
+    /**
+     * Gets content from event compatible with both TYPO3 13 and 14.
+     */
+    private function getContentFromEvent(AfterCacheableContentIsGeneratedEvent $event): string
+    {
+        if ($this->isTypo3v14) {
+            return $event->getContent();
+        }
 
-        self::assertSame($originalContent, $controller->content);
+        // @phpstan-ignore-next-line Method exists in TYPO3 13
+        return $event->getController()->content;
     }
 }
