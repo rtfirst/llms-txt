@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RTfirst\LlmsTxt\EventListener;
 
-use TYPO3\CMS\Core\Site\Entity\SiteInterface;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 
 /**
@@ -20,7 +20,7 @@ final class HeaderLinkEventListener
         $request = $event->getRequest();
         $site = $request->getAttribute('site');
 
-        if (!$site instanceof SiteInterface) {
+        if (!$site instanceof Site) {
             return;
         }
 
@@ -31,6 +31,7 @@ final class HeaderLinkEventListener
         }
 
         // TYPO3 14: use getContent()/setContent(), TYPO3 13: use getController()->content
+        // @phpstan-ignore function.impossibleType (runtime check for TYPO3 version compatibility)
         if (method_exists($event, 'getContent')) {
             // TYPO3 14+
             $content = $event->getContent();
