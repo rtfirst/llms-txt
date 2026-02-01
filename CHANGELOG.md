@@ -5,6 +5,23 @@ All notable changes to the llms_txt extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2026-02-01
+
+### Added
+
+- Unit tests for HeaderLinkEventListener
+
+### Changed
+
+- Update dev dependencies: phpstan ^2.1, phpstan-typo3 ^2.0, rector ^2.0
+- Apply Rector fixes (First Class Callable syntax)
+
+### Fixed
+
+- TYPO3 14 compatibility for HeaderLinkEventListener (use getContent()/setContent())
+- PHPStan errors for TYPO3 13/14 compatibility
+- GitHub repository URLs in composer.json
+
 ## [1.0.3] - 2026-02-01
 
 ### Added
