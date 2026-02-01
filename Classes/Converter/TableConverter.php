@@ -54,7 +54,7 @@ final class TableConverter extends AbstractContentConverter
         // Parse rows and find max column count
         foreach ($rows as $row) {
             $cells = explode('|', $row);
-            $cells = array_map('trim', $cells);
+            $cells = array_map(trim(...), $cells);
             $tableRows[] = $cells;
             $maxColumns = max($maxColumns, \count($cells));
         }

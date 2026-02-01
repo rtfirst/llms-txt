@@ -216,7 +216,7 @@ final class MarkdownRendererService
 
         // Remove trailing whitespace from each line
         $lines = explode("\n", $markdown);
-        $lines = array_map('rtrim', $lines);
+        $lines = array_map(rtrim(...), $lines);
 
         // Remove excessive empty lines (keep max 1 empty line between blocks)
         $result = [];

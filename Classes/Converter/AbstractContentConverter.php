@@ -129,7 +129,7 @@ abstract class AbstractContentConverter implements ContentConverterInterface
         // Replace multiple newlines with double newline (paragraph break)
         $text = preg_replace('/\n{3,}/', "\n\n", $text) ?? $text;
         // Trim each line
-        $lines = array_map('trim', explode("\n", $text));
+        $lines = array_map(trim(...), explode("\n", $text));
 
         return implode("\n", $lines);
     }
