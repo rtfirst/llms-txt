@@ -1,6 +1,12 @@
 # TYPO3 Extension: llms_txt
 
-Generates `llms.txt` for AI/LLM crawlers - a compact index of your website with SEO metadata and instructions for accessing page content in any language.
+[![TYPO3 13](https://img.shields.io/badge/TYPO3-13-orange.svg)](https://get.typo3.org/version/13)
+[![TYPO3 14](https://img.shields.io/badge/TYPO3-14-orange.svg)](https://get.typo3.org/version/14)
+[![Latest Stable Version](https://poser.pugx.org/rtfirst/llms-txt/v/stable)](https://packagist.org/packages/rtfirst/llms-txt)
+[![Total Downloads](https://poser.pugx.org/rtfirst/llms-txt/downloads)](https://packagist.org/packages/rtfirst/llms-txt)
+[![License](https://poser.pugx.org/rtfirst/llms-txt/license)](https://packagist.org/packages/rtfirst/llms-txt)
+
+Generates `llms.txt` for AI/LLM crawlers - a compact index of your website with SEO metadata and instructions for accessing page content in any language. Optionally protect access with an API key.
 
 > **Note:** This extension implements the [llmstxt.org specification](https://llmstxt.org/).
 

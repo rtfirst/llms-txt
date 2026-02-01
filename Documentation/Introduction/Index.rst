@@ -91,6 +91,18 @@ HTML Header Link
 The extension adds a ``<link rel="alternate">`` tag to all HTML pages,
 pointing to the ``llms.txt`` file.
 
+Optional API Key Protection
+---------------------------
+
+Protect your LLM endpoints with an optional API key:
+
+-  Restrict access to your own chatbots/RAG systems
+-  Prevent external scraping of structured content
+-  Control who can access your LLM-optimized content
+
+When configured, the API key can be passed via HTTP header (``X-LLM-API-Key``)
+or query parameter (``api_key``).
+
 Use Cases
 =========
 

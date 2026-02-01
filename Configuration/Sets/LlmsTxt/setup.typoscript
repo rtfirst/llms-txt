@@ -1,8 +1,3 @@
-# LLMs.txt Header Link Tag
-# Adds <link rel="alternate"> pointing to llms.txt for all pages
-# Only shown when no API key is configured (public access)
-
-[siteConfiguration("settings.llmsTxt.apiKey") == ""]
-    page.headerData.999 = TEXT
-    page.headerData.999.value = <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">
-[end]
+# LLMs.txt Site Set
+# Header link is added via PHP EventListener (HeaderLinkEventListener)
+# This ensures compatibility with any TYPO3 theme/template

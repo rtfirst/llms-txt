@@ -31,7 +31,7 @@ final class MarkdownRendererService
 
         // Extract and convert main content
         $mainContent = $this->extractMainContent($originalHtml);
-        $markdownContent = $this->convertToMarkdown($mainContent);
+        $markdownContent = $this->convertToMarkdown($mainContent, $baseUrl);
 
         // Build Markdown document with YAML frontmatter
         $lines = [];
@@ -176,7 +176,7 @@ final class MarkdownRendererService
     /**
      * Convert HTML to Markdown.
      */
-    private function convertToMarkdown(string $html): string
+    private function convertToMarkdown(string $html, string $baseUrl): string
     {
         if ($html === '') {
             return '';
@@ -195,6 +195,9 @@ final class MarkdownRendererService
 
         // Clean up the markdown
         $markdown = $this->cleanupMarkdown($markdown);
+
+        // Convert relative links to absolute URLs
+        $markdown = $this->convertRelativeLinksToAbsolute($markdown, $baseUrl);
 
         return trim($markdown);
     }
@@ -244,5 +247,36 @@ final class MarkdownRendererService
     {
         // Escape quotes and backslashes
         return str_replace(['\\', '"'], ['\\\\', '\\"'], $value);
+    }
+
+    /**
+     * Convert relative links and image sources to absolute URLs.
+     *
+     * Handles:
+     * - Markdown links: [text](/path) -> [text](https://example.com/path)
+     * - Markdown images: ![alt](/path) -> ![alt](https://example.com/path)
+     */
+    private function convertRelativeLinksToAbsolute(string $markdown, string $baseUrl): string
+    {
+        if ($baseUrl === '') {
+            return $markdown;
+        }
+
+        // Convert relative links: [text](/path) -> [text](https://example.com/path)
+        // Match [text](/ but not [text](http or [text](https or [text](//
+        $markdown = preg_replace_callback(
+            '/(\[[^\]]*\]\()(\/)([^)]*\))/',
+            static fn(array $matches): string => $matches[1] . $baseUrl . '/' . $matches[3],
+            $markdown,
+        ) ?? $markdown;
+
+        // Convert relative image sources: ![alt](/path) -> ![alt](https://example.com/path)
+        $markdown = preg_replace_callback(
+            '/(!\[[^\]]*\]\()(\/)([^)]*\))/',
+            static fn(array $matches): string => $matches[1] . $baseUrl . '/' . $matches[3],
+            $markdown,
+        ) ?? $markdown;
+
+        return $markdown;
     }
 }

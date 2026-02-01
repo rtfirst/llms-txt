@@ -33,7 +33,7 @@ LLMs.txt Generator
 
 Generates ``llms.txt`` files for AI/LLM crawlers - a compact index of your
 website with SEO metadata and instructions for accessing page content in
-LLM-friendly formats.
+LLM-friendly formats. Optionally protect access with an API key.
 
 ----
 

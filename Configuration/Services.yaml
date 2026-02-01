@@ -19,6 +19,11 @@ services:
       - name: event.listener
         identifier: 'llms-txt/backend-notification'
 
+  RTfirst\LlmsTxt\EventListener\HeaderLinkEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'llms-txt/header-link'
+
   RTfirst\LlmsTxt\Service\MarkdownConverterService:
     arguments:
       $converters: !tagged_iterator llms_txt.content_converter
