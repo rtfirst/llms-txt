@@ -112,6 +112,9 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '**Generated:** ' . date('Y-m-d H:i:s');
         $lines[] = '';
 
+        // Find an example page (first non-root page for realistic examples)
+        $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
+
         // LLM-optimized content access section (spec-compliant with llmstxt.org)
         $lines[] = '## LLM-Optimized Content Access';
         $lines[] = '';
@@ -119,13 +122,7 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '';
         $lines[] = '### Markdown Format';
         $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
-        $lines[] = '- **Example:** `' . $baseUrl . '/page-slug.md`';
-        $lines[] = '';
-        $lines[] = '### Multi-Language Access';
-        $lines[] = 'Use language-specific URL prefixes with the `.md` suffix:';
-        $lines[] = '- **Default language:** `' . $baseUrl . '/page.md`';
-        $lines[] = '- **English:** `' . $baseUrl . '/en/page.md`';
-        $lines[] = '- **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)';
+        $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
         $lines[] = '';
 
         // Add authentication section if API key is configured
@@ -248,6 +245,28 @@ final readonly class LlmsTxtGeneratorService
         }
 
         return $level;
+    }
+
+    /**
+     * Find a suitable example page URL for documentation.
+     *
+     * Returns the first non-root page URL, or the root page URL if no other pages exist.
+     *
+     * @param array<int, array<string, mixed>> $pages
+     */
+    private function findExamplePageUrl(Site $site, array $pages, SiteLanguage $language): string
+    {
+        $rootPageId = $site->getRootPageId();
+
+        // Find first non-root page
+        foreach ($pages as $pageUid => $page) {
+            if ($pageUid !== $rootPageId) {
+                return $this->pageTreeService->getPageUrl($site, $pageUid, $language);
+            }
+        }
+
+        // Fallback to root page if no other pages exist
+        return $this->pageTreeService->getPageUrl($site, $rootPageId, $language);
     }
 
     /**

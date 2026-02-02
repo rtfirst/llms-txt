@@ -51,14 +51,27 @@ final class MarkdownRendererServiceTest extends TestCase
     }
 
     #[Test]
-    public function renderConvertsRelativeLinksToAbsolute(): void
+    public function renderConvertsRelativeLinksToAbsoluteWithMdSuffix(): void
     {
         $html = '<html><head><title>Test</title></head><body><main><a href="/about">About</a></main></body></html>';
 
         $result = $this->service->render($html, 1, null, 'https://example.com');
 
-        self::assertStringContainsString('[About](https://example.com/about)', $result);
+        // Internal page links should get .md suffix for consistent LLM navigation
+        self::assertStringContainsString('[About](https://example.com/about.md)', $result);
         self::assertStringNotContainsString('[About](/about)', $result);
+    }
+
+    #[Test]
+    public function renderConvertsFileLinksWithoutMdSuffix(): void
+    {
+        $html = '<html><head><title>Test</title></head><body><main><a href="/files/document.pdf">Download PDF</a></main></body></html>';
+
+        $result = $this->service->render($html, 1, null, 'https://example.com');
+
+        // File links should NOT get .md suffix
+        self::assertStringContainsString('[Download PDF](https://example.com/files/document.pdf)', $result);
+        self::assertStringNotContainsString('.pdf.md', $result);
     }
 
     #[Test]

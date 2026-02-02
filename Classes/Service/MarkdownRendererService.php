@@ -29,6 +29,11 @@ final class MarkdownRendererService
         $canonical = $this->extractCanonical($originalHtml);
         $author = $this->extractAuthor($originalHtml);
 
+        // Make canonical URL absolute if it's relative
+        if ($canonical !== '' && !str_starts_with($canonical, 'http')) {
+            $canonical = rtrim($baseUrl, '/') . '/' . ltrim($canonical, '/');
+        }
+
         // Extract and convert main content
         $mainContent = $this->extractMainContent($originalHtml);
         $markdownContent = $this->convertToMarkdown($mainContent, $baseUrl);
@@ -203,13 +208,36 @@ final class MarkdownRendererService
     }
 
     /**
-     * Clean up markdown output - remove excessive whitespace and empty lines.
+     * Clean up markdown output - remove excessive whitespace, empty lines, and HTML remnants.
      */
     private function cleanupMarkdown(string $markdown): string
     {
         // Normalize line endings
         $markdown = str_replace("\r\n", "\n", $markdown);
         $markdown = str_replace("\r", "\n", $markdown);
+
+        // Convert remaining HTML tags to Markdown before stripping
+        // Convert <br> tags to newlines
+        $markdown = preg_replace('/<br\s*\/?>/i', "\n", $markdown) ?? $markdown;
+
+        // Convert <a> tags to Markdown links [text](url)
+        $markdown = preg_replace_callback(
+            '/<a\s+[^>]*href=["\']([^"\']+)["\'][^>]*>([^<]*)<\/a>/i',
+            static fn(array $matches): string => '[' . trim($matches[2]) . '](' . $matches[1] . ')',
+            $markdown,
+        ) ?? $markdown;
+
+        // Convert <strong> and <b> to **bold**
+        $markdown = preg_replace('/<(?:strong|b)\b[^>]*>([^<]*)<\/(?:strong|b)>/i', '**$1**', $markdown) ?? $markdown;
+
+        // Convert <em> and <i> to *italic*
+        $markdown = preg_replace('/<(?:em|i)\b[^>]*>([^<]*)<\/(?:em|i)>/i', '*$1*', $markdown) ?? $markdown;
+
+        // Strip any remaining HTML tags
+        $markdown = strip_tags($markdown);
+
+        // Decode HTML entities (e.g., &amp; → &, &lt; → <)
+        $markdown = html_entity_decode($markdown, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
         // Fix header formatting (remove extra spaces after #)
         $markdown = preg_replace('/^(#{1,6})\s+/m', '$1 ', $markdown) ?? $markdown;
@@ -251,10 +279,12 @@ final class MarkdownRendererService
 
     /**
      * Convert relative links and image sources to absolute URLs.
+     * Internal page links get .md suffix for consistent LLM navigation.
      *
      * Handles:
-     * - Markdown links: [text](/path) -> [text](https://example.com/path)
-     * - Markdown images: ![alt](/path) -> ![alt](https://example.com/path)
+     * - Markdown links: [text](/path) -> [text](https://example.com/path.md)
+     * - Markdown images: ![alt](/path) -> ![alt](https://example.com/path) (no .md)
+     * - File links (.pdf, .jpg, etc.) -> absolute URL without .md
      */
     private function convertRelativeLinksToAbsolute(string $markdown, string $baseUrl): string
     {
@@ -262,21 +292,91 @@ final class MarkdownRendererService
             return $markdown;
         }
 
-        // Convert relative links: [text](/path) -> [text](https://example.com/path)
-        // Match [text](/ but not [text](http or [text](https or [text](//
-        $markdown = preg_replace_callback(
-            '/(\[[^\]]*\]\()(\/)([^)]*\))/',
-            static fn(array $matches): string => $matches[1] . $baseUrl . '/' . $matches[3],
-            $markdown,
-        ) ?? $markdown;
-
-        // Convert relative image sources: ![alt](/path) -> ![alt](https://example.com/path)
+        // Convert relative image sources first (no .md suffix for images)
+        // Match ![alt](/path) but not ![alt](http
         $markdown = preg_replace_callback(
             '/(!\[[^\]]*\]\()(\/)([^)]*\))/',
             static fn(array $matches): string => $matches[1] . $baseUrl . '/' . $matches[3],
             $markdown,
         ) ?? $markdown;
 
+        // Convert relative links: [text](/path) -> [text](https://example.com/path.md)
+        // Match [text](/ but not [text](http or [text](https or [text](// or images ![
+        $markdown = preg_replace_callback(
+            '/(?<!!)\[([^\]]*)\]\(\/([^)]*)\)/',
+            static function (array $matches) use ($baseUrl): string {
+                $text = $matches[1];
+                $path = $matches[2];
+
+                // Build absolute URL
+                $absoluteUrl = $baseUrl . '/' . $path;
+
+                // Add .md suffix for internal page links (not for files with extensions)
+                if (!self::isFileLink($path)) {
+                    $absoluteUrl = self::appendMdSuffix($absoluteUrl);
+                }
+
+                return '[' . $text . '](' . $absoluteUrl . ')';
+            },
+            $markdown,
+        ) ?? $markdown;
+
         return $markdown;
+    }
+
+    /**
+     * Check if a path points to a file (has a file extension).
+     */
+    private static function isFileLink(string $path): bool
+    {
+        // Remove query string and fragment for checking
+        $cleanPath = preg_replace('/[?#].*$/', '', $path) ?? $path;
+
+        // Check for common file extensions (not page URLs)
+        $fileExtensions = [
+            'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+            'zip', 'tar', 'gz', 'rar',
+            'jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'ico',
+            'mp3', 'mp4', 'wav', 'avi', 'mov', 'webm',
+            'css', 'js', 'json', 'xml', 'txt', 'csv',
+        ];
+
+        $extension = strtolower(pathinfo($cleanPath, PATHINFO_EXTENSION));
+
+        return in_array($extension, $fileExtensions, true);
+    }
+
+    /**
+     * Append .md suffix to a URL for internal page links.
+     */
+    private static function appendMdSuffix(string $url): string
+    {
+        // Parse URL to handle query strings and fragments
+        $parsedUrl = parse_url($url);
+        $path = $parsedUrl['path'] ?? '/';
+
+        // Remove trailing slash and append .md
+        $path = $path === '/' ? '/index.html.md' : rtrim($path, '/') . '.md';
+
+        // Reconstruct URL
+        $result = '';
+        if (isset($parsedUrl['scheme'])) {
+            $result .= $parsedUrl['scheme'] . '://';
+        }
+        if (isset($parsedUrl['host'])) {
+            $result .= $parsedUrl['host'];
+        }
+        if (isset($parsedUrl['port'])) {
+            $result .= ':' . $parsedUrl['port'];
+        }
+        $result .= $path;
+        if (isset($parsedUrl['query'])) {
+            $result .= '?' . $parsedUrl['query'];
+        }
+        if (isset($parsedUrl['fragment'])) {
+            $result .= '#' . $parsedUrl['fragment'];
+        }
+
+        return $result;
     }
 }

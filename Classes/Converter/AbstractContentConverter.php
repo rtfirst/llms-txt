@@ -37,7 +37,12 @@ abstract class AbstractContentConverter implements ContentConverterInterface
             ]);
         }
 
-        return trim($this->htmlConverter->convert($html));
+        $result = $this->htmlConverter->convert($html);
+
+        // Decode HTML entities (e.g., &amp; → &, &lt; → <)
+        $result = html_entity_decode($result, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        return trim($result);
     }
 
     /**
