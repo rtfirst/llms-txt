@@ -343,7 +343,7 @@ final class MarkdownRendererService
 
         $extension = strtolower(pathinfo($cleanPath, PATHINFO_EXTENSION));
 
-        return in_array($extension, $fileExtensions, true);
+        return \in_array($extension, $fileExtensions, true);
     }
 
     /**
