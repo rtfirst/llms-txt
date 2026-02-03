@@ -28,6 +28,7 @@ final class HeaderLinkEventListenerTest extends TestCase
         parent::setUp();
         $this->subject = new HeaderLinkEventListener();
         // TYPO3 14 has getContent()/setContent() on the event
+        // @phpstan-ignore function.alreadyNarrowedType (runtime check for TYPO3 version compatibility)
         $this->isTypo3v14 = method_exists(AfterCacheableContentIsGeneratedEvent::class, 'getContent');
     }
 
@@ -137,11 +138,15 @@ final class HeaderLinkEventListenerTest extends TestCase
 
     /**
      * Creates an event instance compatible with both TYPO3 13 and 14.
+     *
+     * @phpstan-ignore missingType.iterableValue (TYPO3 version-specific constructor)
      */
     private function createEvent(ServerRequestInterface $request, string $content): AfterCacheableContentIsGeneratedEvent
     {
+        // @phpstan-ignore deadCode.unreachable (runtime check - this branch runs in TYPO3 14)
         if ($this->isTypo3v14) {
             // TYPO3 14: Event has getContent()/setContent()
+            // @phpstan-ignore argument.type (TYPO3 14 constructor signature)
             return new AfterCacheableContentIsGeneratedEvent(
                 $request,
                 $content,
@@ -151,7 +156,6 @@ final class HeaderLinkEventListenerTest extends TestCase
         }
 
         // TYPO3 13: Event uses TypoScriptFrontendController
-        // @phpstan-ignore-next-line Class exists in TYPO3 13
         $controller = $this->createMock(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class);
         $controller->content = $content;
 
@@ -168,11 +172,12 @@ final class HeaderLinkEventListenerTest extends TestCase
      */
     private function getContentFromEvent(AfterCacheableContentIsGeneratedEvent $event): string
     {
+        // @phpstan-ignore deadCode.unreachable (runtime check - this branch runs in TYPO3 14)
         if ($this->isTypo3v14) {
+            // @phpstan-ignore method.notFound (method exists in TYPO3 14)
             return $event->getContent();
         }
 
-        // @phpstan-ignore-next-line Method exists in TYPO3 13
         return $event->getController()->content;
     }
 }

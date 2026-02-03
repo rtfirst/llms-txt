@@ -269,8 +269,8 @@ This helps AI crawlers discover the `llms.txt` file from any page.
 ### Code Quality
 
 ```bash
-# Static analysis
-ddev exec vendor/bin/phpstan analyse packages/llms_txt --level=8
+# Static analysis (from DDEV project root)
+ddev exec vendor/bin/phpstan analyse packages/llms_txt/Classes --level=8
 
 # Code style check
 ddev exec vendor/bin/php-cs-fixer fix packages/llms_txt --dry-run
@@ -282,8 +282,17 @@ ddev exec vendor/bin/php-cs-fixer fix packages/llms_txt
 ### Testing
 
 ```bash
-ddev exec vendor/bin/phpunit -c packages/llms_txt/phpunit.xml
+# Run unit tests (from DDEV project root)
+ddev exec "cd packages/llms_txt && ../../vendor/bin/phpunit --bootstrap ../../vendor/autoload.php"
 ```
+
+### CI Pipeline
+
+The extension includes a GitHub Actions workflow (`.github/workflows/ci.yaml`) that runs:
+- PHP-CS-Fixer (code style)
+- PHPStan Level 8 (static analysis)
+- Rector (code modernization)
+- Unit Tests (PHP 8.2-8.4, TYPO3 13 & 14)
 
 ## Author
 

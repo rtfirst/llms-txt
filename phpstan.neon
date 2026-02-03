@@ -5,6 +5,10 @@ parameters:
     level: 8
     paths:
         - Classes
-    excludePaths:
-        - Tests
+        - ext_emconf.php
     treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        # ext_emconf.php uses $_EXTKEY which is defined by TYPO3's extension loading
+        -
+            message: '#Variable \$_EXTKEY might not be defined#'
+            path: ext_emconf.php
