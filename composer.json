@@ -1,7 +1,7 @@
 {
     "name": "rtfirst/llms-txt",
     "type": "typo3-cms-extension",
-    "description": "Generates llms.txt files for AI/LLM crawlers with website content in Markdown format, with optional API key protection.",
+    "description": "LLMs.txt Generator - Generates llms.txt files for AI/LLM crawlers with website content in Markdown format, with optional API key protection.",
     "license": "GPL-2.0-or-later",
     "homepage": "https://github.com/rtfirst/llms-txt",
     "support": {

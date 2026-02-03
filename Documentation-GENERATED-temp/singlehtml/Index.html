@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>LLMs.txt Generator 
+        documentation</title>
+
+    
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="phpdocumentor/guides" name="generator">
+<meta content="LLMs.txt Generator" name="docsearch:name">
+<meta content="" name="docsearch:package_type">
+<meta content="" name="docsearch:release">
+<meta content="" name="docsearch:version">
+<meta content="2026-02-03T18:03:14+00:00" name="docsearch:modified">
+<meta content="2026-02-03T18:03:14+00:00" name="dc.modified">
+<meta content="2026-02-03T18:03:14+00:00" property="article:modified_time">
+    <link href="http://purl.org/dc/elements/1.1/" rel="schema.dc">
+<link href="../_resources/css/theme.css" rel="stylesheet">
+<link href="https://docs.typo3.org/search/" rel="search" title="Search">
+<script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/webcomponents-loader.js"></script>
+<script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/typo3-universe.js" type="module"></script>
+                </head>
+<body>
+<div class="page">
+    <header>
+    <div class="page-topbar">
+        <div class="page-topbar-inner">
+            <typo3-universe active="documentation">
+                <div style="display: block; height: 44px; background-color: #313131;"></div>
+            </typo3-universe>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="page-header-inner">
+            <div class="d-flex flex-wrap">
+                <div class="logo-wrapper">
+                    <a class="logo" href="https://docs.typo3.org/" title="TYPO3 Documentation">
+                        <img alt="TYPO3 Logo" class="logo-image" src="../_resources/img/typo3-logo.svg" width="484" height="130">
+                    </a>
+                </div>
+                <div class="align-self-center order-lg-2 order-last">
+                    
+<div class="toc-header">
+    <div class="toc-title pe-3">
+                            <a class="toc-title-project" href="../Index.html">LLMs.txt Generator</a>
+            </div>
+    </div>                </div>
+                <div class="ms-auto order-lg-3 d-flex">
+                    <div class="menu-search-wrapper">
+                        <button id="toc-toggle" class="btn btn-light d-block d-lg-none" tabindex="0" aria-controls="toc-collapse" aria-expanded="false">
+                            <i class="fas fa-bars"></i> <span class="visually-hidden">Mobile Menu</span>
+                        </button>
+                        <all-documentations-menu data-override-url="../_resources/js/menu-proxy.php"></all-documentations-menu>
+                                                <search role="search">
+                            <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
+                                <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
+                                <div class="input-group mb-3 mt-sm-3">
+                                    <select class="form-select search__scope" id="searchscope" name="scope">
+                                        <option value="">Search all</option>
+                                    </select>
+                                    <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
+                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i>&nbsp;<span class="d-none d-md-inline">Search</span></button>
+                                </div>
+                            </form>
+                            <div id="global-search-root"></div>
+                        </search>
+                        <div class="position-relative d-inline-block">
+                            <button id="options-toggle" class="btn btn-light d-block" type="button" aria-expanded="false">
+                                <i class="fas fa-cog"></i> <span class="visually-hidden">Options</span>
+                            </button>
+
+                            <div id="options-panel"
+                                 class="shadow p-3"
+                                 role="menu"
+                                 aria-hidden="true">
+                                <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
+
+                                                                                                        <a class="dropdown-item d-flex align-items-center gap-2" href="../Index.html" rel="noopener">
+                                        <i class="fas fa-file-alt"></i>
+                                        Switch to regular view
+                                    </a>
+                                                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>    <main class="page-main">
+        <div class="page-main-inner">
+            <div class="page-main-navigation">
+                <nav>
+
+                    <div id="toc-collapse">
+                                                <div aria-label="main navigation" class="toc"
+                             role="navigation">
+                                                                                </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="page-main-content">
+                <div class="rst-content">                                                                <!-- content start -->
+    <article>
+            <section class="section" id="llms-txt-generator" data-rst-anchor="start">
+            <a id="start"></a>
+            <h1>LLMs.txt Generator<a class="headerlink" href="#llms-txt-generator" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            <dl class="field-list simple ">
+            <dt class="field-odd">Extension key</dt>
+
+        <dd class="field-odd">
+            
+    <p>llms_txt</p>
+        </dd>
+            <dt class="field-odd">Package name</dt>
+
+        <dd class="field-odd">
+            
+    <p>rtfirst/llms-txt</p>
+        </dd>
+            <dt class="field-odd">Version</dt>
+
+        <dd class="field-odd">
+            
+    <p>1.0.5</p>
+        </dd>
+            <dt class="field-odd">Language</dt>
+
+        <dd class="field-odd">
+            
+    <p>en</p>
+        </dd>
+            <dt class="field-odd">Author</dt>
+
+        <dd class="field-odd">
+            
+    <p>Roland Tfirst</p>
+        </dd>
+            <dt class="field-odd">License</dt>
+
+        <dd class="field-odd">
+            
+    <p>This document is published under the
+<a href="https://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License v2.0 or later</a>.</p>
+        </dd>
+            <dt class="field-odd">Rendered</dt>
+
+        <dd class="field-odd">
+            
+    <p>Tue, 03 Feb 2026 18:03:14 +0000</p>
+        </dd>
+    </dl>
+            <hr />
+            
+    <p>This TYPO3 extension generates <code>llms.txt</code> files for AI/LLM crawlers, providing
+a compact index of your website with SEO metadata and instructions for accessing
+page content in Markdown format. Optionally protect access with an API key.</p>
+
+                
+<div class="admonition note" role="alert">
+    <p class="admonition-title">Note</p>
+        
+    <p>This extension implements the <a href="https://llmstxt.org/">llmstxt.org specification</a>.</p>
+
+</div>
+            <hr />
+            
+    <p><strong>Table of Contents</strong></p>
+
+            <div class="toctree-wrapper compound">
+        <ul class="menu-level">
+    <li class="toc-item">
+    <a href="#">Introduction</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">Installation</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">Configuration</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">Usage</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">API Protection</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">Developer</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">FAQ</a>
+
+
+</li>
+    <li class="toc-item">
+    <a href="#">Get Help</a>
+
+
+</li>
+    </ul>
+</div>
+            <div class="row card-group pb-4 row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#introduction">Introduction</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Learn about the concept and features of this extension.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#installation">Installation</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Install the extension via Composer or classic mode.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#configuration">Configuration</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Configure site settings and page properties for LLM optimization.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#usage">Usage</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>How to access content in different formats and languages.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#api-protection">API Protection</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Protect your LLM endpoints with API key authentication.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#developer">Developer Information</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Technical details for developers and integrators.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#faq">FAQ</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Frequently asked questions.</p>
+
+        </div>
+    </div>
+        </div>
+        </div><div class="col">
+            <div class="card h-100">
+            <div class="card-body">
+        <h3><a href="#help">Get Help</a><a class="headerlink" href="#card" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+        <div class="card-text">
+            
+    <p>Where to get help and report issues.</p>
+
+        </div>
+    </div>
+        </div>
+        </div></div>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="introduction-1" data-rst-anchor="introduction">
+            <a id="introduction"></a>
+            <h1>Introduction<a class="headerlink" href="#introduction-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            <section class="section" id="what-is-llms-txt">
+            <h2>What is llms.txt?<a class="headerlink" href="#what-is-llms-txt" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p><code>llms.txt</code> is an emerging standard for providing AI and Large Language Model (LLM)
+crawlers with structured information about a website. It serves as a machine-readable
+index that helps AI systems understand your website&#039;s content and structure.</p>
+
+            
+    <p>The <a href="https://llmstxt.org/">llmstxt.org specification</a> defines how websites can
+provide this information in a standardized format.</p>
+
+    </section>
+            <section class="section" id="concept">
+            <h2>Concept<a class="headerlink" href="#concept" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>This extension provides a two-tier approach for LLM content access:</p>
+
+            
+    
+<ol start="1">
+    <li value="1">
+    <p><strong>llms.txt Index File</strong> - A single file containing:</p>
+
+
+<ul>
+    <li class="dash">Website metadata (title, description, domain)</li>
+    <li class="dash">Page structure with SEO descriptions and keywords</li>
+    <li class="dash">Instructions for accessing full page content</li>
+</ul>
+</li>
+    <li value="2">
+    <p><strong>Markdown Content Access</strong> - Access any page content via:</p>
+
+
+<ul>
+    <li class="dash"><code>.md</code> suffix - Returns clean Markdown with YAML frontmatter</li>
+    <li class="dash">Example: <code>/about.md</code> returns the &quot;About&quot; page as Markdown</li>
+</ul>
+</li>
+</ol>
+
+    </section>
+            <section class="section" id="multi-language-support">
+            <h2>Multi-Language Support<a class="headerlink" href="#multi-language-support" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Instead of generating separate <code>llms.txt</code> files per language, this extension
+uses a simpler approach:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>Single llms.txt</strong> - Contains the site structure in the default language</li>
+    <li class="dash">
+    <p><strong>Language-specific content</strong> - Access any page in any language using the
+<code>.md</code> suffix with language URL prefix:</p>
+
+
+<ul>
+    <li class="dash">Default: <code>https://example.com/about.md</code></li>
+    <li class="dash">English: <code>https://example.com/en/about.md</code></li>
+    <li class="dash">German: <code>https://example.com/de/ueber-uns.md</code></li>
+</ul>
+</li>
+</ul>
+
+            
+    <p>This approach follows how multi-language sites actually work in TYPO3.</p>
+
+    </section>
+            <section class="section" id="features">
+            <h2>Features<a class="headerlink" href="#features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="core-features">
+            <h3>Core Features<a class="headerlink" href="#core-features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+
+<ul>
+    <li class="dash"><strong>Automatic llms.txt generation</strong> with smart caching</li>
+    <li class="dash"><strong>Markdown output</strong> for all pages via <code>.md</code> URL suffix</li>
+    <li class="dash"><strong>Multi-language support</strong> via URL prefixes</li>
+    <li class="dash"><strong>API key protection</strong> for restricted access</li>
+    <li class="dash"><strong>YAML frontmatter</strong> in Markdown output with page metadata</li>
+</ul>
+
+    </section>
+            <section class="section" id="page-level-control">
+            <h3>Page-Level Control<a class="headerlink" href="#page-level-control" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+
+<ul>
+    <li class="dash"><strong>LLM tab</strong> in page properties for fine-grained control</li>
+    <li class="dash"><strong>Custom descriptions</strong> and summaries per page</li>
+    <li class="dash"><strong>Keywords</strong> for better LLM understanding</li>
+    <li class="dash"><strong>Priority setting</strong> (0-100) for page ordering</li>
+    <li class="dash"><strong>Exclude option</strong> to hide specific pages from llms.txt</li>
+</ul>
+
+    </section>
+            <section class="section" id="technical-features">
+            <h3>Technical Features<a class="headerlink" href="#technical-features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+
+<ul>
+    <li class="dash"><strong>24-hour caching</strong> for optimal performance</li>
+    <li class="dash"><strong>HTML-to-Markdown conversion</strong> using League/html-to-markdown</li>
+    <li class="dash"><strong>Clean output</strong> - removes scripts, styles, navigation elements</li>
+    <li class="dash"><strong>UTF-8 BOM</strong> for proper encoding detection</li>
+    <li class="dash"><strong>Backend notification</strong> if robots.txt lacks llms.txt reference</li>
+    <li class="dash"><strong>Header link injection</strong> (<code>&lt;link rel=&quot;alternate&quot;&gt;</code>) in HTML pages</li>
+</ul>
+
+    </section>
+    </section>
+            <section class="section" id="requirements">
+            <h2>Requirements<a class="headerlink" href="#requirements" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+
+<ul>
+    <li class="dash">TYPO3 13.0 - 14.x</li>
+    <li class="dash">PHP 8.2 or higher</li>
+</ul>
+
+    </section>
+            <section class="section" id="supported-content-elements">
+            <h2>Supported Content Elements<a class="headerlink" href="#supported-content-elements" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension converts the following TYPO3 content elements to Markdown:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>Header</strong> (<code>header</code>)</li>
+    <li class="dash"><strong>Text</strong> (<code>text</code>)</li>
+    <li class="dash"><strong>Text with Image</strong> (<code>textpic</code>, <code>textmedia</code>)</li>
+    <li class="dash"><strong>Image</strong> (<code>image</code>)</li>
+    <li class="dash"><strong>Bullet List</strong> (<code>bullets</code>)</li>
+    <li class="dash"><strong>Table</strong> (<code>table</code>)</li>
+    <li class="dash"><strong>HTML</strong> (<code>html</code>)</li>
+    <li class="dash"><strong>Menu</strong> elements (<code>menu_*</code>)</li>
+    <li class="dash">All other elements via HTML-to-Markdown fallback</li>
+</ul>
+
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="installation-1" data-rst-anchor="installation">
+            <a id="installation"></a>
+            <h1>Installation<a class="headerlink" href="#installation-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            <section class="section" id="installation-via-composer-recommended" data-rst-anchor="installation-composer">
+            <a id="installation-composer"></a>
+            <h2>Installation via Composer (Recommended)<a class="headerlink" href="#installation-via-composer-recommended" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Install the extension via Composer:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">composer require rtfirst/llms-txt</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Then activate the extension and clear the cache:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">vendor/bin/typo3 extension:setup
+vendor/bin/typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>For DDEV environments:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">ddev composer require rtfirst/llms-txt
+ddev typo3 extension:setup
+ddev typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>See also <a href="https://docs.typo3.org/m/typo3/tutorial-getting-started/13.4/en-us/Extensions/InstallingExtensions.html#installing-extensions">Installing extensions</a> in the
+TYPO3 Getting Started documentation.</p>
+
+    </section>
+            <section class="section" id="installation-in-classic-mode" data-rst-anchor="installation-classic">
+            <a id="installation-classic"></a>
+            <h2>Installation in Classic Mode<a class="headerlink" href="#installation-in-classic-mode" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    
+<ol start="1" type="1">
+    <li value="1">Download the extension from the
+<a href="https://extensions.typo3.org/extension/llms_txt">TYPO3 Extension Repository (TER)</a>
+or from <a href="https://github.com/rtfirst/llms-txt">GitHub</a>.</li>
+    <li value="2">Install the extension via the Extension Manager in the TYPO3 Backend.</li>
+    <li value="3">Clear all caches.</li>
+</ol>
+
+    </section>
+            <section class="section" id="activate-the-site-set" data-rst-anchor="installation-site-set">
+            <a id="installation-site-set"></a>
+            <h2>Activate the Site Set<a class="headerlink" href="#activate-the-site-set" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>After installation, you need to add the Site Set to your site configuration:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1">Go to <strong>Site Management &gt; Sites</strong> in the TYPO3 Backend.</li>
+    <li value="2">Edit your site configuration.</li>
+    <li value="3">Go to the <strong>Sets</strong> tab.</li>
+    <li value="4">Add the set <strong>LLMs.txt Generator</strong> (<code>rtfirst/llms-txt</code>).</li>
+    <li value="5">Save and clear all caches.</li>
+</ol>
+
+            <figure class="with-shadow">
+    <img
+    src="Images/SiteSet.png"
+                alt="Adding the LLMs.txt Generator site set"        />
+
+            
+                    <figcaption>
+    <p>Add the LLMs.txt Generator site set to your site configuration.</p>
+</figcaption>
+            </figure>
+    </section>
+            <section class="section" id="verify-installation" data-rst-anchor="installation-verify">
+            <a id="installation-verify"></a>
+            <h2>Verify Installation<a class="headerlink" href="#verify-installation" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>After installation, verify that everything works:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1">Access <code>https://your-site.com/llms.txt</code> - You should see the generated
+llms.txt content.</li>
+    <li value="2">Access any page with <code>.md</code> suffix, e.g., <code>https://your-site.com/about.md</code>
+- You should see Markdown content with YAML frontmatter.</li>
+    <li value="3">Check the page properties of any page - You should see a new <strong>LLM</strong> tab.</li>
+</ol>
+
+                
+<div class="admonition tip" role="alert">
+    <p class="admonition-title">Tip</p>
+        
+    <p>If you get a 404 error, make sure you&#039;ve added the Site Set and cleared
+all caches.</p>
+
+</div>
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="configuration-1" data-rst-anchor="configuration">
+            <a id="configuration"></a>
+            <h1>Configuration<a class="headerlink" href="#configuration-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>The extension can be configured via Site Settings and page properties.</p>
+
+            <section class="section" id="site-settings" data-rst-anchor="configuration-site-settings">
+            <a id="configuration-site-settings"></a>
+            <h2>Site Settings<a class="headerlink" href="#site-settings" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>After adding the Site Set to your site configuration (see <a href="#installation-site-set">Activate the Site Set</a>),
+you can configure the extension in <strong>Site Management &gt; Settings</strong>.</p>
+
+            
+
+
+
+<a id="confval-menu-configuration"></a>
+<div class="table-responsive confval-table">
+    <table class="table table-hover caption-top">        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            
+                                    <th scope="col">Type</th>
+                                    </tr>
+        </thead>
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-baseurl">llms<wbr>Txt.<wbr>base<wbr>Url</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-intro">llms<wbr>Txt.<wbr>intro</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-excludepages">llms<wbr>Txt.<wbr>exclude<wbr>Pages</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-includehidden">llms<wbr>Txt.<wbr>include<wbr>Hidden</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-apikey">llms<wbr>Txt.<wbr>api<wbr>Key</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                        
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-exclude-from-llms-txt">Exclude from llms.<wbr>txt</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-priority">LLM Priority</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-description">LLM Description</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                        
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-summary">LLM Summary</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-keywords">LLM Keywords</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+            </table>
+</div>
+
+            <a id="confval-baseUrl"></a>
+            <section data-search-title="llmsTxt.baseUrl"
+         data-search-id="confval-llmstxt-baseurl"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llmstxt-baseurl"
+>
+    <h3 class="sr-only">llmsTxt.baseUrl</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">llms<wbr>Txt.<wbr>base<wbr>Url</span></code>
+                                    <a class="headerlink" href="#confval-llmstxt-baseurl"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llmstxt-baseurl"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>string</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+    </dl>
+    <p>Full URL of the website (e.g., <code>https://example.com</code>). This is used as
+the base URL in the generated llms.txt file. If empty, the site&#039;s base URL
+from the site configuration is used.</p>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-intro"></a>
+            <section data-search-title="llmsTxt.intro"
+         data-search-id="confval-llmstxt-intro"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llmstxt-intro"
+>
+    <h3 class="sr-only">llmsTxt.intro</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">llms<wbr>Txt.<wbr>intro</span></code>
+                                    <a class="headerlink" href="#confval-llmstxt-intro"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llmstxt-intro"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>text</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+    </dl>
+    <p>Website description shown in the intro section of the llms.txt file.
+This text appears as a blockquote below the site title and helps AI
+crawlers understand the purpose of your website.</p>
+
+    <p>Example:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code>Your expert for tires, wheels, and automotive services since 1985.</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-excludePages"></a>
+            <section data-search-title="llmsTxt.excludePages"
+         data-search-id="confval-llmstxt-excludepages"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llmstxt-excludepages"
+>
+    <h3 class="sr-only">llmsTxt.excludePages</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">llms<wbr>Txt.<wbr>exclude<wbr>Pages</span></code>
+                                    <a class="headerlink" href="#confval-llmstxt-excludepages"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llmstxt-excludepages"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>string</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+    </dl>
+    <p>Comma-separated list of page UIDs to exclude from the llms.txt index.
+Use this for pages that should not appear in the LLM index, such as
+imprint, privacy policy, or internal pages.</p>
+
+    <p>Example:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code>42,56,123</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-includeHidden"></a>
+            <section data-search-title="llmsTxt.includeHidden"
+         data-search-id="confval-llmstxt-includehidden"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llmstxt-includehidden"
+>
+    <h3 class="sr-only">llmsTxt.includeHidden</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">llms<wbr>Txt.<wbr>include<wbr>Hidden</span></code>
+                                    <a class="headerlink" href="#confval-llmstxt-includehidden"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llmstxt-includehidden"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>boolean</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>false</p>
+        </dd>
+    </dl>
+    <p>If enabled, hidden pages are also included in the llms.txt generation.
+This can be useful for staging environments or preview purposes.</p>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-apiKey"></a>
+            <section data-search-title="llmsTxt.apiKey"
+         data-search-id="confval-llmstxt-apikey"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llmstxt-apikey"
+>
+    <h3 class="sr-only">llmsTxt.apiKey</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">llms<wbr>Txt.<wbr>api<wbr>Key</span></code>
+                                    <a class="headerlink" href="#confval-llmstxt-apikey"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llmstxt-apikey"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>string</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+    </dl>
+    <p>API key for protected access to <code>/llms.txt</code> and <code>.md</code> endpoints.
+If set, requests without a valid API key will receive a 401 Unauthorized
+response. Leave empty for public access.</p>
+
+    <p>See <a href="#api-protection">API Protection</a> for details on how to use API key protection.</p>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+    </section>
+            <section class="section" id="page-properties" data-rst-anchor="configuration-page-properties">
+            <a id="configuration-page-properties"></a>
+            <h2>Page Properties<a class="headerlink" href="#page-properties" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Each page has an <strong>LLM</strong> tab in the page properties with the following fields:</p>
+
+            
+
+
+
+<a id="confval-menu-configuration"></a>
+<div class="table-responsive confval-table">
+    <table class="table table-hover caption-top">        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            
+                                    <th scope="col">Type</th>
+                                    </tr>
+        </thead>
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-baseurl">llms<wbr>Txt.<wbr>base<wbr>Url</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-intro">llms<wbr>Txt.<wbr>intro</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-excludepages">llms<wbr>Txt.<wbr>exclude<wbr>Pages</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-includehidden">llms<wbr>Txt.<wbr>include<wbr>Hidden</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llmstxt-apikey">llms<wbr>Txt.<wbr>api<wbr>Key</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                        
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-exclude-from-llms-txt">Exclude from llms.<wbr>txt</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-priority">LLM Priority</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-description">LLM Description</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                        
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-summary">LLM Summary</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                            
+                        <tr>
+        <td><div class="confval-label ps-0"><a href="#confval-llm-keywords">LLM Keywords</a></div></td>
+                    <td>
+                            
+                        </td>
+            </tr>
+                                                    
+            </table>
+</div>
+
+            <a id="confval-exclude"></a>
+            <section data-search-title="Exclude from llms.txt"
+         data-search-id="confval-exclude-from-llms-txt"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-exclude-from-llms-txt"
+>
+    <h3 class="sr-only">Exclude from llms.txt</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">Exclude from llms.<wbr>txt</span></code>
+                                    <a class="headerlink" href="#confval-exclude-from-llms-txt"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-exclude-from-llms-txt"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>checkbox</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>false</p>
+        </dd>
+    </dl>
+    <p>If enabled, this page will not appear in the llms.txt index. The page
+is also excluded from the Markdown output.</p>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-priority"></a>
+            <section data-search-title="LLM Priority"
+         data-search-id="confval-llm-priority"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llm-priority"
+>
+    <h3 class="sr-only">LLM Priority</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">LLM Priority</span></code>
+                                    <a class="headerlink" href="#confval-llm-priority"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llm-priority"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>number (slider)</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+        </dd>
+            <dt class="field-odd">Range</dt>
+
+        <dd class="field-odd">
+            
+    <p>0-100</p>
+        </dd>
+    </dl>
+    <p>Higher values (0-100) cause the page to appear earlier in the llms.txt
+page list. Use this to highlight important pages for AI crawlers.</p>
+
+    <p><strong>Recommendations:</strong></p>
+
+
+<ul>
+    <li class="dash"><strong>80-100</strong>: Main landing pages, key services</li>
+    <li class="dash"><strong>50-70</strong>: Important content pages</li>
+    <li class="dash"><strong>20-40</strong>: Secondary pages</li>
+    <li class="dash"><strong>0-10</strong>: Low-priority pages</li>
+</ul>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-description"></a>
+            <section data-search-title="LLM Description"
+         data-search-id="confval-llm-description"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llm-description"
+>
+    <h3 class="sr-only">LLM Description</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">LLM Description</span></code>
+                                    <a class="headerlink" href="#confval-llm-description"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llm-description"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>textarea</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+            <dt class="field-odd">Max length</dt>
+
+        <dd class="field-odd">
+            
+    <p>500 characters</p>
+        </dd>
+    </dl>
+    <p>Custom description for this page in the llms.txt index. If empty,
+the page&#039;s SEO meta description (from the SEO tab) is used as fallback.</p>
+
+    <p>This description helps AI crawlers understand what the page is about.</p>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-summary"></a>
+            <section data-search-title="LLM Summary"
+         data-search-id="confval-llm-summary"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llm-summary"
+>
+    <h3 class="sr-only">LLM Summary</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">LLM Summary</span></code>
+                                    <a class="headerlink" href="#confval-llm-summary"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llm-summary"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>textarea</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+            <dt class="field-odd">Max length</dt>
+
+        <dd class="field-odd">
+            
+    <p>2000 characters</p>
+        </dd>
+    </dl>
+    <p>Additional summary text shown as a blockquote in the llms.txt index.
+Use this for longer explanations that don&#039;t fit in the description.</p>
+
+            </div>
+        </dd>
+    </dl>
+</section>
+            <a id="confval-keywords"></a>
+            <section data-search-title="LLM Keywords"
+         data-search-id="confval-llm-keywords"
+         data-search-facet="Option"
+         class="confval-section"
+         id="confval-llm-keywords"
+>
+    <h3 class="sr-only">LLM Keywords</h3>
+    <dl class="confval">
+        <dt             class="d-flex justify-content-between">
+            <div class="confval-header flex-grow-1">
+                <code class="sig-name descname"><span
+                        class="pre">LLM Keywords</span></code>
+                                    <a class="headerlink" href="#confval-llm-keywords"
+                       data-bs-toggle="modal"
+                       data-bs-target="#linkReferenceModal"
+                       data-id="confval-llm-keywords"
+                       title="Reference this configuration value"><i
+                            class="fa-solid fa-paragraph"></i></a>
+                </div>
+            <div class="confval-back-to-top">                    <a href="#" class="backToTop" title="Back to top"><i
+                            class="fa-solid fa-arrow-up fa-xs"></i></a>            </div>        </dt>
+        <dd>
+                        <div class="confval-description">
+                <dl class="field-list simple ">
+            <dt class="field-odd">type</dt>
+
+        <dd class="field-odd">
+            
+    <p>text input</p>
+        </dd>
+            <dt class="field-odd">Default</dt>
+
+        <dd class="field-odd">
+            
+    <p>(empty)</p>
+        </dd>
+            <dt class="field-odd">Max length</dt>
+
+        <dd class="field-odd">
+            
+    <p>255 characters</p>
+        </dd>
+    </dl>
+    <p>Comma-separated keywords/topics for this page. These appear in the
+llms.txt index and help AI crawlers categorize the page content.</p>
+
+    <p>Example:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code>tires, wheels, alignment, services</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            </div>
+        </dd>
+    </dl>
+</section>
+    </section>
+            <section class="section" id="robots-txt-configuration" data-rst-anchor="configuration-robots-txt">
+            <a id="configuration-robots-txt"></a>
+            <h2>robots.txt Configuration<a class="headerlink" href="#robots-txt-configuration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>To allow AI crawlers to discover and access your llms.txt file, add these
+lines to your <code>public/robots.txt</code>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext"># Allow AI crawlers to access llms.txt
+User-agent: GPTBot
+Allow: /llms.txt
+
+User-agent: Claude-Web
+Allow: /llms.txt
+
+User-agent: Anthropic-AI
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /llms.txt</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+                
+<div class="admonition note" role="alert">
+    <p class="admonition-title">Note</p>
+        
+    <p>The extension shows a notification in the TYPO3 Backend if your robots.txt
+does not contain a reference to llms.txt.</p>
+
+</div>
+    </section>
+            <section class="section" id="html-header-link" data-rst-anchor="configuration-header-link">
+            <a id="configuration-header-link"></a>
+            <h2>HTML Header Link<a class="headerlink" href="#html-header-link" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension automatically adds a <code>&lt;link&gt;</code> tag to all HTML pages to help
+AI crawlers discover the llms.txt file:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"alternate"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/plain"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/llms.txt"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"LLM Content Guide"</span>&gt;</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+                
+<div class="admonition note" role="alert">
+    <p class="admonition-title">Note</p>
+        
+    <p>When API key protection is enabled, this header link is automatically
+hidden to prevent unauthorized crawlers from discovering the endpoint.</p>
+
+</div>
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="usage-1" data-rst-anchor="usage">
+            <a id="usage"></a>
+            <h1>Usage<a class="headerlink" href="#usage-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>This chapter explains how to access the LLM-optimized content.</p>
+
+            <section class="section" id="accessing-llms-txt" data-rst-anchor="usage-llms-txt">
+            <a id="usage-llms-txt"></a>
+            <h2>Accessing llms.txt<a class="headerlink" href="#accessing-llms-txt" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The llms.txt index file is available at the root of your website:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/llms.txt</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>This file contains:</p>
+
+            
+
+<ul>
+    <li class="dash">Website metadata (title, description, domain)</li>
+    <li class="dash">Page structure with descriptions and keywords</li>
+    <li class="dash">Instructions for accessing page content in Markdown format</li>
+</ul>
+
+            <section class="section" id="example-llms-txt-output" data-rst-anchor="usage-llms-txt-example">
+            <a id="usage-llms-txt-example"></a>
+            <h3>Example llms.txt Output<a class="headerlink" href="#example-llms-txt-output" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs markdown"><span class="hljs-section"># My Website</span>
+
+<span class="hljs-quote">&gt; Your expert for quality products and services.</span>
+
+<span class="hljs-strong">**Specification:**</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">https:</span>//<span class="hljs-attr">llmstxt.org</span>/&gt;</span></span>
+<span class="hljs-strong">**Domain:**</span> https://example.com
+<span class="hljs-strong">**Language:**</span> de
+<span class="hljs-strong">**Generated:**</span> 2026-01-31 12:00:00
+
+<span class="hljs-section">## LLM-Optimized Content Access</span>
+
+This site provides LLM-friendly Markdown output for all pages:
+
+<span class="hljs-section">### Markdown Format</span>
+Append <span class="hljs-code">`.md`</span> to any page URL to get plain Markdown with YAML frontmatter.
+<span class="hljs-bullet">- </span><span class="hljs-strong">**Example:**</span> <span class="hljs-code">`https://example.com/page-slug.md`</span>
+
+<span class="hljs-section">### Multi-Language Access</span>
+Use language-specific URL prefixes with the <span class="hljs-code">`.md`</span> suffix:
+<span class="hljs-bullet">- </span><span class="hljs-strong">**Default language:**</span> <span class="hljs-code">`https://example.com/page.md`</span>
+<span class="hljs-bullet">- </span><span class="hljs-strong">**English:**</span> <span class="hljs-code">`https://example.com/en/page.md`</span>
+
+<span class="hljs-section">## Page Structure</span>
+<span class="hljs-bullet">
+- </span><span class="hljs-strong">**[Home](/)**</span>
+  Welcome to our website with all important information.
+  [<span class="hljs-string">Markdown</span>](<span class="hljs-link">/index.html.md</span>)
+<span class="hljs-bullet">
+  - </span><span class="hljs-strong">**[About](/about/)**</span>
+<span class="hljs-code">    Learn about our company history and values.</span>
+<span class="hljs-code">    [Markdown](/about.md)</span>
+<span class="hljs-bullet">
+  - </span><span class="hljs-strong">**[Services](/services/)**</span>
+<span class="hljs-code">    Professional services for your needs.</span>
+<span class="hljs-code">    *Keywords: services, consulting, support*</span>
+<span class="hljs-code">    [Markdown](/services.md)</span>
+<span class="hljs-bullet">
+- </span><span class="hljs-strong">**[Contact](/contact/)**</span>
+  Get in touch with us via phone or email.
+  [<span class="hljs-string">Markdown</span>](<span class="hljs-link">/contact.md</span>)</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="accessing-markdown-content" data-rst-anchor="usage-markdown">
+            <a id="usage-markdown"></a>
+            <h2>Accessing Markdown Content<a class="headerlink" href="#accessing-markdown-content" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Append <code>.md</code> to any page URL to get the content as clean Markdown with
+YAML frontmatter.</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/about.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            <section class="section" id="example-markdown-output" data-rst-anchor="usage-markdown-output">
+            <a id="usage-markdown-output"></a>
+            <h3>Example Markdown Output<a class="headerlink" href="#example-markdown-output" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs markdown">---
+title: "About Us"
+description: "Learn about our company history and values."
+language: en
+date: 2026-01-31
+canonical: "/about"
+format: markdown
+<span class="hljs-section">generator: "TYPO3 LLMs.txt Extension"
+---</span>
+
+<span class="hljs-section"># About Us</span>
+
+<span class="hljs-quote">&gt; Learn about our company history and values.</span>
+
+<span class="hljs-section">## Our History</span>
+
+Our company was founded in 1985...
+
+<span class="hljs-section">## Our Values</span>
+<span class="hljs-bullet">
+- </span>Quality and reliability
+<span class="hljs-bullet">- </span>Fair and transparent prices
+<span class="hljs-bullet">- </span>Personal consultation</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>The YAML frontmatter contains:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>title</strong>: Page title</li>
+    <li class="dash"><strong>description</strong>: Page description (from LLM or SEO settings)</li>
+    <li class="dash"><strong>language</strong>: ISO language code</li>
+    <li class="dash"><strong>date</strong>: Last modification date</li>
+    <li class="dash"><strong>canonical</strong>: Canonical URL path</li>
+    <li class="dash"><strong>format</strong>: Output format (always &quot;markdown&quot;)</li>
+    <li class="dash"><strong>generator</strong>: Extension identifier</li>
+</ul>
+
+    </section>
+            <section class="section" id="accessing-the-root-page" data-rst-anchor="usage-root-page">
+            <a id="usage-root-page"></a>
+            <h3>Accessing the Root Page<a class="headerlink" href="#accessing-the-root-page" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>For the root/home page, use:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/index.html.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or simply:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="multi-language-access" data-rst-anchor="usage-multi-language">
+            <a id="usage-multi-language"></a>
+            <h2>Multi-Language Access<a class="headerlink" href="#multi-language-access" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Access page content in different languages using the language URL prefix
+with the <code>.md</code> suffix:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext"># German (default language)
+https://example.com/ueber-uns.md
+
+# English
+https://example.com/en/about.md
+
+# French
+https://example.com/fr/a-propos.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>The extension automatically:</p>
+
+            
+
+<ul>
+    <li class="dash">Detects the language from the URL prefix</li>
+    <li class="dash">Loads the translated page content</li>
+    <li class="dash">Sets the correct language in the YAML frontmatter</li>
+</ul>
+
+    </section>
+            <section class="section" id="caching" data-rst-anchor="usage-caching">
+            <a id="usage-caching"></a>
+            <h2>Caching<a class="headerlink" href="#caching" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension uses smart caching for optimal performance:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>llms.txt</strong>: Cached and regenerated when TYPO3 cache is cleared</li>
+    <li class="dash"><strong>Markdown output</strong>: Cached for 24 hours per page/language combination</li>
+</ul>
+
+            
+    <p>To force regeneration:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">vendor/bin/typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or in DDEV:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">ddev typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="content-filtering" data-rst-anchor="usage-content-filtering">
+            <a id="usage-content-filtering"></a>
+            <h2>Content Filtering<a class="headerlink" href="#content-filtering" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The Markdown output is automatically cleaned for better LLM consumption:</p>
+
+            
+    <p><strong>Removed elements:</strong></p>
+
+            
+
+<ul>
+    <li class="dash">Scripts and styles</li>
+    <li class="dash">Navigation and footer elements</li>
+    <li class="dash">Sidebar content</li>
+    <li class="dash">Bootstrap accessibility spans (<code>visually-hidden</code>)</li>
+    <li class="dash">Empty anchor tags (<code>&lt;a id=&quot;c1&quot;&gt;&lt;/a&gt;</code>)</li>
+</ul>
+
+            
+    <p><strong>Preserved elements:</strong></p>
+
+            
+
+<ul>
+    <li class="dash">Main content text</li>
+    <li class="dash">Headings and structure</li>
+    <li class="dash">Lists and tables</li>
+    <li class="dash">Images (converted to Markdown syntax)</li>
+    <li class="dash">Links (converted to absolute URLs)</li>
+</ul>
+
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="api-protection-1" data-rst-anchor="api-protection">
+            <a id="api-protection"></a>
+            <h1>API Protection<a class="headerlink" href="#api-protection-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>You can protect both <code>/llms.txt</code> and the <code>.md</code> suffix endpoints with
+an API key. This is useful when you want to:</p>
+
+            
+
+<ul>
+    <li class="dash">Restrict access to your own chatbots or RAG systems</li>
+    <li class="dash">Prevent external scraping of structured content</li>
+    <li class="dash">Control who can access your LLM-optimized content</li>
+</ul>
+
+            <section class="section" id="setting-up-api-protection" data-rst-anchor="api-protection-setup">
+            <a id="api-protection-setup"></a>
+            <h2>Setting Up API Protection<a class="headerlink" href="#setting-up-api-protection" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    
+<ol start="1" type="1">
+    <li value="1">Go to <strong>Site Management &gt; Settings</strong> in the TYPO3 Backend.</li>
+    <li value="2">Find the <strong>LLMs-Text</strong> category.</li>
+    <li value="3">Enter your API key in the <strong>API Key for Format Access</strong> field.</li>
+    <li value="4">Save and clear all caches.</li>
+</ol>
+
+                
+<div class="admonition tip" role="alert">
+    <p class="admonition-title">Tip</p>
+        
+    <p>Generate a secure API key with:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">php -r <span class="hljs-string">"echo bin2hex(random_bytes(32)) . PHP_EOL;"</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    <p>Or in DDEV:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">ddev <span class="hljs-built_in">exec</span> php -r <span class="hljs-string">"echo bin2hex(random_bytes(32)) . PHP_EOL;"</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+</div>
+    </section>
+            <section class="section" id="authenticating-requests" data-rst-anchor="api-protection-usage">
+            <a id="api-protection-usage"></a>
+            <h2>Authenticating Requests<a class="headerlink" href="#authenticating-requests" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Pass the API key via <strong>HTTP header</strong> (recommended):</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash"><span class="hljs-comment"># Access llms.txt</span>
+curl -H <span class="hljs-string">"X-LLM-API-Key: your-secret-key"</span> https://example.com/llms.txt
+
+<span class="hljs-comment"># Access page as Markdown</span>
+curl -H <span class="hljs-string">"X-LLM-API-Key: your-secret-key"</span> https://example.com/about.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or via <strong>query parameter</strong>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/llms.txt?api_key=your-secret-key
+https://example.com/about.md?api_key=your-secret-key</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+                
+<div class="admonition warning" role="alert">
+    <p class="admonition-title">Warning</p>
+        
+    <p>Using query parameters exposes the API key in server logs and browser
+history. Prefer the HTTP header method for production use.</p>
+
+</div>
+    </section>
+            <section class="section" id="error-response" data-rst-anchor="api-protection-error">
+            <a id="api-protection-error"></a>
+            <h2>Error Response<a class="headerlink" href="#error-response" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Invalid or missing API key returns <strong>HTTP 401 Unauthorized</strong> with a JSON body:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs json">{
+  <span class="hljs-attr">"error"</span>: <span class="hljs-string">"Unauthorized"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Valid API key required. Provide via X-LLM-API-Key header or api_key query parameter."</span>
+}</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="integration-examples" data-rst-anchor="api-protection-integrations">
+            <a id="api-protection-integrations"></a>
+            <h2>Integration Examples<a class="headerlink" href="#integration-examples" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="n8n-integration">
+            <h3>n8n Integration<a class="headerlink" href="#n8n-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>In n8n HTTP Request node, add the header:</p>
+
+            <div class="table-responsive">
+    <table class="table table-bordered align-default colwidths-grid">
+                    <colgroup>
+                                    <col style="width: 30%">
+                        </colgroup>
+            <thead>
+            <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                    </tr>
+        </thead>
+        <tbody>
+    <tr>
+            <td><code>X-LLM-API-Key</code></td>            <td><code>your-secret-key</code></td>    </tr></tbody>    </table>
+</div>
+    </section>
+            <section class="section" id="python-integration">
+            <h3>Python Integration<a class="headerlink" href="#python-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs python"><span class="hljs-keyword">import</span> requests
+
+headers = {
+    <span class="hljs-string">"X-LLM-API-Key"</span>: <span class="hljs-string">"your-secret-key"</span>
+}
+
+<span class="hljs-comment"># Get llms.txt</span>
+response = requests.get(<span class="hljs-string">"https://example.com/llms.txt"</span>, headers=headers)
+print(response.text)
+
+<span class="hljs-comment"># Get page as Markdown</span>
+response = requests.get(<span class="hljs-string">"https://example.com/about.md"</span>, headers=headers)
+print(response.text)</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="javascript-node-js-integration">
+            <h3>JavaScript/Node.js Integration<a class="headerlink" href="#javascript-node-js-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs javascript"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">"https://example.com/llms.txt"</span>, {
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">"X-LLM-API-Key"</span>: <span class="hljs-string">"your-secret-key"</span>
+  }
+});
+
+<span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> response.text();
+<span class="hljs-built_in">console</span>.log(content);</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="curl-integration">
+            <h3>cURL Integration<a class="headerlink" href="#curl-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash"><span class="hljs-comment"># Store API key in environment variable</span>
+<span class="hljs-built_in">export</span> LLM_API_KEY=<span class="hljs-string">"your-secret-key"</span>
+
+<span class="hljs-comment"># Access llms.txt</span>
+curl -H <span class="hljs-string">"X-LLM-API-Key: <span class="hljs-variable">$LLM_API_KEY</span>"</span> https://example.com/llms.txt
+
+<span class="hljs-comment"># Access multiple pages</span>
+<span class="hljs-keyword">for</span> page <span class="hljs-keyword">in</span> about services contact; <span class="hljs-keyword">do</span>
+  curl -H <span class="hljs-string">"X-LLM-API-Key: <span class="hljs-variable">$LLM_API_KEY</span>"</span> <span class="hljs-string">"https://example.com/<span class="hljs-variable">${page}</span>.md"</span> &gt; <span class="hljs-string">"<span class="hljs-variable">${page}</span>.md"</span>
+<span class="hljs-keyword">done</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="behavior-when-enabled" data-rst-anchor="api-protection-behavior">
+            <a id="api-protection-behavior"></a>
+            <h2>Behavior When Enabled<a class="headerlink" href="#behavior-when-enabled" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>When API key protection is enabled:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1"><strong>llms.txt</strong> requires authentication</li>
+    <li value="2"><strong>All .md endpoints</strong> require authentication</li>
+    <li value="3">The <strong>HTML header link</strong> (<code>&lt;link rel=&quot;alternate&quot;&gt;</code>) is automatically hidden</li>
+    <li value="4">The llms.txt file includes <strong>authentication instructions</strong></li>
+</ol>
+
+    </section>
+            <section class="section" id="disabling-api-protection" data-rst-anchor="api-protection-disable">
+            <a id="api-protection-disable"></a>
+            <h2>Disabling API Protection<a class="headerlink" href="#disabling-api-protection" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>To make endpoints publicly accessible again:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1">Go to <strong>Site Management &gt; Settings</strong></li>
+    <li value="2">Clear the <strong>API Key for Format Access</strong> field</li>
+    <li value="3">Save and clear all caches</li>
+</ol>
+
+            
+    <p>The header link will automatically reappear and endpoints will be publicly
+accessible.</p>
+
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="developer-information" data-rst-anchor="developer">
+            <a id="developer"></a>
+            <h1>Developer Information<a class="headerlink" href="#developer-information" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>This chapter provides technical details for developers and integrators.</p>
+
+            <section class="section" id="architecture" data-rst-anchor="developer-architecture">
+            <a id="developer-architecture"></a>
+            <h2>Architecture<a class="headerlink" href="#architecture" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension uses three PSR-15 middlewares:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1"><strong>UrlSuffixMiddleware</strong> - Detects <code>.md</code> suffix and rewrites URLs</li>
+    <li value="2"><strong>LlmsTxtMiddleware</strong> - Serves the <code>/llms.txt</code> endpoint</li>
+    <li value="3"><strong>ContentFormatMiddleware</strong> - Transforms HTML to Markdown</li>
+</ol>
+
+            <section class="section" id="middleware-chain" data-rst-anchor="developer-middlewares">
+            <a id="developer-middlewares"></a>
+            <h3>Middleware Chain<a class="headerlink" href="#middleware-chain" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">Request: /about.md
+   │
+   ▼
+UrlSuffixMiddleware (before site resolver)
+   │  Strips .md suffix
+   │  Sets request attribute 'llms_txt_format' = 'md'
+   │  Rewrites URI to /about
+   ▼
+TYPO3 Site Resolver
+   │
+   ▼
+LlmsTxtMiddleware (after site, before page resolver)
+   │  Handles /llms.txt requests
+   ▼
+TYPO3 Page Resolver &amp; Frontend
+   │
+   ▼
+ContentFormatMiddleware (after content-length-headers)
+   │  Checks for 'llms_txt_format' attribute
+   │  Converts HTML response to Markdown
+   ▼
+Response: Markdown with YAML frontmatter</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="services" data-rst-anchor="developer-services">
+            <a id="developer-services"></a>
+            <h2>Services<a class="headerlink" href="#services" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="pagetreeservice">
+            <h3>PageTreeService<a class="headerlink" href="#pagetreeservice" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p><code>RTfirst\LlmsTxt\Service\PageTreeService</code></p>
+
+            
+    <p>Traverses the TYPO3 page tree and collects page data for llms.txt generation.</p>
+
+            
+
+<ul>
+    <li class="dash">Supports multi-language sites</li>
+    <li class="dash">Respects page exclusion settings</li>
+    <li class="dash">Handles translated pages with fallback</li>
+</ul>
+
+    </section>
+            <section class="section" id="markdownconverterservice">
+            <h3>MarkdownConverterService<a class="headerlink" href="#markdownconverterservice" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p><code>RTfirst\LlmsTxt\Service\MarkdownConverterService</code></p>
+
+            
+    <p>Orchestrates content element to Markdown conversion using registered converters.</p>
+
+    </section>
+            <section class="section" id="llmstxtgeneratorservice">
+            <h3>LlmsTxtGeneratorService<a class="headerlink" href="#llmstxtgeneratorservice" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p><code>RTfirst\LlmsTxt\Service\LlmsTxtGeneratorService</code></p>
+
+            
+    <p>Generates the llms.txt content for a site.</p>
+
+    </section>
+    </section>
+            <section class="section" id="content-converters" data-rst-anchor="developer-converters">
+            <a id="developer-converters"></a>
+            <h2>Content Converters<a class="headerlink" href="#content-converters" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension uses a converter pattern for content element to Markdown conversion.
+Each converter implements <code>ContentConverterInterface</code>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ContentConverterInterface</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">supports</span><span class="hljs-params">(string $cType)</span>: <span class="hljs-title">bool</span></span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convert</span><span class="hljs-params">(array $record, string $baseUrl)</span>: <span class="hljs-title">string</span></span>;
+}</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            <section class="section" id="built-in-converters">
+            <h3>Built-in Converters<a class="headerlink" href="#built-in-converters" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="table-responsive">
+    <table class="table table-bordered align-default colwidths-grid">
+                    <colgroup>
+                                    <col style="width: 30%">
+                        </colgroup>
+            <thead>
+            <tr>
+                            <th>Converter</th>
+                            <th>Supported CTypes</th>
+                            <th>Description</th>
+                    </tr>
+        </thead>
+        <tbody>
+    <tr>
+            <td>HeaderConverter</td>            <td><code>header</code></td>            <td>Converts header elements</td>    </tr>    <tr>
+            <td>TextConverter</td>            <td><code>text</code>, <code>textpic</code>, <code>textmedia</code></td>            <td>Converts text and text+media</td>    </tr>    <tr>
+            <td>ImageConverter</td>            <td><code>image</code></td>            <td>Converts image galleries</td>    </tr>    <tr>
+            <td>BulletsConverter</td>            <td><code>bullets</code></td>            <td>Converts bullet lists</td>    </tr>    <tr>
+            <td>TableConverter</td>            <td><code>table</code></td>            <td>Converts tables</td>    </tr>    <tr>
+            <td>MenuConverter</td>            <td><code>menu_*</code></td>            <td>Converts menu elements</td>    </tr>    <tr>
+            <td>HtmlConverter</td>            <td><code>html</code></td>            <td>Converts raw HTML</td>    </tr>    <tr>
+            <td>DefaultConverter</td>            <td>(fallback)</td>            <td>HTML-to-Markdown fallback</td>    </tr></tbody>    </table>
+</div>
+    </section>
+            <section class="section" id="creating-custom-converters" data-rst-anchor="developer-custom-converter">
+            <a id="developer-custom-converter"></a>
+            <h3>Creating Custom Converters<a class="headerlink" href="#creating-custom-converters" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    
+<ol start="1" type="1">
+    <li value="1">Create a class implementing <code>ContentConverterInterface</code>:</li>
+</ol>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">declare</span>(strict_types=<span class="hljs-number">1</span>);
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">MyExtension</span>\<span class="hljs-title">Converter</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">RTfirst</span>\<span class="hljs-title">LlmsTxt</span>\<span class="hljs-title">Converter</span>\<span class="hljs-title">ContentConverterInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCustomConverter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ContentConverterInterface</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">supports</span><span class="hljs-params">(string $cType)</span>: <span class="hljs-title">bool</span>
+    </span>{
+        <span class="hljs-keyword">return</span> $cType === <span class="hljs-string">'my_custom_element'</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convert</span><span class="hljs-params">(array $record, string $baseUrl)</span>: <span class="hljs-title">string</span>
+    </span>{
+        $header = $record[<span class="hljs-string">'header'</span>] ?? <span class="hljs-string">''</span>;
+        $bodytext = $record[<span class="hljs-string">'bodytext'</span>] ?? <span class="hljs-string">''</span>;
+
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"## {$header}\n\n{$bodytext}"</span>;
+    }
+}</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    
+<ol start="2" type="1">
+    <li value="2">Register the converter in <code>Services.yaml</code>:</li>
+</ol>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-string">Vendor\MyExtension\Converter\MyCustomConverter:</span>
+    <span class="hljs-attr">tags:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">'llms_txt.content_converter'</span>
+        <span class="hljs-attr">priority:</span> <span class="hljs-number">100</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Higher priority converters are checked first.</p>
+
+    </section>
+    </section>
+            <section class="section" id="event-listeners" data-rst-anchor="developer-events">
+            <a id="developer-events"></a>
+            <h2>Event Listeners<a class="headerlink" href="#event-listeners" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="cacheflusheventlistener">
+            <h3>CacheFlushEventListener<a class="headerlink" href="#cacheflusheventlistener" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Invalidates llms.txt cache when TYPO3 caches are flushed.</p>
+
+    </section>
+            <section class="section" id="headerlinkeventlistener">
+            <h3>HeaderLinkEventListener<a class="headerlink" href="#headerlinkeventlistener" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Injects the <code>&lt;link rel=&quot;alternate&quot;&gt;</code> tag into HTML responses.</p>
+
+    </section>
+            <section class="section" id="backendnotificationeventlistener">
+            <h3>BackendNotificationEventListener<a class="headerlink" href="#backendnotificationeventlistener" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Shows a notification in the Backend if robots.txt lacks llms.txt reference.</p>
+
+    </section>
+    </section>
+            <section class="section" id="caching" data-rst-anchor="developer-caching">
+            <a id="developer-caching"></a>
+            <h2>Caching<a class="headerlink" href="#caching" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension uses two cache layers:</p>
+
+            
+    
+<ol start="1">
+    <li value="1">
+    <p><strong>llms.txt Index Cache</strong> (<code>cache_pages</code>)</p>
+
+
+<ul>
+    <li class="dash">Stores generated llms.txt content per site</li>
+    <li class="dash">Invalidated on cache flush</li>
+</ul>
+</li>
+    <li value="2">
+    <p><strong>Format Output Cache</strong> (<code>llms_txt_format</code>)</p>
+
+
+<ul>
+    <li class="dash">Stores Markdown output per page/language</li>
+    <li class="dash">24-hour default lifetime</li>
+    <li class="dash">Part of the <code>pages</code> cache group</li>
+</ul>
+</li>
+</ol>
+
+    </section>
+            <section class="section" id="database-schema" data-rst-anchor="developer-database">
+            <a id="developer-database"></a>
+            <h2>Database Schema<a class="headerlink" href="#database-schema" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension adds fields to the <code>pages</code> table:</p>
+
+            <div class="table-responsive">
+    <table class="table table-bordered align-default colwidths-grid">
+                    <colgroup>
+                                    <col style="width: 30%">
+                        </colgroup>
+            <thead>
+            <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                    </tr>
+        </thead>
+        <tbody>
+    <tr>
+            <td>tx_llmstxt_description</td>            <td>text</td>            <td>LLM-specific page description</td>    </tr>    <tr>
+            <td>tx_llmstxt_summary</td>            <td>text</td>            <td>Extended page summary</td>    </tr>    <tr>
+            <td>tx_llmstxt_keywords</td>            <td>varchar(255)</td>            <td>Comma-separated keywords</td>    </tr>    <tr>
+            <td>tx_llmstxt_exclude</td>            <td>tinyint(1)</td>            <td>Exclude from llms.txt</td>    </tr>    <tr>
+            <td>tx_llmstxt_priority</td>            <td>int(11)</td>            <td>Priority (0-100) for sorting</td>    </tr></tbody>    </table>
+</div>
+    </section>
+            <section class="section" id="code-quality" data-rst-anchor="developer-code-quality">
+            <a id="developer-code-quality"></a>
+            <h2>Code Quality<a class="headerlink" href="#code-quality" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension maintains high code quality standards:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>PHPStan Level 8</strong> compliant</li>
+    <li class="dash"><strong>PSR-12</strong> code style (php-cs-fixer)</li>
+    <li class="dash"><strong>Unit tests</strong> for converters and services</li>
+</ul>
+
+            
+    <p>Run quality checks:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash"><span class="hljs-comment"># Static analysis</span>
+vendor/bin/phpstan analyse packages/llms_txt --level=8
+
+<span class="hljs-comment"># Code style check</span>
+vendor/bin/php-cs-fixer fix packages/llms_txt --dry-run
+
+<span class="hljs-comment"># Fix code style</span>
+vendor/bin/php-cs-fixer fix packages/llms_txt
+
+<span class="hljs-comment"># Run tests</span>
+vendor/bin/phpunit -c packages/llms_txt/phpunit.xml</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="dependencies" data-rst-anchor="developer-dependencies">
+            <a id="developer-dependencies"></a>
+            <h2>Dependencies<a class="headerlink" href="#dependencies" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+
+<ul>
+    <li class="dash"><strong>league/html-to-markdown</strong> (^5.1) - HTML to Markdown conversion</li>
+    <li class="dash"><strong>typo3/cms-core</strong> (^13.0 || ^14.0)</li>
+    <li class="dash"><strong>typo3/cms-frontend</strong> (^13.0 || ^14.0)</li>
+</ul>
+
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="frequently-asked-questions-faq" data-rst-anchor="faq">
+            <a id="faq"></a>
+            <h1>Frequently Asked Questions (FAQ)<a class="headerlink" href="#frequently-asked-questions-faq" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            <section class="section" id="general-questions" data-rst-anchor="faq-general">
+            <a id="faq-general"></a>
+            <h2>General Questions<a class="headerlink" href="#general-questions" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="what-is-llms-txt" data-rst-anchor="faq-what-is-llms-txt">
+            <a id="faq-what-is-llms-txt"></a>
+            <h3>What is llms.txt?<a class="headerlink" href="#what-is-llms-txt" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p><code>llms.txt</code> is an emerging standard for providing AI and Large Language Model
+(LLM) crawlers with structured information about a website. It helps AI systems
+understand your website&#039;s content and structure. See the
+<a href="https://llmstxt.org/">llmstxt.org specification</a> for details.</p>
+
+    </section>
+            <section class="section" id="why-should-i-use-this-extension" data-rst-anchor="faq-why-use">
+            <a id="faq-why-use"></a>
+            <h3>Why should I use this extension?<a class="headerlink" href="#why-should-i-use-this-extension" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+
+<ul>
+    <li class="dash"><strong>Better AI understanding</strong> of your website content</li>
+    <li class="dash"><strong>Structured access</strong> for chatbots and RAG systems</li>
+    <li class="dash"><strong>Clean Markdown output</strong> without navigation, scripts, or styling</li>
+    <li class="dash"><strong>Multi-language support</strong> out of the box</li>
+    <li class="dash"><strong>Optional protection</strong> with API keys</li>
+</ul>
+
+    </section>
+    </section>
+            <section class="section" id="installation-questions" data-rst-anchor="faq-installation">
+            <a id="faq-installation"></a>
+            <h2>Installation Questions<a class="headerlink" href="#installation-questions" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="i-get-a-404-error-when-accessing-llms-txt" data-rst-anchor="faq-404-error">
+            <a id="faq-404-error"></a>
+            <h3>I get a 404 error when accessing /llms.txt<a class="headerlink" href="#i-get-a-404-error-when-accessing-llms-txt" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Make sure you have:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1">Added the <strong>Site Set</strong> to your site configuration</li>
+    <li value="2">Cleared all caches: <code>vendor/bin/typo3 cache:flush</code></li>
+</ol>
+
+            
+    <p>See <a href="#installation-site-set">Activate the Site Set</a> for details.</p>
+
+    </section>
+            <section class="section" id="the-llm-tab-doesn-t-appear-in-page-properties" data-rst-anchor="faq-no-llm-tab">
+            <a id="faq-no-llm-tab"></a>
+            <h3>The LLM tab doesn&#039;t appear in page properties<a class="headerlink" href="#the-llm-tab-doesn-t-appear-in-page-properties" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    
+<ol start="1" type="1">
+    <li value="1">Verify the extension is installed: <code>vendor/bin/typo3 extension:list</code></li>
+    <li value="2">Clear the system cache</li>
+    <li value="3">Log out and log back into the TYPO3 Backend</li>
+</ol>
+
+    </section>
+    </section>
+            <section class="section" id="configuration-questions" data-rst-anchor="faq-configuration">
+            <a id="faq-configuration"></a>
+            <h2>Configuration Questions<a class="headerlink" href="#configuration-questions" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="how-do-i-exclude-specific-pages" data-rst-anchor="faq-exclude-pages">
+            <a id="faq-exclude-pages"></a>
+            <h3>How do I exclude specific pages?<a class="headerlink" href="#how-do-i-exclude-specific-pages" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>You have two options:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1"><strong>Site Settings</strong>: Add page UIDs to <code>llmsTxt.excludePages</code> (comma-separated)</li>
+    <li value="2"><strong>Per Page</strong>: Check &quot;Exclude from llms.txt&quot; in the page&#039;s LLM tab</li>
+</ol>
+
+    </section>
+            <section class="section" id="how-does-the-priority-setting-work" data-rst-anchor="faq-priority">
+            <a id="faq-priority"></a>
+            <h3>How does the priority setting work?<a class="headerlink" href="#how-does-the-priority-setting-work" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Pages with higher priority values (0-100) appear earlier in the llms.txt
+page list. Use this to highlight important pages for AI crawlers:</p>
+
+            
+
+<ul>
+    <li class="dash">80-100: Main landing pages</li>
+    <li class="dash">50-70: Important content</li>
+    <li class="dash">20-40: Secondary pages</li>
+    <li class="dash">0-10: Low priority</li>
+</ul>
+
+    </section>
+            <section class="section" id="can-i-include-hidden-pages" data-rst-anchor="faq-hidden-pages">
+            <a id="faq-hidden-pages"></a>
+            <h3>Can I include hidden pages?<a class="headerlink" href="#can-i-include-hidden-pages" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Yes, enable <code>llmsTxt.includeHidden</code> in the Site Settings. This is useful
+for staging environments.</p>
+
+    </section>
+    </section>
+            <section class="section" id="usage-questions" data-rst-anchor="faq-usage">
+            <a id="faq-usage"></a>
+            <h2>Usage Questions<a class="headerlink" href="#usage-questions" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="how-do-i-access-the-root-page-as-markdown" data-rst-anchor="faq-root-page-md">
+            <a id="faq-root-page-md"></a>
+            <h3>How do I access the root page as Markdown?<a class="headerlink" href="#how-do-i-access-the-root-page-as-markdown" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Use <code>/index.html.md</code> or <code>/.md</code>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/index.html.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="how-do-i-access-translated-pages" data-rst-anchor="faq-language-access">
+            <a id="faq-language-access"></a>
+            <h3>How do I access translated pages?<a class="headerlink" href="#how-do-i-access-translated-pages" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Use the language prefix with the <code>.md</code> suffix:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext"># English
+https://example.com/en/about.md
+
+# German
+https://example.com/de/ueber-uns.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="how-do-i-refresh-the-cached-content" data-rst-anchor="faq-cache-refresh">
+            <a id="faq-cache-refresh"></a>
+            <h3>How do I refresh the cached content?<a class="headerlink" href="#how-do-i-refresh-the-cached-content" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Clear the TYPO3 cache:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">vendor/bin/typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or in DDEV:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">ddev typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="api-protection-questions" data-rst-anchor="faq-api-protection">
+            <a id="faq-api-protection"></a>
+            <h2>API Protection Questions<a class="headerlink" href="#api-protection-questions" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="which-http-header-should-i-use-for-the-api-key" data-rst-anchor="faq-api-key-header">
+            <a id="faq-api-key-header"></a>
+            <h3>Which HTTP header should I use for the API key?<a class="headerlink" href="#which-http-header-should-i-use-for-the-api-key" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Use <code>X-LLM-API-Key</code>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">curl -H <span class="hljs-string">"X-LLM-API-Key: your-key"</span> https://example.com/llms.txt</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="can-i-use-a-query-parameter-instead" data-rst-anchor="faq-api-key-query">
+            <a id="faq-api-key-query"></a>
+            <h3>Can I use a query parameter instead?<a class="headerlink" href="#can-i-use-a-query-parameter-instead" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Yes, use <code>api_key</code>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/llms.txt?api_key=your-key</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>However, HTTP headers are recommended for security reasons.</p>
+
+    </section>
+    </section>
+            <section class="section" id="troubleshooting" data-rst-anchor="faq-troubleshooting">
+            <a id="faq-troubleshooting"></a>
+            <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="the-markdown-output-is-empty" data-rst-anchor="faq-empty-markdown">
+            <a id="faq-empty-markdown"></a>
+            <h3>The Markdown output is empty<a class="headerlink" href="#the-markdown-output-is-empty" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+
+<ul>
+    <li class="dash">Check if the page has content elements</li>
+    <li class="dash">Verify the page is not excluded from llms.txt</li>
+    <li class="dash">Clear all caches</li>
+</ul>
+
+    </section>
+            <section class="section" id="content-shows-in-wrong-language" data-rst-anchor="faq-wrong-language">
+            <a id="faq-wrong-language"></a>
+            <h3>Content shows in wrong language<a class="headerlink" href="#content-shows-in-wrong-language" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+
+<ul>
+    <li class="dash">Verify your site language configuration</li>
+    <li class="dash">Check if translations exist for the page</li>
+    <li class="dash">Use the correct language prefix in the URL</li>
+</ul>
+
+    </section>
+            <section class="section" id="some-content-elements-are-missing" data-rst-anchor="faq-missing-content">
+            <a id="faq-missing-content"></a>
+            <h3>Some content elements are missing<a class="headerlink" href="#some-content-elements-are-missing" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>The extension filters out:</p>
+
+            
+
+<ul>
+    <li class="dash">Navigation elements</li>
+    <li class="dash">Footer content</li>
+    <li class="dash">Scripts and styles</li>
+    <li class="dash">Empty elements</li>
+</ul>
+
+            
+    <p>If a specific content type is missing, you may need to create a custom
+converter. See <a href="#developer-custom-converter">Creating Custom Converters</a>.</p>
+
+    </section>
+    </section>
+    </section>
+
+        </article>
+<article>
+            <section class="section" id="where-to-get-help" data-rst-anchor="help">
+            <a id="help"></a>
+            <h1>Where to Get Help<a class="headerlink" href="#where-to-get-help" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>If you need help with this extension, here are your options:</p>
+
+            <section class="section" id="community-support" data-rst-anchor="help-community">
+            <a id="help-community"></a>
+            <h2>Community Support<a class="headerlink" href="#community-support" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="typo3-slack">
+            <h3>TYPO3 Slack<a class="headerlink" href="#typo3-slack" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Join the TYPO3 Slack workspace and ask questions in the appropriate channels:</p>
+
+            
+
+<ul>
+    <li class="dash"><a href="https://typo3.org/community/meet/chat-slack">TYPO3 Slack</a></li>
+    <li class="dash">Channel: <code>#typo3-cms</code></li>
+</ul>
+
+    </section>
+            <section class="section" id="typo3-forum">
+            <h3>TYPO3 Forum<a class="headerlink" href="#typo3-forum" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>Ask questions in the official TYPO3 forum:</p>
+
+            
+
+<ul>
+    <li class="dash"><a href="https://talk.typo3.org/c/typo3-questions/19">TYPO3 Forum - Questions</a></li>
+</ul>
+
+    </section>
+    </section>
+            <section class="section" id="contact-the-author" data-rst-anchor="help-author">
+            <a id="help-author"></a>
+            <h2>Contact the Author<a class="headerlink" href="#contact-the-author" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>For direct support, you can contact the extension author:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>Author</strong>: Roland Tfirst</li>
+    <li class="dash"><strong>Email</strong>: <a href="mailto:roland@tfirst.de">roland@tfirst.de</a></li>
+</ul>
+
+    </section>
+            <section class="section" id="documentation" data-rst-anchor="help-documentation">
+            <a id="help-documentation"></a>
+            <h2>Documentation<a class="headerlink" href="#documentation" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+
+<ul>
+    <li class="dash"><strong>This documentation</strong>: You&#039;re reading it</li>
+    <li class="dash"><strong>llmstxt.org specification</strong>: <a href="https://llmstxt.org/">https://llmstxt.org/</a></li>
+    <li class="dash"><strong>TYPO3 Documentation</strong>: <a href="https://docs.typo3.org/">https://docs.typo3.org/</a></li>
+</ul>
+
+    </section>
+            <section class="section" id="report-issues" data-rst-anchor="report-issues">
+            <a id="report-issues"></a>
+            <h2>Report Issues<a class="headerlink" href="#report-issues" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Found a bug or have a feature request? Please report it on GitHub:</p>
+
+            
+
+<ul>
+    <li class="dash"><a href="https://github.com/rtfirst/llms-txt/issues">GitHub Issues</a></li>
+</ul>
+
+            
+    <p>When reporting issues, please include:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1"><strong>TYPO3 version</strong> (e.g., 13.4.1)</li>
+    <li value="2"><strong>PHP version</strong> (e.g., 8.2.15)</li>
+    <li value="3"><strong>Extension version</strong> (e.g., 1.0.5)</li>
+    <li value="4"><strong>Steps to reproduce</strong> the issue</li>
+    <li value="5"><strong>Expected behavior</strong> vs. <strong>actual behavior</strong></li>
+    <li value="6"><strong>Error messages</strong> or logs (if any)</li>
+</ol>
+
+    </section>
+            <section class="section" id="contribute" data-rst-anchor="help-contribute">
+            <a id="help-contribute"></a>
+            <h2>Contribute<a class="headerlink" href="#contribute" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Contributions are welcome! The source code is available on GitHub:</p>
+
+            
+
+<ul>
+    <li class="dash"><a href="https://github.com/rtfirst/llms-txt">GitHub Repository</a></li>
+</ul>
+
+            
+    <p>To contribute:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1">Fork the repository</li>
+    <li value="2">Create a feature branch</li>
+    <li value="3">Make your changes</li>
+    <li value="4">Run code quality checks (see <a href="#developer-code-quality">Code Quality</a>)</li>
+    <li value="5">Submit a pull request</li>
+</ol>
+
+    </section>
+            <section class="section" id="changelog" data-rst-anchor="help-changelog">
+            <a id="help-changelog"></a>
+            <h2>Changelog<a class="headerlink" href="#changelog" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>See the <a href="https://github.com/rtfirst/llms-txt/blob/main/CHANGELOG.md">CHANGELOG.md</a>
+for a detailed list of changes in each version.</p>
+
+    </section>
+    </section>
+
+        </article>
+<!-- content end -->
+                                                        </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="linkReferenceModal" tabindex="-1" aria-labelledby="linkReferenceModalLabel"
+    aria-hidden="true" data-current-filename="" data-interlink-shortcode="rtfirst/llms-txt">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkReferenceModalLabel">Reference to the headline</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success d-none" id="permalink-alert-success" role="alert"></div>
+                <div class="mb-3">
+                    <div class="permalink-short-wrapper">
+                        <label for="permalink-short" class="col-form-label">Permalink (Shortlink)</label>
+                        <div class="input-group">
+                            <input class="form-control code" id="permalink-short" readonly>
+                            <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-short"><i class="far fa-clone"></i></button>
+                        </div>
+                        <p><em>Copy and freely share the link</em></p>
+                    </div>
+                    <label for="permalink-uri" class="col-form-label">URL</label>
+                    <div class="input-group">
+                        <input class="form-control code" id="permalink-uri" readonly>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-uri"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="alert alert-warning alert-permalink-rst" role="alert">This link target has no permanent anchor assigned.The link below can be used, but is prone to change if the page gets moved.
+                    </div>
+                    <label for="permalink-rst" class="col-form-label">Link in reStructuredText (reST)</label>
+                    <div class="input-group">
+                        <textarea class="form-control code" id="permalink-rst" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-rst"><i class="far fa-clone"></i></button>
+                    </div>
+                    <p><em>Copy this link into your TYPO3 manual.</em></p>
+                </div>
+                <div class="mb-3">
+                    <label for="permalink-md" class="col-form-label">Link in Markdown</label>
+                    <div class="input-group">
+                        <textarea class="form-control code" id="permalink-md" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-md"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="permalink-html" class="col-form-label">Link in HTML</label>
+                                        <div class="input-group">
+                        <textarea class="form-control code" id="permalink-html" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-html"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>    <div class="modal fade" id="generalModal" tabindex="-1" aria-labelledby="linkReferenceModalLabel"
+    aria-hidden="true" data-current-filename=""
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="generalModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success d-none" id="general-alert-success" role="alert"></div>
+                <div id="generalModalContent">
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <div id="generalModalCustomButtons"></div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-regular fa-circle-xmark"></i>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div></div>
+
+
+<footer class="page-footer">
+    <div class="frame frame-ruler-before frame-background-dark">
+        <div class="frame-container">
+            <div class="frame-inner">
+                <ul class="footer-simplemenu">
+                        <li><a href="https://github.com/rtfirst/llms-txt" title="Home" rel="nofollow noopener"><span>Home</span></a></li>
+                                                                        <li><a href="https://github.com/rtfirst/llms-txt/issues" rel="nofollow noopener" title="Issues"><span>Issues</span></a></li>
+                                                <li><a href="https://github.com/rtfirst/llms-txt" rel="nofollow noopener" title="Repository"><span>Repository</span></a></li>
+                                            </ul>                <div class="footer-additional">
+                    <p class="text-center">Last rendered: Feb 03, 2026 18:03</p>
+                </div>
+                <div class="footer-meta">
+                                        <div class="footer-meta-copyright">
+                        &copy; Roland Tfirst
+                    </div>
+                    <ul class="footer-meta-navigation">
+                        <li><a href="https://typo3.org/legal-notice" rel="nofollow" target="_blank" title="Legal Notice">Legal Notice</a></li>
+                        <li><a href="https://typo3.org/privacy-policy" rel="nofollow" target="_blank" title="Privacy Policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../_resources/js/popper.min.js"></script>
+<script src="../_resources/js/bootstrap.min.js"></script>
+<script src="../_resources/js/theme.min.js"></script>
+
+<!--
+ Locally rendered. No tracking embedded.
+-->
+</body>
+</html>

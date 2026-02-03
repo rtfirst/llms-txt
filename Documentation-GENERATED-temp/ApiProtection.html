@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>API Protection — LLMs.txt Generator 
+        documentation</title>
+
+    
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="phpdocumentor/guides" name="generator">
+<meta content="LLMs.txt Generator" name="docsearch:name">
+<meta content="" name="docsearch:package_type">
+<meta content="" name="docsearch:release">
+<meta content="" name="docsearch:version">
+<meta content="2026-02-03T18:03:14+00:00" name="docsearch:modified">
+<meta content="2026-02-03T18:03:14+00:00" name="dc.modified">
+<meta content="2026-02-03T18:03:14+00:00" property="article:modified_time">
+    <link href="http://purl.org/dc/elements/1.1/" rel="schema.dc">
+<link href="_resources/css/theme.css" rel="stylesheet">
+<link href="https://docs.typo3.org/search/" rel="search" title="Search">
+<script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/webcomponents-loader.js"></script>
+<script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/typo3-universe.js" type="module"></script>
+                        <link href="Usage.html" rel="prev" title="Usage"/>
+            <link href="Developer.html" rel="next" title="Developer Information"/>
+            <link href="Index.html" rel="top" title="LLMs.txt Generator"/>
+    </head>
+<body>
+<div class="page">
+    <header>
+    <div class="page-topbar">
+        <div class="page-topbar-inner">
+            <typo3-universe active="documentation">
+                <div style="display: block; height: 44px; background-color: #313131;"></div>
+            </typo3-universe>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="page-header-inner">
+            <div class="d-flex flex-wrap">
+                <div class="logo-wrapper">
+                    <a class="logo" href="https://docs.typo3.org/" title="TYPO3 Documentation">
+                        <img alt="TYPO3 Logo" class="logo-image" src="_resources/img/typo3-logo.svg" width="484" height="130">
+                    </a>
+                </div>
+                <div class="align-self-center order-lg-2 order-last">
+                    
+<div class="toc-header">
+    <div class="toc-title pe-3">
+                            <a class="toc-title-project" href="Index.html">LLMs.txt Generator</a>
+            </div>
+    </div>                </div>
+                <div class="ms-auto order-lg-3 d-flex">
+                    <div class="menu-search-wrapper">
+                        <button id="toc-toggle" class="btn btn-light d-block d-lg-none" tabindex="0" aria-controls="toc-collapse" aria-expanded="false">
+                            <i class="fas fa-bars"></i> <span class="visually-hidden">Mobile Menu</span>
+                        </button>
+                        <all-documentations-menu data-override-url="_resources/js/menu-proxy.php"></all-documentations-menu>
+                                                <search role="search">
+                            <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
+                                <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
+                                <div class="input-group mb-3 mt-sm-3">
+                                    <select class="form-select search__scope" id="searchscope" name="scope">
+                                        <option value="">Search all</option>
+                                    </select>
+                                    <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
+                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i>&nbsp;<span class="d-none d-md-inline">Search</span></button>
+                                </div>
+                            </form>
+                            <div id="global-search-root"></div>
+                        </search>
+                        <div class="position-relative d-inline-block">
+                            <button id="options-toggle" class="btn btn-light d-block" type="button" aria-expanded="false">
+                                <i class="fas fa-cog"></i> <span class="visually-hidden">Options</span>
+                            </button>
+
+                            <div id="options-panel"
+                                 class="shadow p-3"
+                                 role="menu"
+                                 aria-hidden="true">
+                                <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
+
+                                                                                                            <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/rtfirst/llms-txt/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2Frtfirst%2Fllms-txt%2FApiProtection.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-comment-dots"></i>
+        Give feedback
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="_sources/ApiProtection.rst.txt" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-code"></i>
+        View source
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingDocsOfficial/GithubMethod.html" id="btnHowToEdit" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-info-circle"></i>
+        How to edit
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/rtfirst/llms-txt/edit/main/Documentation/ApiProtection.rst" id="btnEditOnGitHub" rel="nofollow noopener" target="_blank">
+        <i class="fab fa-github"></i>
+        Edit on GitHub
+    </a>
+                                                                                                                <a class="dropdown-item d-flex align-items-center gap-2" href="Index.html" target="_blank" rel="noopener">
+                                            <i class="fas fa-print"></i>
+                                            Full documentation (single file)
+                                        </a>
+                                                                                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>    <main class="page-main">
+        <div class="page-main-inner">
+            <div class="page-main-navigation">
+                <nav>
+
+                    <div id="toc-collapse">
+                                                <div aria-label="main navigation" class="toc"
+                             role="navigation">
+                                <all-documentations-menu-mobile
+        data-override-url="_resources/js/menu-proxy.php"></all-documentations-menu-mobile>
+    <div aria-label="Main navigation" class="main_menu" role="navigation">
+                <p class="caption">LLMs.txt Generator</p>
+            <ul class="menu-level-1" role="menubar">
+    <li class="" role="menuitem">
+    <a href="Introduction.html">
+        Introduction
+    </a></li>    <li class="" role="menuitem">
+    <a href="Installation.html">
+        Installation
+    </a></li>    <li class="" role="menuitem">
+    <a href="Configuration.html">
+        Configuration
+    </a></li>    <li class="" role="menuitem">
+    <a href="Usage.html">
+        Usage
+    </a></li>    <li class=" current active" role="menuitem">
+    <a href="#" aria-current="page">
+        API Protection
+    </a></li>    <li class="" role="menuitem">
+    <a href="Developer.html">
+        Developer
+    </a></li>    <li class="" role="menuitem">
+    <a href="Faq.html">
+        FAQ
+    </a></li>    <li class="" role="menuitem">
+    <a href="GetHelp.html">
+        Get Help
+    </a></li>    </ul>
+    </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="page-main-content">
+                <div class="rst-content">                        <nav aria-label="breadcrumbs navigation" class="breadcrumb-bar" role="navigation">
+        
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="Index.html">LLMs.txt Generator</a></li>
+                    <li aria-current="page"  class="breadcrumb-item  active">API Protection</li>
+        </ol>
+        <div class="breadcrumb-additions">                <a class="btn btn-sm btn-light" href="https://github.com/rtfirst/llms-txt/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2Frtfirst%2Fllms-txt%2FApiProtection.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
+                    <span class="btn-icon"><i class="fas fa-comment-dots"></i></span>
+                    <span class="btn-text">Give feedback</span>
+                </a>
+                            <a class="btn btn-sm btn-secondary" href="https://github.com/rtfirst/llms-txt/edit/main/Documentation/ApiProtection.rst" id="btnEditOnGitHub" rel="nofollow noopener" target="_blank">
+                    <span class="btn-icon"><span class="fab fa-github"></span></span>
+                    <span class="btn-text">Edit on GitHub</span>
+                </a>
+            </div>
+    </nav>
+                    
+<article class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+    <div itemprop="articleBody">
+        <!-- content start -->
+                <section class="section" id="api-protection-1" data-rst-anchor="api-protection">
+            <a id="api-protection"></a>
+            <h1>API Protection<a class="headerlink" href="#api-protection-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>You can protect both <code>/llms.txt</code> and the <code>.md</code> suffix endpoints with
+an API key. This is useful when you want to:</p>
+
+            
+
+<ul>
+    <li class="dash">Restrict access to your own chatbots or RAG systems</li>
+    <li class="dash">Prevent external scraping of structured content</li>
+    <li class="dash">Control who can access your LLM-optimized content</li>
+</ul>
+
+            <section class="section" id="setting-up-api-protection" data-rst-anchor="api-protection-setup">
+            <a id="api-protection-setup"></a>
+            <h2>Setting Up API Protection<a class="headerlink" href="#setting-up-api-protection" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    
+<ol start="1" type="1">
+    <li value="1">Go to <strong>Site Management &gt; Settings</strong> in the TYPO3 Backend.</li>
+    <li value="2">Find the <strong>LLMs-Text</strong> category.</li>
+    <li value="3">Enter your API key in the <strong>API Key for Format Access</strong> field.</li>
+    <li value="4">Save and clear all caches.</li>
+</ol>
+
+                
+<div class="admonition tip" role="alert">
+    <p class="admonition-title">Tip</p>
+        
+    <p>Generate a secure API key with:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">php -r <span class="hljs-string">"echo bin2hex(random_bytes(32)) . PHP_EOL;"</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    <p>Or in DDEV:</p>
+<div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">ddev <span class="hljs-built_in">exec</span> php -r <span class="hljs-string">"echo bin2hex(random_bytes(32)) . PHP_EOL;"</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+</div>
+    </section>
+            <section class="section" id="authenticating-requests" data-rst-anchor="api-protection-usage">
+            <a id="api-protection-usage"></a>
+            <h2>Authenticating Requests<a class="headerlink" href="#authenticating-requests" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Pass the API key via <strong>HTTP header</strong> (recommended):</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash"><span class="hljs-comment"># Access llms.txt</span>
+curl -H <span class="hljs-string">"X-LLM-API-Key: your-secret-key"</span> https://example.com/llms.txt
+
+<span class="hljs-comment"># Access page as Markdown</span>
+curl -H <span class="hljs-string">"X-LLM-API-Key: your-secret-key"</span> https://example.com/about.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or via <strong>query parameter</strong>:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/llms.txt?api_key=your-secret-key
+https://example.com/about.md?api_key=your-secret-key</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+                
+<div class="admonition warning" role="alert">
+    <p class="admonition-title">Warning</p>
+        
+    <p>Using query parameters exposes the API key in server logs and browser
+history. Prefer the HTTP header method for production use.</p>
+
+</div>
+    </section>
+            <section class="section" id="error-response" data-rst-anchor="api-protection-error">
+            <a id="api-protection-error"></a>
+            <h2>Error Response<a class="headerlink" href="#error-response" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Invalid or missing API key returns <strong>HTTP 401 Unauthorized</strong> with a JSON body:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs json">{
+  <span class="hljs-attr">"error"</span>: <span class="hljs-string">"Unauthorized"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Valid API key required. Provide via X-LLM-API-Key header or api_key query parameter."</span>
+}</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="integration-examples" data-rst-anchor="api-protection-integrations">
+            <a id="api-protection-integrations"></a>
+            <h2>Integration Examples<a class="headerlink" href="#integration-examples" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <section class="section" id="n8n-integration">
+            <h3>n8n Integration<a class="headerlink" href="#n8n-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>In n8n HTTP Request node, add the header:</p>
+
+            <div class="table-responsive">
+    <table class="table table-bordered align-default colwidths-grid">
+                    <colgroup>
+                                    <col style="width: 30%">
+                        </colgroup>
+            <thead>
+            <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                    </tr>
+        </thead>
+        <tbody>
+    <tr>
+            <td><code>X-LLM-API-Key</code></td>            <td><code>your-secret-key</code></td>    </tr></tbody>    </table>
+</div>
+    </section>
+            <section class="section" id="python-integration">
+            <h3>Python Integration<a class="headerlink" href="#python-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs python"><span class="hljs-keyword">import</span> requests
+
+headers = {
+    <span class="hljs-string">"X-LLM-API-Key"</span>: <span class="hljs-string">"your-secret-key"</span>
+}
+
+<span class="hljs-comment"># Get llms.txt</span>
+response = requests.get(<span class="hljs-string">"https://example.com/llms.txt"</span>, headers=headers)
+print(response.text)
+
+<span class="hljs-comment"># Get page as Markdown</span>
+response = requests.get(<span class="hljs-string">"https://example.com/about.md"</span>, headers=headers)
+print(response.text)</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="javascript-node-js-integration">
+            <h3>JavaScript/Node.js Integration<a class="headerlink" href="#javascript-node-js-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs javascript"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">"https://example.com/llms.txt"</span>, {
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">"X-LLM-API-Key"</span>: <span class="hljs-string">"your-secret-key"</span>
+  }
+});
+
+<span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> response.text();
+<span class="hljs-built_in">console</span>.log(content);</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="curl-integration">
+            <h3>cURL Integration<a class="headerlink" href="#curl-integration" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash"><span class="hljs-comment"># Store API key in environment variable</span>
+<span class="hljs-built_in">export</span> LLM_API_KEY=<span class="hljs-string">"your-secret-key"</span>
+
+<span class="hljs-comment"># Access llms.txt</span>
+curl -H <span class="hljs-string">"X-LLM-API-Key: <span class="hljs-variable">$LLM_API_KEY</span>"</span> https://example.com/llms.txt
+
+<span class="hljs-comment"># Access multiple pages</span>
+<span class="hljs-keyword">for</span> page <span class="hljs-keyword">in</span> about services contact; <span class="hljs-keyword">do</span>
+  curl -H <span class="hljs-string">"X-LLM-API-Key: <span class="hljs-variable">$LLM_API_KEY</span>"</span> <span class="hljs-string">"https://example.com/<span class="hljs-variable">${page}</span>.md"</span> &gt; <span class="hljs-string">"<span class="hljs-variable">${page}</span>.md"</span>
+<span class="hljs-keyword">done</span></code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="behavior-when-enabled" data-rst-anchor="api-protection-behavior">
+            <a id="api-protection-behavior"></a>
+            <h2>Behavior When Enabled<a class="headerlink" href="#behavior-when-enabled" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>When API key protection is enabled:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1"><strong>llms.txt</strong> requires authentication</li>
+    <li value="2"><strong>All .md endpoints</strong> require authentication</li>
+    <li value="3">The <strong>HTML header link</strong> (<code>&lt;link rel=&quot;alternate&quot;&gt;</code>) is automatically hidden</li>
+    <li value="4">The llms.txt file includes <strong>authentication instructions</strong></li>
+</ol>
+
+    </section>
+            <section class="section" id="disabling-api-protection" data-rst-anchor="api-protection-disable">
+            <a id="api-protection-disable"></a>
+            <h2>Disabling API Protection<a class="headerlink" href="#disabling-api-protection" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>To make endpoints publicly accessible again:</p>
+
+            
+    
+<ol start="1" type="1">
+    <li value="1">Go to <strong>Site Management &gt; Settings</strong></li>
+    <li value="2">Clear the <strong>API Key for Format Access</strong> field</li>
+    <li value="3">Save and clear all caches</li>
+</ol>
+
+            
+    <p>The header link will automatically reappear and endpoints will be publicly
+accessible.</p>
+
+    </section>
+    </section>
+        <!-- content end -->
+    </div>
+</article>
+                        
+            <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center"><li class="page-item">
+                            <a class="page-link" href="Usage.html"
+                               title="Accesskey Alt(+Shift)+p">
+                                <i class="fa-solid fa-chevron-left"></i> Previous
+                            </a>
+                        </li>
+                    <li class="page-item">
+                            <a class="page-link" href="Developer.html"
+                               title="Accesskey Alt(+Shift)+n">
+                                Next <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+        </nav>
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="linkReferenceModal" tabindex="-1" aria-labelledby="linkReferenceModalLabel"
+    aria-hidden="true" data-current-filename="ApiProtection" data-interlink-shortcode="rtfirst/llms-txt">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkReferenceModalLabel">Reference to the headline</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success d-none" id="permalink-alert-success" role="alert"></div>
+                <div class="mb-3">
+                    <div class="permalink-short-wrapper">
+                        <label for="permalink-short" class="col-form-label">Permalink (Shortlink)</label>
+                        <div class="input-group">
+                            <input class="form-control code" id="permalink-short" readonly>
+                            <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-short"><i class="far fa-clone"></i></button>
+                        </div>
+                        <p><em>Copy and freely share the link</em></p>
+                    </div>
+                    <label for="permalink-uri" class="col-form-label">URL</label>
+                    <div class="input-group">
+                        <input class="form-control code" id="permalink-uri" readonly>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-uri"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="alert alert-warning alert-permalink-rst" role="alert">This link target has no permanent anchor assigned.                        You can make a <a href="https://github.com/rtfirst/llms-txt/edit/main/Documentation/ApiProtection.rst">pull request on GitHub</a> to suggest an anchor.
+                        The link below can be used, but is prone to change if the page gets moved.
+                    </div>
+                    <label for="permalink-rst" class="col-form-label">Link in reStructuredText (reST)</label>
+                    <div class="input-group">
+                        <textarea class="form-control code" id="permalink-rst" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-rst"><i class="far fa-clone"></i></button>
+                    </div>
+                    <p><em>Copy this link into your TYPO3 manual.</em></p>
+                </div>
+                <div class="mb-3">
+                    <label for="permalink-md" class="col-form-label">Link in Markdown</label>
+                    <div class="input-group">
+                        <textarea class="form-control code" id="permalink-md" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-md"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="permalink-html" class="col-form-label">Link in HTML</label>
+                                        <div class="input-group">
+                        <textarea class="form-control code" id="permalink-html" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-html"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>    <div class="modal fade" id="generalModal" tabindex="-1" aria-labelledby="linkReferenceModalLabel"
+    aria-hidden="true" data-current-filename="ApiProtection"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="generalModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success d-none" id="general-alert-success" role="alert"></div>
+                <div id="generalModalContent">
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <div id="generalModalCustomButtons"></div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-regular fa-circle-xmark"></i>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div></div>
+
+
+<footer class="page-footer">
+    <div class="frame frame-ruler-before frame-background-dark">
+        <div class="frame-container">
+            <div class="frame-inner">
+                <ul class="footer-simplemenu">
+                        <li><a href="https://github.com/rtfirst/llms-txt" title="Home" rel="nofollow noopener"><span>Home</span></a></li>
+                                                                        <li><a href="https://github.com/rtfirst/llms-txt/issues" rel="nofollow noopener" title="Issues"><span>Issues</span></a></li>
+                                                <li><a href="https://github.com/rtfirst/llms-txt" rel="nofollow noopener" title="Repository"><span>Repository</span></a></li>
+                                            </ul>                <div class="footer-additional">
+                    <p class="text-center">Last rendered: Feb 03, 2026 18:03</p>
+                </div>
+                <div class="footer-meta">
+                                        <div class="footer-meta-copyright">
+                        &copy; Roland Tfirst
+                    </div>
+                    <ul class="footer-meta-navigation">
+                        <li><a href="https://typo3.org/legal-notice" rel="nofollow" target="_blank" title="Legal Notice">Legal Notice</a></li>
+                        <li><a href="https://typo3.org/privacy-policy" rel="nofollow" target="_blank" title="Privacy Policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="_resources/js/popper.min.js"></script>
+<script src="_resources/js/bootstrap.min.js"></script>
+<script src="_resources/js/theme.min.js"></script>
+
+<!--
+ Locally rendered. No tracking embedded.
+-->
+</body>
+</html>

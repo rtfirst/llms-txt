@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>Usage — LLMs.txt Generator 
+        documentation</title>
+
+    
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="phpdocumentor/guides" name="generator">
+<meta content="LLMs.txt Generator" name="docsearch:name">
+<meta content="" name="docsearch:package_type">
+<meta content="" name="docsearch:release">
+<meta content="" name="docsearch:version">
+<meta content="2026-02-03T18:03:14+00:00" name="docsearch:modified">
+<meta content="2026-02-03T18:03:14+00:00" name="dc.modified">
+<meta content="2026-02-03T18:03:14+00:00" property="article:modified_time">
+    <link href="http://purl.org/dc/elements/1.1/" rel="schema.dc">
+<link href="_resources/css/theme.css" rel="stylesheet">
+<link href="https://docs.typo3.org/search/" rel="search" title="Search">
+<script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/webcomponents-loader.js"></script>
+<script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/typo3-universe.js" type="module"></script>
+                        <link href="Configuration.html" rel="prev" title="Configuration"/>
+            <link href="ApiProtection.html" rel="next" title="API Protection"/>
+            <link href="Index.html" rel="top" title="LLMs.txt Generator"/>
+    </head>
+<body>
+<div class="page">
+    <header>
+    <div class="page-topbar">
+        <div class="page-topbar-inner">
+            <typo3-universe active="documentation">
+                <div style="display: block; height: 44px; background-color: #313131;"></div>
+            </typo3-universe>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="page-header-inner">
+            <div class="d-flex flex-wrap">
+                <div class="logo-wrapper">
+                    <a class="logo" href="https://docs.typo3.org/" title="TYPO3 Documentation">
+                        <img alt="TYPO3 Logo" class="logo-image" src="_resources/img/typo3-logo.svg" width="484" height="130">
+                    </a>
+                </div>
+                <div class="align-self-center order-lg-2 order-last">
+                    
+<div class="toc-header">
+    <div class="toc-title pe-3">
+                            <a class="toc-title-project" href="Index.html">LLMs.txt Generator</a>
+            </div>
+    </div>                </div>
+                <div class="ms-auto order-lg-3 d-flex">
+                    <div class="menu-search-wrapper">
+                        <button id="toc-toggle" class="btn btn-light d-block d-lg-none" tabindex="0" aria-controls="toc-collapse" aria-expanded="false">
+                            <i class="fas fa-bars"></i> <span class="visually-hidden">Mobile Menu</span>
+                        </button>
+                        <all-documentations-menu data-override-url="_resources/js/menu-proxy.php"></all-documentations-menu>
+                                                <search role="search">
+                            <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
+                                <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
+                                <div class="input-group mb-3 mt-sm-3">
+                                    <select class="form-select search__scope" id="searchscope" name="scope">
+                                        <option value="">Search all</option>
+                                    </select>
+                                    <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
+                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i>&nbsp;<span class="d-none d-md-inline">Search</span></button>
+                                </div>
+                            </form>
+                            <div id="global-search-root"></div>
+                        </search>
+                        <div class="position-relative d-inline-block">
+                            <button id="options-toggle" class="btn btn-light d-block" type="button" aria-expanded="false">
+                                <i class="fas fa-cog"></i> <span class="visually-hidden">Options</span>
+                            </button>
+
+                            <div id="options-panel"
+                                 class="shadow p-3"
+                                 role="menu"
+                                 aria-hidden="true">
+                                <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
+
+                                                                                                            <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/rtfirst/llms-txt/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2Frtfirst%2Fllms-txt%2FUsage.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-comment-dots"></i>
+        Give feedback
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="_sources/Usage.rst.txt" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-code"></i>
+        View source
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingDocsOfficial/GithubMethod.html" id="btnHowToEdit" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-info-circle"></i>
+        How to edit
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/rtfirst/llms-txt/edit/main/Documentation/Usage.rst" id="btnEditOnGitHub" rel="nofollow noopener" target="_blank">
+        <i class="fab fa-github"></i>
+        Edit on GitHub
+    </a>
+                                                                                                                <a class="dropdown-item d-flex align-items-center gap-2" href="Index.html" target="_blank" rel="noopener">
+                                            <i class="fas fa-print"></i>
+                                            Full documentation (single file)
+                                        </a>
+                                                                                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>    <main class="page-main">
+        <div class="page-main-inner">
+            <div class="page-main-navigation">
+                <nav>
+
+                    <div id="toc-collapse">
+                                                <div aria-label="main navigation" class="toc"
+                             role="navigation">
+                                <all-documentations-menu-mobile
+        data-override-url="_resources/js/menu-proxy.php"></all-documentations-menu-mobile>
+    <div aria-label="Main navigation" class="main_menu" role="navigation">
+                <p class="caption">LLMs.txt Generator</p>
+            <ul class="menu-level-1" role="menubar">
+    <li class="" role="menuitem">
+    <a href="Introduction.html">
+        Introduction
+    </a></li>    <li class="" role="menuitem">
+    <a href="Installation.html">
+        Installation
+    </a></li>    <li class="" role="menuitem">
+    <a href="Configuration.html">
+        Configuration
+    </a></li>    <li class=" current active" role="menuitem">
+    <a href="#" aria-current="page">
+        Usage
+    </a></li>    <li class="" role="menuitem">
+    <a href="ApiProtection.html">
+        API Protection
+    </a></li>    <li class="" role="menuitem">
+    <a href="Developer.html">
+        Developer
+    </a></li>    <li class="" role="menuitem">
+    <a href="Faq.html">
+        FAQ
+    </a></li>    <li class="" role="menuitem">
+    <a href="GetHelp.html">
+        Get Help
+    </a></li>    </ul>
+    </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="page-main-content">
+                <div class="rst-content">                        <nav aria-label="breadcrumbs navigation" class="breadcrumb-bar" role="navigation">
+        
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="Index.html">LLMs.txt Generator</a></li>
+                    <li aria-current="page"  class="breadcrumb-item  active">Usage</li>
+        </ol>
+        <div class="breadcrumb-additions">                <a class="btn btn-sm btn-light" href="https://github.com/rtfirst/llms-txt/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2Frtfirst%2Fllms-txt%2FUsage.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
+                    <span class="btn-icon"><i class="fas fa-comment-dots"></i></span>
+                    <span class="btn-text">Give feedback</span>
+                </a>
+                            <a class="btn btn-sm btn-secondary" href="https://github.com/rtfirst/llms-txt/edit/main/Documentation/Usage.rst" id="btnEditOnGitHub" rel="nofollow noopener" target="_blank">
+                    <span class="btn-icon"><span class="fab fa-github"></span></span>
+                    <span class="btn-text">Edit on GitHub</span>
+                </a>
+            </div>
+    </nav>
+                    
+<article class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+    <div itemprop="articleBody">
+        <!-- content start -->
+                <section class="section" id="usage-1" data-rst-anchor="usage">
+            <a id="usage"></a>
+            <h1>Usage<a class="headerlink" href="#usage-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            
+    <p>This chapter explains how to access the LLM-optimized content.</p>
+
+            <section class="section" id="accessing-llms-txt" data-rst-anchor="usage-llms-txt">
+            <a id="usage-llms-txt"></a>
+            <h2>Accessing llms.txt<a class="headerlink" href="#accessing-llms-txt" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The llms.txt index file is available at the root of your website:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/llms.txt</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>This file contains:</p>
+
+            
+
+<ul>
+    <li class="dash">Website metadata (title, description, domain)</li>
+    <li class="dash">Page structure with descriptions and keywords</li>
+    <li class="dash">Instructions for accessing page content in Markdown format</li>
+</ul>
+
+            <section class="section" id="example-llms-txt-output" data-rst-anchor="usage-llms-txt-example">
+            <a id="usage-llms-txt-example"></a>
+            <h3>Example llms.txt Output<a class="headerlink" href="#example-llms-txt-output" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs markdown"><span class="hljs-section"># My Website</span>
+
+<span class="hljs-quote">&gt; Your expert for quality products and services.</span>
+
+<span class="hljs-strong">**Specification:**</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">https:</span>//<span class="hljs-attr">llmstxt.org</span>/&gt;</span></span>
+<span class="hljs-strong">**Domain:**</span> https://example.com
+<span class="hljs-strong">**Language:**</span> de
+<span class="hljs-strong">**Generated:**</span> 2026-01-31 12:00:00
+
+<span class="hljs-section">## LLM-Optimized Content Access</span>
+
+This site provides LLM-friendly Markdown output for all pages:
+
+<span class="hljs-section">### Markdown Format</span>
+Append <span class="hljs-code">`.md`</span> to any page URL to get plain Markdown with YAML frontmatter.
+<span class="hljs-bullet">- </span><span class="hljs-strong">**Example:**</span> <span class="hljs-code">`https://example.com/page-slug.md`</span>
+
+<span class="hljs-section">### Multi-Language Access</span>
+Use language-specific URL prefixes with the <span class="hljs-code">`.md`</span> suffix:
+<span class="hljs-bullet">- </span><span class="hljs-strong">**Default language:**</span> <span class="hljs-code">`https://example.com/page.md`</span>
+<span class="hljs-bullet">- </span><span class="hljs-strong">**English:**</span> <span class="hljs-code">`https://example.com/en/page.md`</span>
+
+<span class="hljs-section">## Page Structure</span>
+<span class="hljs-bullet">
+- </span><span class="hljs-strong">**[Home](/)**</span>
+  Welcome to our website with all important information.
+  [<span class="hljs-string">Markdown</span>](<span class="hljs-link">/index.html.md</span>)
+<span class="hljs-bullet">
+  - </span><span class="hljs-strong">**[About](/about/)**</span>
+<span class="hljs-code">    Learn about our company history and values.</span>
+<span class="hljs-code">    [Markdown](/about.md)</span>
+<span class="hljs-bullet">
+  - </span><span class="hljs-strong">**[Services](/services/)**</span>
+<span class="hljs-code">    Professional services for your needs.</span>
+<span class="hljs-code">    *Keywords: services, consulting, support*</span>
+<span class="hljs-code">    [Markdown](/services.md)</span>
+<span class="hljs-bullet">
+- </span><span class="hljs-strong">**[Contact](/contact/)**</span>
+  Get in touch with us via phone or email.
+  [<span class="hljs-string">Markdown</span>](<span class="hljs-link">/contact.md</span>)</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="accessing-markdown-content" data-rst-anchor="usage-markdown">
+            <a id="usage-markdown"></a>
+            <h2>Accessing Markdown Content<a class="headerlink" href="#accessing-markdown-content" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Append <code>.md</code> to any page URL to get the content as clean Markdown with
+YAML frontmatter.</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/about.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            <section class="section" id="example-markdown-output" data-rst-anchor="usage-markdown-output">
+            <a id="usage-markdown-output"></a>
+            <h3>Example Markdown Output<a class="headerlink" href="#example-markdown-output" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs markdown">---
+title: "About Us"
+description: "Learn about our company history and values."
+language: en
+date: 2026-01-31
+canonical: "/about"
+format: markdown
+<span class="hljs-section">generator: "TYPO3 LLMs.txt Extension"
+---</span>
+
+<span class="hljs-section"># About Us</span>
+
+<span class="hljs-quote">&gt; Learn about our company history and values.</span>
+
+<span class="hljs-section">## Our History</span>
+
+Our company was founded in 1985...
+
+<span class="hljs-section">## Our Values</span>
+<span class="hljs-bullet">
+- </span>Quality and reliability
+<span class="hljs-bullet">- </span>Fair and transparent prices
+<span class="hljs-bullet">- </span>Personal consultation</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>The YAML frontmatter contains:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>title</strong>: Page title</li>
+    <li class="dash"><strong>description</strong>: Page description (from LLM or SEO settings)</li>
+    <li class="dash"><strong>language</strong>: ISO language code</li>
+    <li class="dash"><strong>date</strong>: Last modification date</li>
+    <li class="dash"><strong>canonical</strong>: Canonical URL path</li>
+    <li class="dash"><strong>format</strong>: Output format (always &quot;markdown&quot;)</li>
+    <li class="dash"><strong>generator</strong>: Extension identifier</li>
+</ul>
+
+    </section>
+            <section class="section" id="accessing-the-root-page" data-rst-anchor="usage-root-page">
+            <a id="usage-root-page"></a>
+            <h3>Accessing the Root Page<a class="headerlink" href="#accessing-the-root-page" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
+            
+    <p>For the root/home page, use:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/index.html.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or simply:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext">https://example.com/.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+    </section>
+            <section class="section" id="multi-language-access" data-rst-anchor="usage-multi-language">
+            <a id="usage-multi-language"></a>
+            <h2>Multi-Language Access<a class="headerlink" href="#multi-language-access" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>Access page content in different languages using the language URL prefix
+with the <code>.md</code> suffix:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs plaintext"># German (default language)
+https://example.com/ueber-uns.md
+
+# English
+https://example.com/en/about.md
+
+# French
+https://example.com/fr/a-propos.md</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>The extension automatically:</p>
+
+            
+
+<ul>
+    <li class="dash">Detects the language from the URL prefix</li>
+    <li class="dash">Loads the translated page content</li>
+    <li class="dash">Sets the correct language in the YAML frontmatter</li>
+</ul>
+
+    </section>
+            <section class="section" id="caching" data-rst-anchor="usage-caching">
+            <a id="usage-caching"></a>
+            <h2>Caching<a class="headerlink" href="#caching" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The extension uses smart caching for optimal performance:</p>
+
+            
+
+<ul>
+    <li class="dash"><strong>llms.txt</strong>: Cached and regenerated when TYPO3 cache is cleared</li>
+    <li class="dash"><strong>Markdown output</strong>: Cached for 24 hours per page/language combination</li>
+</ul>
+
+            
+    <p>To force regeneration:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">vendor/bin/typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+            
+    <p>Or in DDEV:</p>
+
+            <div class="code-block-wrapper" translate="no">
+            
+    <pre class="code-block"><code class="hljs bash">ddev typo3 cache:flush</code></pre>
+    <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
+            <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
+            <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
+        </button>
+        <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
+    </div>
+</div>
+    </section>
+            <section class="section" id="content-filtering" data-rst-anchor="usage-content-filtering">
+            <a id="usage-content-filtering"></a>
+            <h2>Content Filtering<a class="headerlink" href="#content-filtering" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>The Markdown output is automatically cleaned for better LLM consumption:</p>
+
+            
+    <p><strong>Removed elements:</strong></p>
+
+            
+
+<ul>
+    <li class="dash">Scripts and styles</li>
+    <li class="dash">Navigation and footer elements</li>
+    <li class="dash">Sidebar content</li>
+    <li class="dash">Bootstrap accessibility spans (<code>visually-hidden</code>)</li>
+    <li class="dash">Empty anchor tags (<code>&lt;a id=&quot;c1&quot;&gt;&lt;/a&gt;</code>)</li>
+</ul>
+
+            
+    <p><strong>Preserved elements:</strong></p>
+
+            
+
+<ul>
+    <li class="dash">Main content text</li>
+    <li class="dash">Headings and structure</li>
+    <li class="dash">Lists and tables</li>
+    <li class="dash">Images (converted to Markdown syntax)</li>
+    <li class="dash">Links (converted to absolute URLs)</li>
+</ul>
+
+    </section>
+    </section>
+        <!-- content end -->
+    </div>
+</article>
+                        
+            <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center"><li class="page-item">
+                            <a class="page-link" href="Configuration.html"
+                               title="Accesskey Alt(+Shift)+p">
+                                <i class="fa-solid fa-chevron-left"></i> Previous
+                            </a>
+                        </li>
+                    <li class="page-item">
+                            <a class="page-link" href="ApiProtection.html"
+                               title="Accesskey Alt(+Shift)+n">
+                                Next <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+        </nav>
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="linkReferenceModal" tabindex="-1" aria-labelledby="linkReferenceModalLabel"
+    aria-hidden="true" data-current-filename="Usage" data-interlink-shortcode="rtfirst/llms-txt">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkReferenceModalLabel">Reference to the headline</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success d-none" id="permalink-alert-success" role="alert"></div>
+                <div class="mb-3">
+                    <div class="permalink-short-wrapper">
+                        <label for="permalink-short" class="col-form-label">Permalink (Shortlink)</label>
+                        <div class="input-group">
+                            <input class="form-control code" id="permalink-short" readonly>
+                            <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-short"><i class="far fa-clone"></i></button>
+                        </div>
+                        <p><em>Copy and freely share the link</em></p>
+                    </div>
+                    <label for="permalink-uri" class="col-form-label">URL</label>
+                    <div class="input-group">
+                        <input class="form-control code" id="permalink-uri" readonly>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-uri"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="alert alert-warning alert-permalink-rst" role="alert">This link target has no permanent anchor assigned.                        You can make a <a href="https://github.com/rtfirst/llms-txt/edit/main/Documentation/Usage.rst">pull request on GitHub</a> to suggest an anchor.
+                        The link below can be used, but is prone to change if the page gets moved.
+                    </div>
+                    <label for="permalink-rst" class="col-form-label">Link in reStructuredText (reST)</label>
+                    <div class="input-group">
+                        <textarea class="form-control code" id="permalink-rst" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-rst"><i class="far fa-clone"></i></button>
+                    </div>
+                    <p><em>Copy this link into your TYPO3 manual.</em></p>
+                </div>
+                <div class="mb-3">
+                    <label for="permalink-md" class="col-form-label">Link in Markdown</label>
+                    <div class="input-group">
+                        <textarea class="form-control code" id="permalink-md" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-md"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="permalink-html" class="col-form-label">Link in HTML</label>
+                                        <div class="input-group">
+                        <textarea class="form-control code" id="permalink-html" readonly></textarea>
+                        <button type="button" class="btn btn-outline-secondary copy-button" data-target="permalink-html"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>    <div class="modal fade" id="generalModal" tabindex="-1" aria-labelledby="linkReferenceModalLabel"
+    aria-hidden="true" data-current-filename="Usage"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="generalModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success d-none" id="general-alert-success" role="alert"></div>
+                <div id="generalModalContent">
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <div id="generalModalCustomButtons"></div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-regular fa-circle-xmark"></i>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div></div>
+
+
+<footer class="page-footer">
+    <div class="frame frame-ruler-before frame-background-dark">
+        <div class="frame-container">
+            <div class="frame-inner">
+                <ul class="footer-simplemenu">
+                        <li><a href="https://github.com/rtfirst/llms-txt" title="Home" rel="nofollow noopener"><span>Home</span></a></li>
+                                                                        <li><a href="https://github.com/rtfirst/llms-txt/issues" rel="nofollow noopener" title="Issues"><span>Issues</span></a></li>
+                                                <li><a href="https://github.com/rtfirst/llms-txt" rel="nofollow noopener" title="Repository"><span>Repository</span></a></li>
+                                            </ul>                <div class="footer-additional">
+                    <p class="text-center">Last rendered: Feb 03, 2026 18:03</p>
+                </div>
+                <div class="footer-meta">
+                                        <div class="footer-meta-copyright">
+                        &copy; Roland Tfirst
+                    </div>
+                    <ul class="footer-meta-navigation">
+                        <li><a href="https://typo3.org/legal-notice" rel="nofollow" target="_blank" title="Legal Notice">Legal Notice</a></li>
+                        <li><a href="https://typo3.org/privacy-policy" rel="nofollow" target="_blank" title="Privacy Policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="_resources/js/popper.min.js"></script>
+<script src="_resources/js/bootstrap.min.js"></script>
+<script src="_resources/js/theme.min.js"></script>
+
+<!--
+ Locally rendered. No tracking embedded.
+-->
+</body>
+</html>

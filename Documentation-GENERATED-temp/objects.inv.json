@@ -1,0 +1,1194 @@
+{
+    "std:doc": {
+        "ApiProtection": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html",
+            "API Protection"
+        ],
+        "Configuration": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html",
+            "Configuration"
+        ],
+        "Developer": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html",
+            "Developer Information"
+        ],
+        "Faq": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html",
+            "Frequently Asked Questions (FAQ)"
+        ],
+        "GetHelp": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html",
+            "Where to Get Help"
+        ],
+        "Index": [
+            "LLMs.txt Generator",
+            "-",
+            "Index.html",
+            "LLMs.txt Generator"
+        ],
+        "Installation": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html",
+            "Installation"
+        ],
+        "Introduction": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html",
+            "Introduction"
+        ],
+        "Usage": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html",
+            "Usage"
+        ]
+    },
+    "std:label": {
+        "api-protection": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection",
+            "API Protection"
+        ],
+        "api-protection-setup": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-setup",
+            "Setting Up API Protection"
+        ],
+        "api-protection-usage": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-usage",
+            "Authenticating Requests"
+        ],
+        "api-protection-error": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-error",
+            "Error Response"
+        ],
+        "api-protection-integrations": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-integrations",
+            "Integration Examples"
+        ],
+        "api-protection-behavior": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-behavior",
+            "Behavior When Enabled"
+        ],
+        "api-protection-disable": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-disable",
+            "Disabling API Protection"
+        ],
+        "configuration": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration",
+            "Configuration"
+        ],
+        "configuration-site-settings": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-site-settings",
+            "Site Settings"
+        ],
+        "confval-baseurl": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-baseUrl",
+            "Site Settings"
+        ],
+        "confval-intro": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-intro",
+            "Site Settings"
+        ],
+        "confval-excludepages": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-excludePages",
+            "Site Settings"
+        ],
+        "confval-includehidden": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-includeHidden",
+            "Site Settings"
+        ],
+        "confval-apikey": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-apiKey",
+            "Site Settings"
+        ],
+        "configuration-page-properties": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-page-properties",
+            "Page Properties"
+        ],
+        "confval-exclude": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-exclude",
+            "Page Properties"
+        ],
+        "confval-priority": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-priority",
+            "Page Properties"
+        ],
+        "confval-description": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-description",
+            "Page Properties"
+        ],
+        "confval-summary": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-summary",
+            "Page Properties"
+        ],
+        "confval-keywords": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-keywords",
+            "Page Properties"
+        ],
+        "configuration-robots-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-robots-txt",
+            "robots.txt Configuration"
+        ],
+        "configuration-header-link": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-header-link",
+            "HTML Header Link"
+        ],
+        "developer": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer",
+            "Developer Information"
+        ],
+        "developer-architecture": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-architecture",
+            "Architecture"
+        ],
+        "developer-middlewares": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-middlewares",
+            "Middleware Chain"
+        ],
+        "developer-services": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-services",
+            "Services"
+        ],
+        "developer-converters": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-converters",
+            "Content Converters"
+        ],
+        "developer-custom-converter": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-custom-converter",
+            "Creating Custom Converters"
+        ],
+        "developer-events": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-events",
+            "Event Listeners"
+        ],
+        "developer-caching": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-caching",
+            "Caching"
+        ],
+        "developer-database": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-database",
+            "Database Schema"
+        ],
+        "developer-code-quality": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-code-quality",
+            "Code Quality"
+        ],
+        "developer-dependencies": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-dependencies",
+            "Dependencies"
+        ],
+        "faq": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq",
+            "Frequently Asked Questions (FAQ)"
+        ],
+        "faq-general": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-general",
+            "General Questions"
+        ],
+        "faq-what-is-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-what-is-llms-txt",
+            "What is llms.txt?"
+        ],
+        "faq-why-use": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-why-use",
+            "Why should I use this extension?"
+        ],
+        "faq-installation": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-installation",
+            "Installation Questions"
+        ],
+        "faq-404-error": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-404-error",
+            "I get a 404 error when accessing \/llms.txt"
+        ],
+        "faq-no-llm-tab": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-no-llm-tab",
+            "The LLM tab doesn't appear in page properties"
+        ],
+        "faq-configuration": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-configuration",
+            "Configuration Questions"
+        ],
+        "faq-exclude-pages": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-exclude-pages",
+            "How do I exclude specific pages?"
+        ],
+        "faq-priority": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-priority",
+            "How does the priority setting work?"
+        ],
+        "faq-hidden-pages": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-hidden-pages",
+            "Can I include hidden pages?"
+        ],
+        "faq-usage": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-usage",
+            "Usage Questions"
+        ],
+        "faq-root-page-md": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-root-page-md",
+            "How do I access the root page as Markdown?"
+        ],
+        "faq-language-access": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-language-access",
+            "How do I access translated pages?"
+        ],
+        "faq-cache-refresh": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-cache-refresh",
+            "How do I refresh the cached content?"
+        ],
+        "faq-api-protection": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-api-protection",
+            "API Protection Questions"
+        ],
+        "faq-api-key-header": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-api-key-header",
+            "Which HTTP header should I use for the API key?"
+        ],
+        "faq-api-key-query": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-api-key-query",
+            "Can I use a query parameter instead?"
+        ],
+        "faq-troubleshooting": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-troubleshooting",
+            "Troubleshooting"
+        ],
+        "faq-empty-markdown": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-empty-markdown",
+            "The Markdown output is empty"
+        ],
+        "faq-wrong-language": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-wrong-language",
+            "Content shows in wrong language"
+        ],
+        "faq-missing-content": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-missing-content",
+            "Some content elements are missing"
+        ],
+        "help": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help",
+            "Where to Get Help"
+        ],
+        "help-community": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-community",
+            "Community Support"
+        ],
+        "help-author": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-author",
+            "Contact the Author"
+        ],
+        "help-documentation": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-documentation",
+            "Documentation"
+        ],
+        "report-issues": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#report-issues",
+            "Report Issues"
+        ],
+        "help-contribute": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-contribute",
+            "Contribute"
+        ],
+        "help-changelog": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-changelog",
+            "Changelog"
+        ],
+        "start": [
+            "LLMs.txt Generator",
+            "-",
+            "Index.html#start",
+            "LLMs.txt Generator"
+        ],
+        "installation": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation",
+            "Installation"
+        ],
+        "installation-composer": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-composer",
+            "Installation via Composer (Recommended)"
+        ],
+        "installation-classic": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-classic",
+            "Installation in Classic Mode"
+        ],
+        "installation-site-set": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-site-set",
+            "Activate the Site Set"
+        ],
+        "installation-verify": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-verify",
+            "Verify Installation"
+        ],
+        "introduction": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#introduction",
+            "Introduction"
+        ],
+        "usage": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage",
+            "Usage"
+        ],
+        "usage-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-llms-txt",
+            "Accessing llms.txt"
+        ],
+        "usage-llms-txt-example": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-llms-txt-example",
+            "Example llms.txt Output"
+        ],
+        "usage-markdown": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-markdown",
+            "Accessing Markdown Content"
+        ],
+        "usage-markdown-output": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-markdown-output",
+            "Example Markdown Output"
+        ],
+        "usage-root-page": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-root-page",
+            "Accessing the Root Page"
+        ],
+        "usage-multi-language": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-multi-language",
+            "Multi-Language Access"
+        ],
+        "usage-caching": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-caching",
+            "Caching"
+        ],
+        "usage-content-filtering": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-content-filtering",
+            "Content Filtering"
+        ],
+        "confval-menu-configuration": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-menu-configuration",
+            ""
+        ],
+        "confval-llmstxt-baseurl": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-baseurl",
+            "llmsTxt.baseUrl"
+        ],
+        "confval-llmstxt-intro": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-intro",
+            "llmsTxt.intro"
+        ],
+        "confval-llmstxt-excludepages": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-excludepages",
+            "llmsTxt.excludePages"
+        ],
+        "confval-llmstxt-includehidden": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-includehidden",
+            "llmsTxt.includeHidden"
+        ],
+        "confval-llmstxt-apikey": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-apikey",
+            "llmsTxt.apiKey"
+        ],
+        "confval-exclude-from-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-exclude-from-llms-txt",
+            "Exclude from llms.txt"
+        ],
+        "confval-llm-priority": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-priority",
+            "LLM Priority"
+        ],
+        "confval-llm-description": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-description",
+            "LLM Description"
+        ],
+        "confval-llm-summary": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-summary",
+            "LLM Summary"
+        ],
+        "confval-llm-keywords": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-keywords",
+            "LLM Keywords"
+        ]
+    },
+    "std:title": {
+        "api-protection-1": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection",
+            "API Protection"
+        ],
+        "setting-up-api-protection": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-setup",
+            "Setting Up API Protection"
+        ],
+        "authenticating-requests": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-usage",
+            "Authenticating Requests"
+        ],
+        "error-response": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-error",
+            "Error Response"
+        ],
+        "integration-examples": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-integrations",
+            "Integration Examples"
+        ],
+        "n8n-integration": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#n8n-integration",
+            "n8n Integration"
+        ],
+        "python-integration": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#python-integration",
+            "Python Integration"
+        ],
+        "javascript-node-js-integration": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#javascript-node-js-integration",
+            "JavaScript\/Node.js Integration"
+        ],
+        "curl-integration": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#curl-integration",
+            "cURL Integration"
+        ],
+        "behavior-when-enabled": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-behavior",
+            "Behavior When Enabled"
+        ],
+        "disabling-api-protection": [
+            "LLMs.txt Generator",
+            "-",
+            "ApiProtection.html#api-protection-disable",
+            "Disabling API Protection"
+        ],
+        "configuration-1": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration",
+            "Configuration"
+        ],
+        "site-settings": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-site-settings",
+            "Site Settings"
+        ],
+        "page-properties": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-page-properties",
+            "Page Properties"
+        ],
+        "robots-txt-configuration": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-robots-txt",
+            "robots.txt Configuration"
+        ],
+        "html-header-link": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#configuration-header-link",
+            "HTML Header Link"
+        ],
+        "developer-information": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer",
+            "Developer Information"
+        ],
+        "architecture": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-architecture",
+            "Architecture"
+        ],
+        "middleware-chain": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-middlewares",
+            "Middleware Chain"
+        ],
+        "services": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-services",
+            "Services"
+        ],
+        "pagetreeservice": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#pagetreeservice",
+            "PageTreeService"
+        ],
+        "markdownconverterservice": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#markdownconverterservice",
+            "MarkdownConverterService"
+        ],
+        "llmstxtgeneratorservice": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#llmstxtgeneratorservice",
+            "LlmsTxtGeneratorService"
+        ],
+        "content-converters": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-converters",
+            "Content Converters"
+        ],
+        "built-in-converters": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#built-in-converters",
+            "Built-in Converters"
+        ],
+        "creating-custom-converters": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-custom-converter",
+            "Creating Custom Converters"
+        ],
+        "event-listeners": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-events",
+            "Event Listeners"
+        ],
+        "cacheflusheventlistener": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#cacheflusheventlistener",
+            "CacheFlushEventListener"
+        ],
+        "headerlinkeventlistener": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#headerlinkeventlistener",
+            "HeaderLinkEventListener"
+        ],
+        "backendnotificationeventlistener": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#backendnotificationeventlistener",
+            "BackendNotificationEventListener"
+        ],
+        "caching": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-caching",
+            "Caching"
+        ],
+        "database-schema": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-database",
+            "Database Schema"
+        ],
+        "code-quality": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-code-quality",
+            "Code Quality"
+        ],
+        "dependencies": [
+            "LLMs.txt Generator",
+            "-",
+            "Developer.html#developer-dependencies",
+            "Dependencies"
+        ],
+        "frequently-asked-questions-faq": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq",
+            "Frequently Asked Questions (FAQ)"
+        ],
+        "general-questions": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-general",
+            "General Questions"
+        ],
+        "what-is-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#what-is-llms-txt",
+            "What is llms.txt?"
+        ],
+        "why-should-i-use-this-extension": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-why-use",
+            "Why should I use this extension?"
+        ],
+        "installation-questions": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-installation",
+            "Installation Questions"
+        ],
+        "i-get-a-404-error-when-accessing-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-404-error",
+            "I get a 404 error when accessing \/llms.txt"
+        ],
+        "the-llm-tab-doesn-t-appear-in-page-properties": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-no-llm-tab",
+            "The LLM tab doesn't appear in page properties"
+        ],
+        "configuration-questions": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-configuration",
+            "Configuration Questions"
+        ],
+        "how-do-i-exclude-specific-pages": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-exclude-pages",
+            "How do I exclude specific pages?"
+        ],
+        "how-does-the-priority-setting-work": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-priority",
+            "How does the priority setting work?"
+        ],
+        "can-i-include-hidden-pages": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-hidden-pages",
+            "Can I include hidden pages?"
+        ],
+        "usage-questions": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-usage",
+            "Usage Questions"
+        ],
+        "how-do-i-access-the-root-page-as-markdown": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-root-page-md",
+            "How do I access the root page as Markdown?"
+        ],
+        "how-do-i-access-translated-pages": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-language-access",
+            "How do I access translated pages?"
+        ],
+        "how-do-i-refresh-the-cached-content": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-cache-refresh",
+            "How do I refresh the cached content?"
+        ],
+        "api-protection-questions": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-api-protection",
+            "API Protection Questions"
+        ],
+        "which-http-header-should-i-use-for-the-api-key": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-api-key-header",
+            "Which HTTP header should I use for the API key?"
+        ],
+        "can-i-use-a-query-parameter-instead": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-api-key-query",
+            "Can I use a query parameter instead?"
+        ],
+        "troubleshooting": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-troubleshooting",
+            "Troubleshooting"
+        ],
+        "the-markdown-output-is-empty": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-empty-markdown",
+            "The Markdown output is empty"
+        ],
+        "content-shows-in-wrong-language": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-wrong-language",
+            "Content shows in wrong language"
+        ],
+        "some-content-elements-are-missing": [
+            "LLMs.txt Generator",
+            "-",
+            "Faq.html#faq-missing-content",
+            "Some content elements are missing"
+        ],
+        "where-to-get-help": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help",
+            "Where to Get Help"
+        ],
+        "community-support": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-community",
+            "Community Support"
+        ],
+        "typo3-slack": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#typo3-slack",
+            "TYPO3 Slack"
+        ],
+        "typo3-forum": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#typo3-forum",
+            "TYPO3 Forum"
+        ],
+        "contact-the-author": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-author",
+            "Contact the Author"
+        ],
+        "documentation": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-documentation",
+            "Documentation"
+        ],
+        "report-issues": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#report-issues",
+            "Report Issues"
+        ],
+        "contribute": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-contribute",
+            "Contribute"
+        ],
+        "changelog": [
+            "LLMs.txt Generator",
+            "-",
+            "GetHelp.html#help-changelog",
+            "Changelog"
+        ],
+        "llms-txt-generator": [
+            "LLMs.txt Generator",
+            "-",
+            "Index.html#start",
+            "LLMs.txt Generator"
+        ],
+        "installation-1": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation",
+            "Installation"
+        ],
+        "installation-via-composer-recommended": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-composer",
+            "Installation via Composer (Recommended)"
+        ],
+        "installation-in-classic-mode": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-classic",
+            "Installation in Classic Mode"
+        ],
+        "activate-the-site-set": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-site-set",
+            "Activate the Site Set"
+        ],
+        "verify-installation": [
+            "LLMs.txt Generator",
+            "-",
+            "Installation.html#installation-verify",
+            "Verify Installation"
+        ],
+        "introduction-1": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#introduction",
+            "Introduction"
+        ],
+        "concept": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#concept",
+            "Concept"
+        ],
+        "multi-language-support": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#multi-language-support",
+            "Multi-Language Support"
+        ],
+        "features": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#features",
+            "Features"
+        ],
+        "core-features": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#core-features",
+            "Core Features"
+        ],
+        "page-level-control": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#page-level-control",
+            "Page-Level Control"
+        ],
+        "technical-features": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#technical-features",
+            "Technical Features"
+        ],
+        "requirements": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#requirements",
+            "Requirements"
+        ],
+        "supported-content-elements": [
+            "LLMs.txt Generator",
+            "-",
+            "Introduction.html#supported-content-elements",
+            "Supported Content Elements"
+        ],
+        "usage-1": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage",
+            "Usage"
+        ],
+        "accessing-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-llms-txt",
+            "Accessing llms.txt"
+        ],
+        "example-llms-txt-output": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-llms-txt-example",
+            "Example llms.txt Output"
+        ],
+        "accessing-markdown-content": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-markdown",
+            "Accessing Markdown Content"
+        ],
+        "example-markdown-output": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-markdown-output",
+            "Example Markdown Output"
+        ],
+        "accessing-the-root-page": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-root-page",
+            "Accessing the Root Page"
+        ],
+        "multi-language-access": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-multi-language",
+            "Multi-Language Access"
+        ],
+        "content-filtering": [
+            "LLMs.txt Generator",
+            "-",
+            "Usage.html#usage-content-filtering",
+            "Content Filtering"
+        ]
+    },
+    "std:confval-menu": {
+        "configuration": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-menu-configuration",
+            ""
+        ]
+    },
+    "std:confval": {
+        "llmstxt-baseurl": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-baseurl",
+            "llmsTxt.baseUrl"
+        ],
+        "llmstxt-intro": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-intro",
+            "llmsTxt.intro"
+        ],
+        "llmstxt-excludepages": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-excludepages",
+            "llmsTxt.excludePages"
+        ],
+        "llmstxt-includehidden": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-includehidden",
+            "llmsTxt.includeHidden"
+        ],
+        "llmstxt-apikey": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llmstxt-apikey",
+            "llmsTxt.apiKey"
+        ],
+        "exclude-from-llms-txt": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-exclude-from-llms-txt",
+            "Exclude from llms.txt"
+        ],
+        "llm-priority": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-priority",
+            "LLM Priority"
+        ],
+        "llm-description": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-description",
+            "LLM Description"
+        ],
+        "llm-summary": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-summary",
+            "LLM Summary"
+        ],
+        "llm-keywords": [
+            "LLMs.txt Generator",
+            "-",
+            "Configuration.html#confval-llm-keywords",
+            "LLM Keywords"
+        ]
+    }
+}
