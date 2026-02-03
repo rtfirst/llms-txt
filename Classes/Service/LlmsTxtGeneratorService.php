@@ -259,7 +259,7 @@ final readonly class LlmsTxtGeneratorService
         $rootPageId = $site->getRootPageId();
 
         // Find first non-root page
-        foreach ($pages as $pageUid => $page) {
+        foreach (array_keys($pages) as $pageUid) {
             if ($pageUid !== $rootPageId) {
                 return $this->pageTreeService->getPageUrl($site, $pageUid, $language);
             }
