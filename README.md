@@ -3,6 +3,7 @@
 [![TYPO3 13](https://img.shields.io/badge/TYPO3-13-orange.svg)](https://get.typo3.org/version/13)
 [![TYPO3 14](https://img.shields.io/badge/TYPO3-14-orange.svg)](https://get.typo3.org/version/14)
 [![Latest Stable Version](https://poser.pugx.org/rtfirst/llms-txt/v/stable)](https://packagist.org/packages/rtfirst/llms-txt)
+[![CI](https://github.com/rtfirst/llms-txt/actions/workflows/ci.yaml/badge.svg)](https://github.com/rtfirst/llms-txt/actions/workflows/ci.yaml)
 [![Total Downloads](https://poser.pugx.org/rtfirst/llms-txt/downloads)](https://packagist.org/packages/rtfirst/llms-txt)
 [![License](https://poser.pugx.org/rtfirst/llms-txt/license)](https://packagist.org/packages/rtfirst/llms-txt)
 
