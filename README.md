@@ -12,7 +12,7 @@ Generates `llms.txt` for AI/LLM crawlers - a compact index of your website with 
 
 ## Concept
 
-The extension provides a two-tier approach for LLM content access:
+The extension provides a two-tier approach for LLM content access: 
 
 1. **llms.txt** - A single index file containing:
    - Website metadata (title, description, domain)
