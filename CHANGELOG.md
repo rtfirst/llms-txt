@@ -5,6 +5,46 @@ All notable changes to the llms_txt extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.7] - 2026-02-06
+
+### Added
+
+- GitHub Actions workflow for automatic TER publishing on version tags
+- CI workflow reusable via `workflow_call` for TER publish pipeline
+- Missing CHANGELOG entries for versions 1.0.5 and 1.0.6
+
+### Fixed
+
+- Version mismatch in `Documentation/guides.xml` (was 1.0.5, now synced)
+
+## [1.0.6] - 2026-02-03
+
+### Changed
+
+- Add comprehensive RST documentation (ApiProtection, Configuration, Developer, FAQ, Usage, etc.)
+
+### Fixed
+
+- Rector: unused foreach value warning in `LlmsTxtGeneratorService`
+- PHP-CS-Fixer: coding style issue (`in_array` native function import)
+
+## [1.0.5] - 2026-02-02
+
+### Added
+
+- Append `.md` suffix to internal page links in Markdown output for consistent LLM navigation
+- File link detection to avoid `.md` suffix on file downloads (PDF, images, etc.)
+- HTML entity decoding in Markdown output (`&amp;` → `&`, `&lt;` → `<`)
+- Convert remaining HTML tags (`<br>`, `<a>`, `<strong>`, `<em>`) to Markdown before stripping
+- Dynamic example page URL in llms.txt (uses first real page instead of placeholder)
+- Make canonical URLs absolute in Markdown frontmatter
+- Unit test for file links without `.md` suffix
+
+### Changed
+
+- Improved Markdown cleanup: convert inline HTML to Markdown equivalents before `strip_tags()`
+- Reorder link conversion: process images before page links to avoid false matches
+
 ## [1.0.4] - 2026-02-01
 
 ### Added
