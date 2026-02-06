@@ -1,0 +1,22 @@
+name: TER Register
+
+on:
+  workflow_dispatch:
+
+jobs:
+  register:
+    name: Register Extension on TER
+    runs-on: ubuntu-latest
+    env:
+      TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Install TYPO3 Tailor
+        run: composer global require typo3/tailor --no-progress
+
+      - name: Register extension key
+        run: ~/.composer/vendor/bin/tailor ter:register llms_txt
