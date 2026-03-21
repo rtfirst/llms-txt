@@ -6,7 +6,14 @@ namespace RTfirst\LlmsTxt\Service;
 
 use Doctrine\DBAL\ParameterType;
 use Exception;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\FrontendGroupRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -18,6 +25,7 @@ final readonly class PageTreeService
 {
     public function __construct(
         private ConnectionPool $connectionPool,
+        private LoggerInterface $logger,
     ) {}
 
     /**
@@ -57,17 +65,12 @@ final readonly class PageTreeService
     private function getPage(int $pageUid, int $languageId, bool $includeHidden): ?array
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
+        $this->applyRestrictions($queryBuilder, $includeHidden);
 
         $constraints = [
             $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($pageUid, ParameterType::INTEGER)),
-            $queryBuilder->expr()->eq('deleted', 0),
             $queryBuilder->expr()->eq('tx_llmstxt_exclude', 0),
         ];
-
-        if (!$includeHidden) {
-            $constraints[] = $queryBuilder->expr()->eq('hidden', 0);
-        }
 
         $row = $queryBuilder
             ->select('*')
@@ -109,19 +112,14 @@ final readonly class PageTreeService
         ?SiteLanguage $language = null,
     ): void {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
+        $this->applyRestrictions($queryBuilder, $includeHidden);
 
         // Base constraints
         $constraints = [
             $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($parentId, ParameterType::INTEGER)),
-            $queryBuilder->expr()->eq('deleted', 0),
             $queryBuilder->expr()->eq('sys_language_uid', 0), // Always query default language first
             $queryBuilder->expr()->eq('tx_llmstxt_exclude', 0), // Exclude pages marked for exclusion
         ];
-
-        if (!$includeHidden) {
-            $constraints[] = $queryBuilder->expr()->eq('hidden', 0);
-        }
 
         // Exclude certain doktypes (folders, recycler, etc.)
         // doktype values: 254=sysfolder, 255=recycler, 199=spacer, 6=be_user_section
@@ -184,17 +182,12 @@ final readonly class PageTreeService
     private function getTranslatedPage(int $pageUid, int $languageId, bool $includeHidden): ?array
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
+        $this->applyRestrictions($queryBuilder, $includeHidden);
 
         $constraints = [
             $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($pageUid, ParameterType::INTEGER)),
             $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($languageId, ParameterType::INTEGER)),
-            $queryBuilder->expr()->eq('deleted', 0),
         ];
-
-        if (!$includeHidden) {
-            $constraints[] = $queryBuilder->expr()->eq('hidden', 0);
-        }
 
         $result = $queryBuilder
             ->select('*')
@@ -225,8 +218,12 @@ final readonly class PageTreeService
             }
 
             return $url;
-        } catch (Exception) {
-            // Fallback to base URL + slug
+        } catch (Exception $e) {
+            $this->logger->warning('Failed to generate URL for page {pageUid}, using fallback slug-based URL', [
+                'pageUid' => $pageUid,
+                'exception' => $e->getMessage(),
+            ]);
+
             return $this->getFallbackUrl($pageUid, $language);
         }
     }
@@ -239,12 +236,10 @@ final readonly class PageTreeService
         $languageBase = rtrim((string)$language->getBase(), '/');
 
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
+        $this->applyRestrictions($queryBuilder, false);
 
         $languageId = $this->extractLanguageId($language);
-        $constraints = [
-            $queryBuilder->expr()->eq('deleted', 0),
-        ];
+        $constraints = [];
 
         if ($languageId > 0) {
             // Try to get translated page slug
@@ -280,14 +275,13 @@ final readonly class PageTreeService
         // If no translated slug found for non-default language, try default language
         if ($languageId > 0) {
             $defaultQueryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
-            $defaultQueryBuilder->getRestrictions()->removeAll();
+            $this->applyRestrictions($defaultQueryBuilder, false);
 
             $defaultResult = $defaultQueryBuilder
                 ->select('slug')
                 ->from('pages')
                 ->where(
                     $defaultQueryBuilder->expr()->eq('uid', $defaultQueryBuilder->createNamedParameter($pageUid, ParameterType::INTEGER)),
-                    $defaultQueryBuilder->expr()->eq('deleted', 0),
                 )
                 ->executeQuery()
                 ->fetchAssociative();
@@ -298,6 +292,24 @@ final readonly class PageTreeService
         }
 
         return $languageBase !== '' ? $languageBase . '/' : '/';
+    }
+
+    /**
+     * Apply query restrictions: keep deleted, fe_group, starttime/endtime checks;
+     * optionally remove hidden restriction when includeHidden is true.
+     */
+    private function applyRestrictions(QueryBuilder $queryBuilder, bool $includeHidden): void
+    {
+        $queryBuilder->getRestrictions()
+            ->removeAll()
+            ->add(new DeletedRestriction())
+            ->add(new StartTimeRestriction())
+            ->add(new EndTimeRestriction())
+            ->add(new FrontendGroupRestriction());
+
+        if (!$includeHidden) {
+            $queryBuilder->getRestrictions()->add(new HiddenRestriction());
+        }
     }
 
     /**

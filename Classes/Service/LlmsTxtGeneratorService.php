@@ -56,7 +56,9 @@ final readonly class LlmsTxtGeneratorService
 
         $baseUrl = $this->getBaseUrl($site, $defaultLanguage);
 
-        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro);
+        $apiKey = trim((string)($settings['apiKey'] ?? ''));
+
+        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro, $apiKey);
     }
 
     /**
@@ -87,6 +89,7 @@ final readonly class LlmsTxtGeneratorService
         array $pages,
         string $baseUrl,
         string $intro,
+        string $apiKey,
     ): string {
         $lines = [];
 
@@ -126,8 +129,6 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '';
 
         // Add authentication section if API key is configured
-        $settings = $this->getSettings($site);
-        $apiKey = trim((string)($settings['apiKey'] ?? ''));
         if ($apiKey !== '') {
             $lines[] = '### Authentication';
             $lines[] = 'This site requires API key authentication for all LLM endpoints.';
@@ -155,8 +156,9 @@ final readonly class LlmsTxtGeneratorService
             $indent = $this->getIndentLevel($page, $pages);
             $priority = (int)($page['tx_llmstxt_priority'] ?? 0);
 
-            // Page entry with URL
-            $lines[] = str_repeat('  ', $indent) . '- **[' . $pageTitle . '](' . $pageUrl . ')**';
+            // Page entry with URL (escape Markdown link syntax in title)
+            $escapedTitle = str_replace(['[', ']', '(', ')'], ['\[', '\]', '\(', '\)'], $pageTitle);
+            $lines[] = str_repeat('  ', $indent) . '- **[' . $escapedTitle . '](' . $pageUrl . ')**';
 
             // Add description if available
             $description = $this->getPageDescription($page);

@@ -5,6 +5,25 @@ All notable changes to the rt_llms_txt extension will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.9] - 2026-03-21
+
+### Fixed
+
+- **Security:** Replace `removeAll()` query restrictions with selective restriction management — now properly respects `fe_group`, `starttime`, and `endtime` access controls
+- **Bug:** Cache flush event now clears entire llms.txt cache (index + per-page Markdown), not just index entries
+- **Bug:** Escape pipe characters in table cell content to prevent broken Markdown tables
+- **Bug:** YAML frontmatter escaping now handles newlines, carriage returns, and tabs
+- **Bug:** Escape Markdown link syntax characters in page titles within llms.txt output
+- **Bug:** Apply YAML escaping to canonical URLs in Markdown frontmatter
+
+### Changed
+
+- Add `LoggerInterface` to `AbstractContentConverter` — file reference errors are now logged instead of silently swallowed
+- Add `LoggerInterface` to `PageTreeService` — URL generation fallbacks are now logged with exception details
+- Use `new FlashMessage()` instead of `GeneralUtility::makeInstance()` in `BackendNotificationEventListener`
+- Remove redundant `getSettings()` call in `LlmsTxtGeneratorService` — settings are now retrieved once and passed through
+- Simplify `CacheFlushEventListener` — remove unused `LlmsTxtGeneratorService` dependency
+
 ## [1.0.8] - 2026-03-21
 
 ### Changed
