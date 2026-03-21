@@ -41,7 +41,7 @@ Installation in Classic Mode
 ============================
 
 1.  Download the extension from the
-    `TYPO3 Extension Repository (TER) <https://extensions.typo3.org/extension/llms_txt>`__
+    `TYPO3 Extension Repository (TER) <https://extensions.typo3.org/extension/rt_llms_txt>`__
     or from `GitHub <https://github.com/rtfirst/llms-txt>`__.
 
 2.  Install the extension via the Extension Manager in the TYPO3 Backend.

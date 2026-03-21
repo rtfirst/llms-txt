@@ -41,4 +41,5 @@ jobs:
         run: |
           ~/.composer/vendor/bin/tailor ter:publish \
             --comment "Release version ${{ steps.version.outputs.version }}" \
-            ${{ steps.version.outputs.version }}
+            ${{ steps.version.outputs.version }} \
+            rt_llms_txt

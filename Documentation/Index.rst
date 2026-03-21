@@ -5,7 +5,7 @@ LLMs.txt Generator
 ==================
 
 :Extension key:
-   llms_txt
+   rt_llms_txt
 
 :Package name:
    rtfirst/llms-txt

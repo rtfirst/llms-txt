@@ -1,4 +1,4 @@
-# TYPO3 Extension: llms_txt
+# TYPO3 Extension: rt_llms_txt
 
 [![TYPO3 13](https://img.shields.io/badge/TYPO3-13-orange.svg)](https://get.typo3.org/version/13)
 [![TYPO3 14](https://img.shields.io/badge/TYPO3-14-orange.svg)](https://get.typo3.org/version/14)

@@ -48,7 +48,7 @@
     },
     "extra": {
         "typo3/cms": {
-            "extension-key": "llms_txt"
+            "extension-key": "rt_llms_txt"
         }
     },
     "config": {

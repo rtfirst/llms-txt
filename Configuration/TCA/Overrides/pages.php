@@ -8,8 +8,8 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 $llmsTxtColumns = [
     'tx_llmstxt_description' => [
-        'label' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_description',
-        'description' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_description.description',
+        'label' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_description',
+        'description' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_description.description',
         'config' => [
             'type' => 'text',
             'cols' => 40,
@@ -18,8 +18,8 @@ $llmsTxtColumns = [
         ],
     ],
     'tx_llmstxt_summary' => [
-        'label' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_summary',
-        'description' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_summary.description',
+        'label' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_summary',
+        'description' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_summary.description',
         'config' => [
             'type' => 'text',
             'cols' => 40,
@@ -29,8 +29,8 @@ $llmsTxtColumns = [
         ],
     ],
     'tx_llmstxt_keywords' => [
-        'label' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_keywords',
-        'description' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_keywords.description',
+        'label' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_keywords',
+        'description' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_keywords.description',
         'config' => [
             'type' => 'input',
             'size' => 50,
@@ -39,8 +39,8 @@ $llmsTxtColumns = [
         ],
     ],
     'tx_llmstxt_exclude' => [
-        'label' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_exclude',
-        'description' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_exclude.description',
+        'label' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_exclude',
+        'description' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_exclude.description',
         'config' => [
             'type' => 'check',
             'renderType' => 'checkboxToggle',
@@ -52,8 +52,8 @@ $llmsTxtColumns = [
         ],
     ],
     'tx_llmstxt_priority' => [
-        'label' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_priority',
-        'description' => 'LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_priority.description',
+        'label' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_priority',
+        'description' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_priority.description',
         'config' => [
             'type' => 'number',
             'size' => 5,
@@ -75,7 +75,7 @@ ExtensionManagementUtility::addTCAcolumns('pages', $llmsTxtColumns);
 // Add LLM tab to all page types (appears at the end)
 ExtensionManagementUtility::addToAllTCAtypes(
     'pages',
-    '--div--;LLL:EXT:llms_txt/Resources/Private/Language/locallang.xlf:pages.tab.llm,
+    '--div--;LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tab.llm,
         tx_llmstxt_exclude,
         tx_llmstxt_priority,
         tx_llmstxt_description,

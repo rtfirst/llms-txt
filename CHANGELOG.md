@@ -1,9 +1,17 @@
 # Changelog
 
-All notable changes to the llms_txt extension will be documented in this file.
+All notable changes to the rt_llms_txt extension will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.8] - 2026-03-21
+
+### Changed
+
+- Rename TYPO3 extension key from `llms_txt` to `rt_llms_txt` (Composer package name `rtfirst/llms-txt` remains unchanged)
+- Update all `EXT:llms_txt/` references to `EXT:rt_llms_txt/`
+- Add explicit extension key to TER publish workflow
 
 ## [1.0.7] - 2026-02-06
 
