@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 $EM_CONF['rt_llms_txt'] = [
     'title' => 'LLMs.txt Generator',
     'description' => 'Generates llms.txt files for AI/LLM crawlers with website content in Markdown format, with optional API key protection.',
