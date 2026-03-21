@@ -9,7 +9,6 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Event listener that shows a notification in the backend if robots.txt needs updating.
@@ -45,8 +44,7 @@ final readonly class BackendNotificationEventListener
         }
 
         // Show notification
-        $message = GeneralUtility::makeInstance(
-            FlashMessage::class,
+        $message = new FlashMessage(
             'The llms_txt extension recommends adding llms.txt references to your robots.txt file. '
                 . 'See the extension documentation for details.',
             'LLMs.txt: robots.txt configuration',

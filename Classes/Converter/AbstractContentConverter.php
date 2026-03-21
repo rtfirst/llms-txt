@@ -6,6 +6,7 @@ namespace RTfirst\LlmsTxt\Converter;
 
 use Exception;
 use League\HTMLToMarkdown\HtmlConverter;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 
@@ -18,6 +19,7 @@ abstract class AbstractContentConverter implements ContentConverterInterface
 
     public function __construct(
         protected readonly FileRepository $fileRepository,
+        protected readonly LoggerInterface $logger,
     ) {}
 
     /**
@@ -87,7 +89,13 @@ abstract class AbstractContentConverter implements ContentConverterInterface
     {
         try {
             return $this->fileRepository->findByRelation('tt_content', $fieldName, $uid);
-        } catch (Exception) {
+        } catch (Exception $e) {
+            $this->logger->warning('Failed to get file references for tt_content:{uid} field:{field}', [
+                'uid' => $uid,
+                'field' => $fieldName,
+                'exception' => $e->getMessage(),
+            ]);
+
             return [];
         }
     }

@@ -6,6 +6,7 @@ namespace RTfirst\LlmsTxt\Tests\Unit\Converter;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use RTfirst\LlmsTxt\Converter\TableConverter;
 use TYPO3\CMS\Core\Resource\FileRepository;
 
@@ -16,7 +17,7 @@ final class TableConverterTest extends TestCase
     protected function setUp(): void
     {
         $fileRepository = $this->createMock(FileRepository::class);
-        $this->converter = new TableConverter($fileRepository);
+        $this->converter = new TableConverter($fileRepository, new NullLogger());
     }
 
     #[Test]

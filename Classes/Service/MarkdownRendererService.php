@@ -55,7 +55,7 @@ final class MarkdownRendererService
         $lines[] = 'date: ' . date('Y-m-d');
 
         if ($canonical !== '') {
-            $lines[] = 'canonical: "' . $canonical . '"';
+            $lines[] = 'canonical: "' . $this->escapeYaml($canonical) . '"';
         }
 
         $lines[] = 'format: markdown';
@@ -273,8 +273,11 @@ final class MarkdownRendererService
      */
     private function escapeYaml(string $value): string
     {
-        // Escape quotes and backslashes
-        return str_replace(['\\', '"'], ['\\\\', '\\"'], $value);
+        return str_replace(
+            ['\\', '"', "\n", "\r", "\t"],
+            ['\\\\', '\\"', '\\n', '\\r', '\\t'],
+            $value,
+        );
     }
 
     /**

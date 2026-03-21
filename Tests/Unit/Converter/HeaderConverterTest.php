@@ -7,6 +7,7 @@ namespace RTfirst\LlmsTxt\Tests\Unit\Converter;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use RTfirst\LlmsTxt\Converter\HeaderConverter;
 use TYPO3\CMS\Core\Resource\FileRepository;
 
@@ -17,7 +18,7 @@ final class HeaderConverterTest extends TestCase
     protected function setUp(): void
     {
         $fileRepository = $this->createMock(FileRepository::class);
-        $this->converter = new HeaderConverter($fileRepository);
+        $this->converter = new HeaderConverter($fileRepository, new NullLogger());
     }
 
     #[Test]
