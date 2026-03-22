@@ -22,6 +22,8 @@ final class MarkdownRendererService
         int $pageId,
         ?SiteLanguage $language,
         string $baseUrl,
+        ?int $createdAt = null,
+        ?int $modifiedAt = null,
     ): string {
         // Extract metadata from original HTML
         $title = $this->extractTitle($originalHtml);
@@ -52,7 +54,16 @@ final class MarkdownRendererService
         }
 
         $lines[] = 'language: ' . ($language?->getLocale()->getLanguageCode() ?? 'de');
-        $lines[] = 'date: ' . date('Y-m-d');
+
+        $createdDate = $createdAt !== null && $createdAt > 0 ? date('Y-m-d', $createdAt) : date('Y-m-d');
+        $lines[] = 'date: ' . $createdDate;
+
+        if ($modifiedAt !== null && $modifiedAt > 0) {
+            $modifiedDate = date('Y-m-d', $modifiedAt);
+            if ($modifiedDate !== $createdDate) {
+                $lines[] = 'lastmod: ' . $modifiedDate;
+            }
+        }
 
         if ($canonical !== '') {
             $lines[] = 'canonical: "' . $this->escapeYaml($canonical) . '"';

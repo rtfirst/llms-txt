@@ -107,7 +107,8 @@ Output:
 title: "About Us"
 description: "Learn about our company..."
 language: en
-date: 2026-01-31
+date: 2024-06-15
+lastmod: 2026-01-31
 canonical: "/about"
 format: markdown
 generator: "TYPO3 LLMs.txt Extension"

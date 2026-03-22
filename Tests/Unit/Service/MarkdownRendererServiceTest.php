@@ -130,6 +130,52 @@ final class MarkdownRendererServiceTest extends TestCase
     }
 
     #[Test]
+    public function renderIncludesCreatedDateFromTimestamp(): void
+    {
+        $html = '<html><head><title>Test</title></head><body><main><p>Content</p></main></body></html>';
+        $createdAt = 1718409600;
+
+        $result = $this->service->render($html, 1, null, 'https://example.com', $createdAt);
+
+        self::assertStringContainsString('date: ' . date('Y-m-d', $createdAt), $result);
+    }
+
+    #[Test]
+    public function renderIncludesLastmodWhenDifferentFromCreated(): void
+    {
+        $html = '<html><head><title>Test</title></head><body><main><p>Content</p></main></body></html>';
+        $createdAt = 1718409600;
+        $modifiedAt = 1774051200;
+
+        $result = $this->service->render($html, 1, null, 'https://example.com', $createdAt, $modifiedAt);
+
+        self::assertStringContainsString('date: ' . date('Y-m-d', $createdAt), $result);
+        self::assertStringContainsString('lastmod: ' . date('Y-m-d', $modifiedAt), $result);
+    }
+
+    #[Test]
+    public function renderOmitsLastmodWhenSameAsCreated(): void
+    {
+        $html = '<html><head><title>Test</title></head><body><main><p>Content</p></main></body></html>';
+        $timestamp = 1718452800;
+
+        $result = $this->service->render($html, 1, null, 'https://example.com', $timestamp, $timestamp);
+
+        self::assertStringNotContainsString('lastmod:', $result);
+    }
+
+    #[Test]
+    public function renderFallsBackToCurrentDateWithoutTimestamps(): void
+    {
+        $html = '<html><head><title>Test</title></head><body><main><p>Content</p></main></body></html>';
+
+        $result = $this->service->render($html, 1, null, 'https://example.com');
+
+        self::assertStringContainsString('date: ' . date('Y-m-d'), $result);
+        self::assertStringNotContainsString('lastmod:', $result);
+    }
+
+    #[Test]
     public function renderRemovesScriptTags(): void
     {
         $html = '<html><head><title>Test</title></head><body><main><p>Content</p><script>alert("test")</script></main></body></html>';

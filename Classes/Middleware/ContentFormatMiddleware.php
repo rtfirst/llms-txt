@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace RTfirst\LlmsTxt\Middleware;
 
+use Doctrine\DBAL\Exception as DbalException;
+use Doctrine\DBAL\ParameterType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 use RTfirst\LlmsTxt\Service\MarkdownRendererService;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
@@ -30,6 +35,8 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
     public function __construct(
         private MarkdownRendererService $markdownRenderer,
         private FrontendInterface $cache,
+        private ConnectionPool $connectionPool,
+        private LoggerInterface $logger,
     ) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -90,8 +97,25 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
         // Get original HTML content
         $originalHtml = (string)$response->getBody();
 
+        // Fetch page timestamps for frontmatter (graceful fallback on DB errors)
+        $createdAt = 0;
+        $modifiedAt = 0;
+        try {
+            $timestamps = $this->getPageTimestamps($pageId, $languageId);
+            $createdAt = $timestamps['crdate'];
+            $contentLastModified = $this->getContentLastModified($pageId, $languageId);
+            // Prefer content timestamps (editorial changes) over pages.tstamp
+            // (which gets updated by system operations like cache flush or extension setup)
+            $modifiedAt = $contentLastModified > 0 ? $contentLastModified : $timestamps['tstamp'];
+        } catch (DbalException $e) {
+            $this->logger->error('Failed to fetch timestamps for page {pageId}', [
+                'pageId' => $pageId,
+                'exception' => $e->getMessage(),
+            ]);
+        }
+
         // Render as Markdown
-        $content = $this->markdownRenderer->render($originalHtml, $pageId, $language, $baseUrl);
+        $content = $this->markdownRenderer->render($originalHtml, $pageId, $language, $baseUrl, $createdAt, $modifiedAt);
         $contentType = 'text/plain; charset=utf-8';
 
         // Store in cache with page tag for targeted invalidation
@@ -175,6 +199,94 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
 
         $uri = $request->getUri();
         return $uri->getScheme() . '://' . $uri->getHost();
+    }
+
+    /**
+     * Fetch page timestamps from the database.
+     *
+     * For non-default languages, queries the translation overlay record.
+     * If no overlay exists, falls back to default-language crdate but sets
+     * tstamp to 0 so that lastmod is determined solely by language-specific
+     * content timestamps (prevents cross-language timestamp bleeding).
+     * Uses only DeletedRestriction since the page was already confirmed
+     * accessible by TYPO3 routing.
+     *
+     * @return array{crdate: int, tstamp: int}
+     */
+    private function getPageTimestamps(int $pageId, int $languageId = 0): array
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
+        $queryBuilder->getRestrictions()
+            ->removeAll()
+            ->add(new DeletedRestriction());
+
+        if ($languageId > 0) {
+            $row = $queryBuilder
+                ->select('crdate', 'tstamp')
+                ->from('pages')
+                ->where(
+                    $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($pageId, ParameterType::INTEGER)),
+                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($languageId, ParameterType::INTEGER)),
+                )
+                ->executeQuery()
+                ->fetchAssociative();
+
+            if ($row !== false) {
+                return [
+                    'crdate' => (int)$row['crdate'],
+                    'tstamp' => (int)$row['tstamp'],
+                ];
+            }
+
+            // No overlay: use default-language crdate for date field, but tstamp=0
+            // so lastmod reflects only language-specific content changes
+            $defaultTimestamps = $this->getPageTimestamps($pageId, 0);
+            return ['crdate' => $defaultTimestamps['crdate'], 'tstamp' => 0];
+        }
+
+        $row = $queryBuilder
+            ->select('crdate', 'tstamp')
+            ->from('pages')
+            ->where($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($pageId, ParameterType::INTEGER)))
+            ->executeQuery()
+            ->fetchAssociative();
+
+        if ($row === false) {
+            $this->logger->warning('Could not fetch timestamps for page {pageId}', ['pageId' => $pageId]);
+            return ['crdate' => 0, 'tstamp' => 0];
+        }
+
+        return [
+            'crdate' => (int)$row['crdate'],
+            'tstamp' => (int)$row['tstamp'],
+        ];
+    }
+
+    /**
+     * Get the most recent modification timestamp from content elements on a page.
+     *
+     * Uses only DeletedRestriction so that hiding/restricting a content element
+     * is correctly reflected as a modification. Filters by language.
+     */
+    private function getContentLastModified(int $pageId, int $languageId = 0): int
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tt_content');
+        $queryBuilder->getRestrictions()
+            ->removeAll()
+            ->add(new DeletedRestriction());
+
+        $result = $queryBuilder
+            ->addSelectLiteral($queryBuilder->expr()->max('tstamp', 'max_tstamp'))
+            ->from('tt_content')
+            ->where(
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageId, ParameterType::INTEGER)),
+                $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($languageId, ParameterType::INTEGER)),
+            )
+            ->executeQuery()
+            ->fetchOne();
+
+        // MAX() returns NULL when no rows match; (int) cast handles this safely
+        return (int)$result;
     }
 
     /**
