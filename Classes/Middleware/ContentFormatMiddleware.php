@@ -56,9 +56,10 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        // Generate cache key
+        // Generate cache key (includes path hash to differentiate plugin views)
         $languageId = $this->extractLanguageId($language);
-        $cacheKey = $this->generateCacheKey($pageId, $languageId, $format);
+        $requestPath = $request->getUri()->getPath();
+        $cacheKey = $this->generateCacheKey($pageId, $languageId, $format, $requestPath);
 
         // Try to get from cache
         if ($this->cache->has($cacheKey)) {
@@ -128,11 +129,19 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Generate a unique cache key for the page/language/format combination.
+     * Generate a unique cache key for the page/language/format/path combination.
+     *
+     * Includes a hash of the request path to differentiate plugin views
+     * (e.g., news list vs. news detail) on the same page.
      */
-    private function generateCacheKey(int $pageId, int $languageId, string $format): string
+    private function generateCacheKey(int $pageId, int $languageId, string $format, string $requestPath = ''): string
     {
-        return 'llmstxt_' . $pageId . '_' . $languageId . '_' . $format;
+        $key = 'llmstxt_' . $pageId . '_' . $languageId . '_' . $format;
+        if ($requestPath !== '' && $requestPath !== '/') {
+            $key .= '_' . substr(md5($requestPath), 0, 10);
+        }
+
+        return $key;
     }
 
     private function getPageId(ServerRequestInterface $request): ?int
