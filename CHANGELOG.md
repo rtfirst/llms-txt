@@ -5,6 +5,20 @@ All notable changes to the rt_llms_txt extension will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.11] - 2026-03-22
+
+### Added
+
+- **Feature:** YAML frontmatter now includes real page timestamps — `date` shows the page creation date (`crdate`), `lastmod` shows the most recent modification date across page record and content elements (`tt_content`); `lastmod` is omitted when identical to `date`
+
+### Improved
+
+- Only `DeletedRestriction` on timestamp queries (page already confirmed by TYPO3 routing)
+- Language-aware timestamps: translation overlay `crdate`/`tstamp` used for non-default languages; default-language content changes do not bleed into other languages' `lastmod`
+- Content element timestamps filtered by `sys_language_uid` for accurate per-language `lastmod`
+- Graceful error handling: database failures during timestamp fetching are logged and fall back to current date instead of crashing the response
+- `LoggerInterface` added to `ContentFormatMiddleware` for error observability
+
 ## [1.0.10] - 2026-03-22
 
 ### Fixed

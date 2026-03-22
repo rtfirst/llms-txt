@@ -96,7 +96,8 @@ Example Markdown Output
    title: "About Us"
    description: "Learn about our company history and values."
    language: en
-   date: 2026-01-31
+   date: 2024-06-15
+   lastmod: 2026-01-31
    canonical: "/about"
    format: markdown
    generator: "TYPO3 LLMs.txt Extension"
@@ -121,7 +122,8 @@ The YAML frontmatter contains:
 -   **title**: Page title
 -   **description**: Page description (from LLM or SEO settings)
 -   **language**: ISO language code
--   **date**: Last modification date
+-   **date**: Page creation date (from TYPO3 ``crdate``)
+-   **lastmod**: Last modification date (most recent change across page and content elements); omitted if same as ``date``
 -   **canonical**: Canonical URL path
 -   **format**: Output format (always "markdown")
 -   **generator**: Extension identifier
