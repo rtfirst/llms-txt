@@ -21,7 +21,7 @@ if ($autoloader === null) {
     exit(1);
 }
 
-$frameworkBootstrap = dirname((string)(new ReflectionClass(\TYPO3\TestingFramework\Core\Testbase::class))->getFileName(), 3)
+$frameworkBootstrap = \dirname((string)(new ReflectionClass(\TYPO3\TestingFramework\Core\Testbase::class))->getFileName(), 3)
     . '/Resources/Core/Build/FunctionalTestsBootstrap.php';
 
 require $frameworkBootstrap;
