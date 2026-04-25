@@ -121,12 +121,14 @@ final readonly class PageTreeService
             $queryBuilder->expr()->eq('tx_llmstxt_exclude', 0), // Exclude pages marked for exclusion
         ];
 
-        // Exclude certain doktypes (folders, recycler, etc.)
-        // doktype values: 254=sysfolder, 255=recycler, 199=spacer, 6=be_user_section
+        // Exclude doktypes that never produce frontend output and have no
+        // visible descendants (folders, recycler, BE user section).
+        // Spacers (199) are intentionally NOT excluded here: they may have
+        // child pages that should appear in llms.txt. The spacer row itself
+        // is filtered out below.
         $excludedDoktypes = [
             255, // Recycler
             PageRepository::DOKTYPE_SYSFOLDER,
-            PageRepository::DOKTYPE_SPACER,
             PageRepository::DOKTYPE_BE_USER_SECTION,
         ];
         $constraints[] = $queryBuilder->expr()->notIn(
@@ -151,6 +153,13 @@ final readonly class PageTreeService
 
         while ($row = $result->fetchAssociative()) {
             $pageUid = (int)$row['uid'];
+
+            // Spacer pages are menu separators and are not output themselves,
+            // but their child pages must still be discovered.
+            if ((int)$row['doktype'] === PageRepository::DOKTYPE_SPACER) {
+                $this->collectPages($pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+                continue;
+            }
 
             // Get translated page if not default language
             if ($languageId > 0) {
