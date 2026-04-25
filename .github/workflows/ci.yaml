@@ -150,3 +150,56 @@ jobs:
 
       - name: Run Unit Tests
         run: vendor/bin/phpunit --configuration=phpunit.xml
+
+  functional-tests:
+    name: Functional Tests
+    runs-on: ubuntu-latest
+    needs: [phpstan, rector]
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.2', '8.3', '8.4']
+        typo3-version: ['^13.4', '^14.0']
+        exclude:
+          # TYPO3 14 requires PHP 8.3+
+          - php-version: '8.2'
+            typo3-version: '^14.0'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: intl, pdo_sqlite, sqlite3
+          coverage: none
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v5
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-functional-${{ matrix.php-version }}-${{ matrix.typo3-version }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-functional-${{ matrix.php-version }}-${{ matrix.typo3-version }}-
+            ${{ runner.os }}-composer-
+
+      - name: Remove incompatible dev dependencies for TYPO3 14
+        if: matrix.typo3-version == '^14.0'
+        run: |
+          composer remove --dev saschaegerer/phpstan-typo3 --no-interaction --no-update
+
+      - name: Install dependencies
+        run: |
+          composer require typo3/cms-core:${{ matrix.typo3-version }} typo3/cms-frontend:${{ matrix.typo3-version }} --no-progress --no-interaction
+          composer install --no-progress --no-interaction
+
+      - name: Run Functional Tests
+        env:
+          typo3DatabaseDriver: pdo_sqlite
+          typo3DatabaseName: typo3_test
+        run: vendor/bin/phpunit --configuration=phpunit.functional.xml

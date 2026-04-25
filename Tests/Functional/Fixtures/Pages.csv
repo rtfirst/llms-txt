@@ -1,0 +1,10 @@
+"pages"
+,"uid","pid","sys_language_uid","l10n_parent","title","doktype","slug","sorting","hidden","deleted","tx_llmstxt_exclude"
+,1,0,0,0,"Root",1,"/",1,0,0,0
+,2,1,0,0,"Normal child",1,"/normal-child",2,0,0,0
+,3,1,0,0,"Spacer in menu",199,"/spacer",3,0,0,0
+,4,3,0,0,"Child of spacer",1,"/spacer/child-of-spacer",1,0,0,0
+,5,4,0,0,"Grandchild via spacer",1,"/spacer/child-of-spacer/grandchild",1,0,0,0
+,6,3,0,0,"Nested spacer",199,"/spacer/nested-spacer",2,0,0,0
+,7,6,0,0,"Deep child via nested spacers",1,"/spacer/nested-spacer/deep-child",1,0,0,0
+,8,1,0,0,"Excluded page",1,"/excluded",4,0,0,1
