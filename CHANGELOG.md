@@ -5,6 +5,12 @@ All notable changes to the rt_llms_txt extension will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- New site setting `llmsTxt.enableMarkdown` (default: enabled) to turn off the `.md` Markdown variant per site. When disabled, `.md` URLs are left untouched by `UrlSuffixMiddleware` (so they 404 normally instead of being rewritten), `ContentFormatMiddleware` refuses to render Markdown as a safety net, and `llms.txt` no longer advertises the Markdown format or lists per-page Markdown links.
+
 ## [1.0.12] - 2026-04-25
 
 ### Fixed

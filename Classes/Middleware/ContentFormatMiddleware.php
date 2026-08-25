@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Http\Response;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
@@ -46,6 +47,14 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
 
         // Only handle our special formats
         if ($format === null) {
+            return $handler->handle($request);
+        }
+
+        // Safety net: never render Markdown for a site that has it disabled,
+        // regardless of how a request reached this point (defense in depth
+        // alongside UrlSuffixMiddleware, which normally prevents this).
+        $site = $request->getAttribute('site');
+        if ($site instanceof Site && !(bool)$site->getSettings()->get('llmsTxt.enableMarkdown', true)) {
             return $handler->handle($request);
         }
 

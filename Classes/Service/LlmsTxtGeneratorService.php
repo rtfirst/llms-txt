@@ -38,6 +38,7 @@ final readonly class LlmsTxtGeneratorService
         $excludePages = $this->parseExcludePages($settings['excludePages'] ?? '');
         $includeHidden = (bool)($settings['includeHidden'] ?? false);
         $intro = trim((string)($settings['intro'] ?? ''));
+        $enableMarkdown = (bool)($settings['enableMarkdown'] ?? true);
 
         $pages = $this->pageTreeService->getPages($site, $defaultLanguage, $excludePages, $includeHidden);
 
@@ -58,7 +59,7 @@ final readonly class LlmsTxtGeneratorService
 
         $apiKey = trim((string)($settings['apiKey'] ?? ''));
 
-        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro, $apiKey);
+        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro, $apiKey, $enableMarkdown);
     }
 
     /**
@@ -90,6 +91,7 @@ final readonly class LlmsTxtGeneratorService
         string $baseUrl,
         string $intro,
         string $apiKey,
+        bool $enableMarkdown,
     ): string {
         $lines = [];
 
@@ -115,18 +117,21 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '**Generated:** ' . date('Y-m-d H:i:s');
         $lines[] = '';
 
-        // Find an example page (first non-root page for realistic examples)
-        $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
-
         // LLM-optimized content access section (spec-compliant with llmstxt.org)
-        $lines[] = '## LLM-Optimized Content Access';
-        $lines[] = '';
-        $lines[] = 'This site provides LLM-friendly Markdown output for all pages:';
-        $lines[] = '';
-        $lines[] = '### Markdown Format';
-        $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
-        $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
-        $lines[] = '';
+        // Omitted entirely when Markdown output is disabled for this site.
+        if ($enableMarkdown) {
+            // Find an example page (first non-root page for realistic examples)
+            $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
+
+            $lines[] = '## LLM-Optimized Content Access';
+            $lines[] = '';
+            $lines[] = 'This site provides LLM-friendly Markdown output for all pages:';
+            $lines[] = '';
+            $lines[] = '### Markdown Format';
+            $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
+            $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
+            $lines[] = '';
+        }
 
         // Add authentication section if API key is configured
         if ($apiKey !== '') {
@@ -140,7 +145,9 @@ final readonly class LlmsTxtGeneratorService
             $lines[] = '';
             $lines[] = '**Query Parameter:**';
             $lines[] = '```';
-            $lines[] = $baseUrl . '/page.md?api_key=<your-api-key>';
+            $lines[] = $enableMarkdown
+                ? $baseUrl . '/page.md?api_key=<your-api-key>'
+                : $baseUrl . '/llms.txt?api_key=<your-api-key>';
             $lines[] = '```';
             $lines[] = '';
         }
@@ -178,9 +185,11 @@ final readonly class LlmsTxtGeneratorService
                 $lines[] = str_repeat('  ', $indent) . '  > ' . str_replace("\n", ' ', $summary);
             }
 
-            // Add format access hints (spec-compliant .md suffix)
-            $mdUrl = $this->buildMarkdownUrl($pageUrl);
-            $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ')';
+            // Add format access hints (spec-compliant .md suffix), unless disabled
+            if ($enableMarkdown) {
+                $mdUrl = $this->buildMarkdownUrl($pageUrl);
+                $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ')';
+            }
             $lines[] = '';
         }
 
