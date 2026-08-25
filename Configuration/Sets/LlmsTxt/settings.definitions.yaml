@@ -27,6 +27,12 @@ settings:
     label: 'Include Hidden Pages'
     description: 'Include hidden pages in llms.txt generation'
     category: llmstxt
+  llmsTxt.enableMarkdown:
+    type: bool
+    default: true
+    label: 'Enable Markdown output'
+    description: 'Serve the .md Markdown variant for pages and reference it from llms.txt. If disabled, .md URLs are left untouched (404) and no Markdown links are listed in llms.txt.'
+    category: llmstxt
   llmsTxt.apiKey:
     type: string
     default: ''
