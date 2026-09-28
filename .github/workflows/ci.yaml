@@ -203,3 +203,37 @@ jobs:
           typo3DatabaseDriver: pdo_sqlite
           typo3DatabaseName: typo3_test
         run: vendor/bin/phpunit --configuration=phpunit.functional.xml
+
+  ter-artefact:
+    name: TER Artefact (classic mode)
+    runs-on: ubuntu-latest
+    needs: php-cs-fixer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: intl, mbstring, json, zip
+          coverage: none
+
+      - name: Install TYPO3 Tailor
+        run: composer global require typo3/tailor --no-progress
+
+      - name: Bundle Composer dependencies for classic mode
+        run: php Build/Scripts/bundleClassicDependencies.php
+
+      - name: Create TER artefact
+        run: |
+          VERSION=$(php -r '$_EXTKEY = "rt_llms_txt"; include "ext_emconf.php"; echo $EM_CONF[$_EXTKEY]["version"];')
+          ~/.composer/vendor/bin/tailor create-artefact "${VERSION}" rt_llms_txt
+          mkdir -p .Build/artefact
+          unzip -q "tailor-version-artefact/rt_llms_txt_${VERSION}.zip" -d .Build/artefact
+
+      - name: Check TER artefact (TYPO3 v13 classic mode)
+        run: php Build/Scripts/checkClassicArtefact.php .Build/artefact v13
+
+      - name: Check TER artefact (TYPO3 v14 classic mode)
+        run: php Build/Scripts/checkClassicArtefact.php .Build/artefact v14

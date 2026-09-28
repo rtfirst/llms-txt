@@ -3,3 +3,4 @@
 .phpunit.cache/
 .idea/
 /vendor/
+/Resources/Private/Php/ComposerVendor/

@@ -61,6 +61,13 @@ ddev typo3 extension:setup
 ddev typo3 cache:flush
 ```
 
+### Classic mode (without Composer)
+
+Install the extension from the [TER](https://extensions.typo3.org/extension/rt_llms_txt) via the Extension Manager,
+or upload `rt_llms_txt_<version>.zip` from the assets of a [GitHub release](https://github.com/rtfirst/llms-txt/releases).
+These packages bundle the required library [league/html-to-markdown](https://github.com/thephpleague/html-to-markdown)
+(MIT license) in `Resources/Private/Php/ComposerVendor/`. The "Source code" archives of GitHub releases do not.
+
 ## Configuration
 
 ### Site Settings
