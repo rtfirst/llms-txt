@@ -10,6 +10,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Routing\SiteMatcher;
 use TYPO3\CMS\Core\Routing\SiteRouteResult;
+use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * Middleware that detects .md suffix in URLs and rewrites them for routing.
@@ -80,15 +81,18 @@ final readonly class UrlSuffixMiddleware implements MiddlewareInterface
      *
      * Defaults to true (enabled) if no site can be matched yet, matching the
      * setting's own default and preserving prior behaviour for edge cases.
+     * The matcher returns a NullSite (without settings) if no site matches the
+     * URL, e.g. for an unknown host or a scheme that differs from the site base.
      */
     private function isMarkdownEnabledForRequest(ServerRequestInterface $request): bool
     {
         $routeResult = $this->siteMatcher->matchRequest($request);
-        if (!$routeResult instanceof SiteRouteResult) {
+        $site = $routeResult instanceof SiteRouteResult ? $routeResult->getSite() : null;
+        if (!$site instanceof Site) {
             return true;
         }
 
-        return (bool)$routeResult->getSite()->getSettings()->get('llmsTxt.enableMarkdown', true);
+        return (bool)$site->getSettings()->get('llmsTxt.enableMarkdown', true);
     }
 
     /**
