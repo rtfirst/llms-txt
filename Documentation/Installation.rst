@@ -42,11 +42,22 @@ Installation in Classic Mode
 
 1.  Download the extension from the
     `TYPO3 Extension Repository (TER) <https://extensions.typo3.org/extension/rt_llms_txt>`__
-    or from `GitHub <https://github.com/rtfirst/llms-txt>`__.
+    or download :file:`rt_llms_txt_<version>.zip` from the assets of a
+    `GitHub release <https://github.com/rtfirst/llms-txt/releases>`__.
 
 2.  Install the extension via the Extension Manager in the TYPO3 Backend.
 
 3.  Clear all caches.
+
+..  note::
+    The extension requires the Composer package
+    `league/html-to-markdown <https://github.com/thephpleague/html-to-markdown>`__
+    (MIT license). In classic mode no Composer packages are installed, so the
+    TER package and the zip file of the GitHub release ship it in
+    :file:`Resources/Private/Php/ComposerVendor/`, including its license file.
+
+    The "Source code" archives of a GitHub release and a plain Git checkout do
+    not contain this package and do not work in classic mode.
 
 ..  _installation-site-set:
 
