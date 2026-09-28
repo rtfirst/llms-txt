@@ -50,8 +50,8 @@ final readonly class LlmsTxtMiddleware implements MiddlewareInterface
             return $authResponse;
         }
 
-        // Generate cache key based on site identifier
-        $cacheKey = self::CACHE_KEY_PREFIX . $site->getIdentifier();
+        // Generate cache key based on site identifier and llms.txt settings
+        $cacheKey = self::CACHE_KEY_PREFIX . $site->getIdentifier() . '_' . $this->getSettingsHash($site);
 
         // Try to get from cache
         if ($this->cache->has($cacheKey)) {
@@ -77,6 +77,20 @@ final readonly class LlmsTxtMiddleware implements MiddlewareInterface
         );
 
         return $this->createResponse($content, false);
+    }
+
+    /**
+     * Short hash of the llms.txt site settings for the cache key.
+     *
+     * Saving the site settings (e.g. in the backend settings editor) does not
+     * flush the pages cache group, so a changed setting (enableMarkdown, intro,
+     * excludePages, ...) has to lead to a new cache entry by itself.
+     */
+    private function getSettingsHash(Site $site): string
+    {
+        $settings = $site->getSettings()->getAll()['llmsTxt'] ?? [];
+
+        return substr(md5(serialize($settings)), 0, 10);
     }
 
     /**
