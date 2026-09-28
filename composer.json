@@ -48,7 +48,12 @@
     },
     "extra": {
         "typo3/cms": {
-            "extension-key": "rt_llms_txt"
+            "extension-key": "rt_llms_txt",
+            "Package": {
+                "providesPackages": {
+                    "league/html-to-markdown": "Resources/Private/Php/ComposerVendor"
+                }
+            }
         }
     },
     "config": {
