@@ -80,8 +80,9 @@ you can configure the extension in **Site Management > Settings**.
 
    If disabled, the ``.md`` Markdown variant is no longer served for any
    page on this site: ``.md`` URLs are left untouched and resolve as a
-   normal 404 instead of being rewritten, and llms.txt no longer lists a
-   "Markdown Format" section or per-page Markdown links.
+   normal 404 instead of being rewritten, and llms.txt no longer lists the
+   "LLM-Optimized Content Access" section (including the authentication
+   hints for ``llmsTxt.apiKey``) or per-page Markdown links.
 
 .. _confval-apiKey:
 

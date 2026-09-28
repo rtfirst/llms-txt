@@ -118,7 +118,9 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '';
 
         // LLM-optimized content access section (spec-compliant with llmstxt.org)
-        // Omitted entirely when Markdown output is disabled for this site.
+        // Omitted entirely when Markdown output is disabled for this site, including
+        // the authentication hints: llms.txt is then the only protected endpoint, and
+        // whoever can read these hints has already authenticated for it.
         if ($enableMarkdown) {
             // Find an example page (first non-root page for realistic examples)
             $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
@@ -131,25 +133,23 @@ final readonly class LlmsTxtGeneratorService
             $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
             $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
             $lines[] = '';
-        }
 
-        // Add authentication section if API key is configured
-        if ($apiKey !== '') {
-            $lines[] = '### Authentication';
-            $lines[] = 'This site requires API key authentication for all LLM endpoints.';
-            $lines[] = '';
-            $lines[] = '**HTTP Header (recommended):**';
-            $lines[] = '```';
-            $lines[] = 'X-LLM-API-Key: <your-api-key>';
-            $lines[] = '```';
-            $lines[] = '';
-            $lines[] = '**Query Parameter:**';
-            $lines[] = '```';
-            $lines[] = $enableMarkdown
-                ? $baseUrl . '/page.md?api_key=<your-api-key>'
-                : $baseUrl . '/llms.txt?api_key=<your-api-key>';
-            $lines[] = '```';
-            $lines[] = '';
+            // Add authentication section if API key is configured
+            if ($apiKey !== '') {
+                $lines[] = '### Authentication';
+                $lines[] = 'This site requires API key authentication for all LLM endpoints.';
+                $lines[] = '';
+                $lines[] = '**HTTP Header (recommended):**';
+                $lines[] = '```';
+                $lines[] = 'X-LLM-API-Key: <your-api-key>';
+                $lines[] = '```';
+                $lines[] = '';
+                $lines[] = '**Query Parameter:**';
+                $lines[] = '```';
+                $lines[] = $baseUrl . '/page.md?api_key=<your-api-key>';
+                $lines[] = '```';
+                $lines[] = '';
+            }
         }
 
         // Page structure with descriptions (sorted by priority for display)

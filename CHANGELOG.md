@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- New site setting `llmsTxt.enableMarkdown` (default: enabled) to turn off the `.md` Markdown variant per site. When disabled, `.md` URLs are left untouched by `UrlSuffixMiddleware` (so they 404 normally instead of being rewritten), `ContentFormatMiddleware` refuses to render Markdown as a safety net, and `llms.txt` no longer advertises the Markdown format or lists per-page Markdown links.
+- New site setting `llmsTxt.enableMarkdown` (default: enabled) to turn off the `.md` Markdown variant per site. When disabled, `.md` URLs are left untouched by `UrlSuffixMiddleware` (so they 404 normally instead of being rewritten), `ContentFormatMiddleware` refuses to render Markdown as a safety net, and `llms.txt` no longer advertises the Markdown format (including the authentication hints for the API key) or lists per-page Markdown links.
 
 ## [1.0.13] - 2026-09-28
 
