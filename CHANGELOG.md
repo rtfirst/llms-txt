@@ -5,6 +5,21 @@ All notable changes to the rt_llms_txt extension will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.13] - 2026-09-28
+
+### Fixed
+
+- **Bug:** Classic mode (non-Composer) installations from the TER failed with `Class "League\HTMLToMarkdown\HtmlConverter" not found` as soon as Markdown was rendered (e.g. `/page.md`), because the TER package did not contain the required Composer package `league/html-to-markdown` (issue [#8](https://github.com/rtfirst/llms-txt/issues/8)). Composer installations were not affected.
+
+### Changed
+
+- TER packages now bundle `league/html-to-markdown` (MIT license) in `Resources/Private/Php/ComposerVendor/`. TYPO3 v14 loads it via `extra.typo3/cms.Package.providesPackages` in `composer.json`, TYPO3 v13 via the new `autoload` section of `ext_emconf.php`.
+- The TER publish workflow bundles the Composer packages before packaging, checks the artefact for classic mode and attaches it as `rt_llms_txt_<version>.zip` to the GitHub release (the release is created from this changelog if it does not exist yet).
+
+### Added
+
+- CI job "TER Artefact (classic mode)": builds the TER artefact with tailor and checks that all runtime Composer packages are bundled and loadable in TYPO3 v13 and v14 classic mode.
+
 ## [1.0.12] - 2026-04-25
 
 ### Fixed
