@@ -321,26 +321,19 @@ final readonly class LlmsTxtGeneratorService
             $languagePrefix = '/' . trim($languageBase, '/');
         }
 
-        // 1. Check for configured base URL in site settings
-        $settings = $this->getSettings($site);
-        $configuredBaseUrl = trim((string)($settings['baseUrl'] ?? ''));
-        if ($configuredBaseUrl !== '') {
-            return rtrim($configuredBaseUrl, '/') . $languagePrefix;
-        }
-
-        // 2. Try site base if it's a full URL
+        // 1. Use the site base from the site configuration if it's a full URL
         $siteBase = (string)$site->getBase();
         if (str_starts_with($siteBase, 'http://') || str_starts_with($siteBase, 'https://')) {
             return rtrim($siteBase, '/') . $languagePrefix;
         }
 
-        // 3. Try TYPO3_REQUEST_HOST environment variable
+        // 2. Try TYPO3_REQUEST_HOST environment variable
         $requestHost = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
         if (\is_string($requestHost) && $requestHost !== '' && $requestHost !== 'http:') {
             return rtrim($requestHost, '/') . $languagePrefix;
         }
 
-        // 4. Fallback: use relative path only
+        // 3. Fallback: use relative path only
         return $languagePrefix;
     }
 

@@ -16,10 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The labels and descriptions of the site settings are now translatable: they moved from `settings.definitions.yaml` to `labels.xlf` of the site set (English and German), so the backend settings editor shows them in the backend language. The unused `settings.*` labels were removed from `locallang.xlf`.
 - Documentation: `llmsTxt.enableMarkdown` documented in README, Usage, API Protection, FAQ and Developer; the example `llms.txt` output matches the generated one again (absolute URLs, no "Multi-Language Access" section).
 
+### Removed
+
+- Site setting `llmsTxt.baseUrl`. It only affected the `**Domain:**` line and the API key example in `llms.txt`, while the page and Markdown links always came from the site configuration, so a different value led to inconsistent URLs. Both lines now use the base URL of the site configuration (or the request host if the site base is not a full URL). An existing value in `settings.yaml` is ignored.
+
 ### Fixed
 
 - **Bug:** A changed `llmsTxt.*` site setting (e.g. saved in the backend settings editor) did not show up in `/llms.txt` until the pages cache was flushed or the cache entry expired after 24 hours, because saving the site settings only flushes the code cache. The cache entry of `llms.txt` now depends on these settings.
-- Outdated setting descriptions: `llmsTxt.apiKey` still referred to the removed `?format=clean/md` endpoints, `llmsTxt.baseUrl` to a CLI generation that does not exist.
+- Outdated description of `llmsTxt.apiKey`: it still referred to the removed `?format=clean/md` endpoints.
 - README: `llms.txt` is served dynamically, not written to `public/`.
 
 ## [1.0.13] - 2026-09-28

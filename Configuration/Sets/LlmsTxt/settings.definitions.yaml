@@ -3,10 +3,6 @@ categories:
   llmstxt: {}
 
 settings:
-  llmsTxt.baseUrl:
-    type: string
-    default: ''
-    category: llmstxt
   llmsTxt.intro:
     type: text
     default: ''

@@ -6,12 +6,6 @@
             <trans-unit id="categories.llmstxt" resname="categories.llmstxt">
                 <source>LLMs-Text</source>
             </trans-unit>
-            <trans-unit id="settings.llmsTxt.baseUrl" resname="settings.llmsTxt.baseUrl">
-                <source>Base URL</source>
-            </trans-unit>
-            <trans-unit id="settings.description.llmsTxt.baseUrl" resname="settings.description.llmsTxt.baseUrl">
-                <source>Full URL of the website used in llms.txt (e.g. https://example.com). If empty, the base URL from the site configuration is used.</source>
-            </trans-unit>
             <trans-unit id="settings.llmsTxt.intro" resname="settings.llmsTxt.intro">
                 <source>Website Description</source>
             </trans-unit>

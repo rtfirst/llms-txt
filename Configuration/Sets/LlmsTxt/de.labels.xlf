@@ -7,14 +7,6 @@
                 <source>LLMs-Text</source>
                 <target>LLMs-Text</target>
             </trans-unit>
-            <trans-unit id="settings.llmsTxt.baseUrl" resname="settings.llmsTxt.baseUrl">
-                <source>Base URL</source>
-                <target>Basis-URL</target>
-            </trans-unit>
-            <trans-unit id="settings.description.llmsTxt.baseUrl" resname="settings.description.llmsTxt.baseUrl">
-                <source>Full URL of the website used in llms.txt (e.g. https://example.com). If empty, the base URL from the site configuration is used.</source>
-                <target>Vollständige URL der Website für die llms.txt (z. B. https://example.com). Wenn leer, wird die Basis-URL aus der Site-Konfiguration verwendet.</target>
-            </trans-unit>
             <trans-unit id="settings.llmsTxt.intro" resname="settings.llmsTxt.intro">
                 <source>Website Description</source>
                 <target>Website-Beschreibung</target>
