@@ -31,6 +31,9 @@ final readonly class PageTreeService
     /**
      * Get all visible pages for a site in a specific language.
      *
+     * Spacer pages are left out, so each record carries the UID of its nearest
+     * parent page that is not a spacer in "_LLMSTXT_PARENT".
+     *
      * @param array<int> $excludePageUids Page UIDs to exclude
      * @return array<int, array<string, mixed>> Page records indexed by UID
      */
@@ -46,13 +49,14 @@ final readonly class PageTreeService
         $pages = [];
 
         // First, add the root page itself
-        $rootPage = $this->getPage($rootPageId, $languageId, $includeHidden);
+        $rootPage = $this->getPage($rootPageId, $languageId, $includeHidden, $language);
         if ($rootPage !== null && !\in_array($rootPageId, $excludePageUids, true)) {
+            $rootPage['_LLMSTXT_PARENT'] = (int)($rootPage['pid'] ?? 0);
             $pages[$rootPageId] = $rootPage;
         }
 
         // Then collect all child pages recursively
-        $this->collectPages($rootPageId, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+        $this->collectPages($rootPageId, $rootPageId, $languageId, $excludePageUids, $includeHidden, $pages, $language);
 
         return $pages;
     }
@@ -62,7 +66,7 @@ final readonly class PageTreeService
      *
      * @return array<string, mixed>|null
      */
-    private function getPage(int $pageUid, int $languageId, bool $includeHidden): ?array
+    private function getPage(int $pageUid, int $languageId, bool $includeHidden, ?SiteLanguage $language = null): ?array
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
         $this->applyRestrictions($queryBuilder, $includeHidden);
@@ -83,28 +87,20 @@ final readonly class PageTreeService
             return null;
         }
 
-        // Get translation if not default language
-        if ($languageId > 0) {
-            $translatedPage = $this->getTranslatedPage($pageUid, $languageId, $includeHidden);
-            if ($translatedPage !== null) {
-                $row = array_merge($row, $translatedPage);
-                $row['_PAGES_OVERLAY'] = true;
-                $row['_PAGES_OVERLAY_UID'] = (int)$translatedPage['uid'];
-                $row['_PAGES_OVERLAY_LANGUAGE'] = $languageId;
-            }
-        }
-
-        return $row;
+        return $this->overlayTranslation($row, $languageId, $includeHidden, $language);
     }
 
     /**
      * Recursively collect pages from the page tree.
      *
+     * @param int $parentId Page whose subpages are collected
+     * @param int $treeParentId Nearest page above them that is not a spacer
      * @param array<int> $excludePageUids
      * @param array<int, array<string, mixed>> $pages
      */
     private function collectPages(
         int $parentId,
+        int $treeParentId,
         int $languageId,
         array $excludePageUids,
         bool $includeHidden,
@@ -155,32 +151,56 @@ final readonly class PageTreeService
             $pageUid = (int)$row['uid'];
 
             // Spacer pages are menu separators and are not output themselves,
-            // but their child pages must still be discovered.
+            // but their child pages must still be discovered. They take the
+            // place of the spacer in the tree.
             if ((int)$row['doktype'] === PageRepository::DOKTYPE_SPACER) {
-                $this->collectPages($pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+                $this->collectPages($pageUid, $treeParentId, $languageId, $excludePageUids, $includeHidden, $pages, $language);
                 continue;
             }
 
-            // Get translated page if not default language
-            if ($languageId > 0) {
-                $translatedPage = $this->getTranslatedPage($pageUid, $languageId, $includeHidden);
-                if ($translatedPage !== null) {
-                    // Merge translated fields into the base page
-                    $row = array_merge($row, $translatedPage);
-                    $row['_PAGES_OVERLAY'] = true;
-                    $row['_PAGES_OVERLAY_UID'] = (int)$translatedPage['uid'];
-                    $row['_PAGES_OVERLAY_LANGUAGE'] = $languageId;
-                } elseif ($language instanceof SiteLanguage && $language->getFallbackType() === 'strict') {
-                    // In strict mode, skip pages without translation
-                    continue;
-                }
+            $page = $this->overlayTranslation($row, $languageId, $includeHidden, $language);
+            if ($page === null) {
+                continue;
             }
 
-            $pages[$pageUid] = $row;
+            $page['_LLMSTXT_PARENT'] = $treeParentId;
+            $pages[$pageUid] = $page;
 
             // Recursively get child pages
-            $this->collectPages($pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+            $this->collectPages($pageUid, $pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
         }
+    }
+
+    /**
+     * Overlay a default language page record with its translation, if not default language.
+     *
+     * Returns null if the page has no translation and the language does not fall
+     * back to the default language (strict mode).
+     *
+     * @param array<string, mixed> $row
+     * @return array<string, mixed>|null
+     */
+    private function overlayTranslation(array $row, int $languageId, bool $includeHidden, ?SiteLanguage $language): ?array
+    {
+        if ($languageId === 0) {
+            return $row;
+        }
+
+        $translatedPage = $this->getTranslatedPage((int)$row['uid'], $languageId, $includeHidden);
+        if ($translatedPage === null) {
+            // In strict mode, skip pages without translation
+            return $language instanceof SiteLanguage && $language->getFallbackType() === 'strict' ? null : $row;
+        }
+
+        // Merge translated fields into the base page. The priority is not translated:
+        // every language uses the one of the default language page.
+        $page = array_merge($row, $translatedPage);
+        $page['tx_llmstxt_priority'] = $row['tx_llmstxt_priority'] ?? 0;
+        $page['_PAGES_OVERLAY'] = true;
+        $page['_PAGES_OVERLAY_UID'] = (int)$translatedPage['uid'];
+        $page['_PAGES_OVERLAY_LANGUAGE'] = $languageId;
+
+        return $page;
     }
 
     /**

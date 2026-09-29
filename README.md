@@ -22,22 +22,27 @@ The extension provides a two-tier approach for LLM content access:
 
 2. **Content Format** - Access page content via (spec-compliant with llmstxt.org):
    - `.md` suffix - Clean Markdown (e.g., `/page.md`)
+   - Enabled by default, can be turned off per site with `llmsTxt.enableMarkdown`
 
 ## Multi-Language Support
 
-Instead of generating separate llms.txt files per language, this extension uses a simpler approach:
+Every enabled language of a site has its own `llms.txt` below its base:
 
-- **Single llms.txt** - Contains the site structure in the default language
-- **Language-specific content** - Access any page in any language using the `.md` suffix with language URL prefix:
-  - Default: `https://example.com/about.md`
-  - English: `https://example.com/en/about.md`
-  - German: `https://example.com/de/about.md`
+- Default language: `https://example.com/llms.txt`
+- English with the base `/en/`: `https://example.com/en/llms.txt`
+- A language with its own domain: `https://example.co.uk/llms.txt`
 
-This approach is cleaner and follows how multi-language sites actually work.
+Each file lists the pages in its language, with translated titles, descriptions and URLs (with `fallbackType: strict`, untranslated pages are left out). A `## Languages` section links to the `llms.txt` of the other languages, so crawlers find all of them from any file. A language without pages has no `llms.txt` (404).
+
+The intro of each language is set in the site configuration (see [Site Languages](#site-languages)). Page content in any language is available with the `.md` suffix:
+
+- Default: `https://example.com/about.md`
+- English: `https://example.com/en/about.md`
 
 ## Features
 
-- **Automatic generation** of llms.txt when TYPO3 cache is cleared
+- **Automatic generation** of llms.txt when TYPO3 cache is cleared or the llms.txt site settings change
+- **One llms.txt per language**, linked to each other
 - **Page properties tab**: Configure LLM-specific metadata for each page
 - **HTML header link**: Adds `<link rel="alternate">` to HTML pages
 - **Clean output formats**: Well-formatted HTML and Markdown without excessive whitespace
@@ -76,11 +81,19 @@ Add the Site Set "LLMs.txt Generator" to your site configuration, then configure
 
 | Setting | Description |
 |---------|-------------|
-| `llmsTxt.baseUrl` | Full URL of the website (e.g., `https://example.com`) |
-| `llmsTxt.intro` | Website description shown in the intro section |
+| `llmsTxt.intro` | Website description shown in the intro section of the default language (see [Site Languages](#site-languages)) |
 | `llmsTxt.excludePages` | Comma-separated page UIDs to exclude |
 | `llmsTxt.includeHidden` | Include hidden pages (default: false) |
+| `llmsTxt.enableMarkdown` | Serve the `.md` Markdown variant and reference it in llms.txt (default: true). If disabled, `.md` URLs return 404 and llms.txt contains no Markdown section or links |
 | `llmsTxt.apiKey` | API key for protected access (empty = public access) |
+
+### Site Languages
+
+In the **Sites** module, each language of a site has this field:
+
+| Field | Description |
+|-------|-------------|
+| **llms.txt Intro** | Website description shown in the intro section of the `llms.txt` of this language (`llmsTxtIntro` in `config.yaml`). It takes precedence over `llmsTxt.intro`, which is the fallback for the default language only. Other languages without this field have no intro |
 
 ### Page Properties (LLM Tab)
 
@@ -89,14 +102,14 @@ Each page has an "LLM" tab with these fields:
 | Field | Description |
 |-------|-------------|
 | **Exclude from llms.txt** | Don't include this page in the index |
-| **LLM Priority** | Higher values (0-100) appear first in the list |
+| **LLM Priority** | Higher values (0-100) appear first among the pages with the same parent page. Translations use the priority of the default language page |
 | **LLM Description** | Custom description (fallback: meta description) |
-| **LLM Summary** | Additional summary text shown as quote |
+| **LLM Summary** | Additional summary text, added to the notes of the page in llms.txt |
 | **LLM Keywords** | Comma-separated topics for this page |
 
 ## Output File
 
-After cache flush, `llms.txt` is created in `public/`.
+`llms.txt` is not written to `public/`. The extension serves it dynamically at `/llms.txt` of each site and below the base of every further language (e.g. `/en/llms.txt`), and caches the generated content until the TYPO3 cache is flushed or the `llmsTxt.*` site settings or the site languages change. A static `public/llms.txt` file would be delivered by the web server instead, so do not create one.
 
 ## Content Access Formats
 
@@ -213,39 +226,24 @@ Invalid or missing API key returns `401 Unauthorized`:
 **Language:** de
 **Generated:** 2026-01-31 12:00:00
 
-## LLM-Optimized Content Access
+This site provides LLM-friendly Markdown output for all pages.
 
-This site provides LLM-friendly Markdown output for all pages:
+**Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+- **Example:** `https://example.com/about.md`
 
-### Markdown Format
-Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
-- **Example:** `https://example.com/page-slug.md`
+## Languages
 
-### Multi-Language Access
-Use language-specific URL prefixes with the `.md` suffix:
-- **Default language:** `https://example.com/page.md`
-- **English:** `https://example.com/en/page.md`
-- **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)
+- [English](https://example.com/en/llms.txt): en
 
 ## Page Structure
 
-- **[Home](/)**
-  Welcome to our website with all important information.
-  [Markdown](/index.html.md)
-
-  - **[About](/about/)**
-    Learn about our company history and values.
-    [Markdown](/about.md)
-
-  - **[Services](/services/)**
-    Professional services for your needs.
-    *Keywords: services, consulting, support*
-    [Markdown](/services.md)
-
-- **[Contact](/contact/)**
-  Get in touch with us via phone or email.
-  [Markdown](/contact.md)
+- [Home](https://example.com/): Welcome to our website with all important information. [Markdown](https://example.com/index.html.md)
+  - [About](https://example.com/about): Learn about our company history and values. [Markdown](https://example.com/about.md)
+  - [Services](https://example.com/services): Professional services for your needs. Keywords: services, consulting, support. [Markdown](https://example.com/services.md)
+  - [Contact](https://example.com/contact): Get in touch with us via phone or email. [Markdown](https://example.com/contact.md)
 ```
+
+Each page is one line `- [Title](url): notes` as defined by [llmstxt.org](https://llmstxt.org/). The notes contain the description, summary and keywords of the page and the link to its Markdown version, so the file can be read by llms.txt parsers. The `## Languages` section links to the `llms.txt` of the other languages; it is omitted on single-language sites. With `llmsTxt.enableMarkdown` disabled, the Markdown hints and the `[Markdown](…)` links are omitted.
 
 ## robots.txt Configuration
 
@@ -263,6 +261,8 @@ User-agent: Anthropic-AI
 Allow: /llms.txt
 ```
 
+Add the `llms.txt` of further languages as well, e.g. `Allow: /en/llms.txt`.
+
 ## HTML Header Link
 
 The extension automatically adds a link tag to all HTML pages:
@@ -271,7 +271,7 @@ The extension automatically adds a link tag to all HTML pages:
 <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">
 ```
 
-This helps AI crawlers discover the `llms.txt` file from any page.
+This helps AI crawlers discover the `llms.txt` file from any page. The link points to the `llms.txt` of the page language, e.g. `/en/llms.txt` on English pages.
 
 ## Development
 
@@ -297,11 +297,14 @@ ddev exec "cd packages/llms_txt && ../../vendor/bin/phpunit --bootstrap ../../ve
 
 ### CI Pipeline
 
-The extension includes a GitHub Actions workflow (`.github/workflows/ci.yaml`) that runs:
+The extension includes a GitHub Actions workflow (`.github/workflows/ci.yaml`) that runs for pushes to and pull requests against `main` and `develop`:
 - PHP-CS-Fixer (code style)
-- PHPStan Level 8 (static analysis)
+- PHPStan Level 8 (static analysis, TYPO3 13)
 - Rector (code modernization)
-- Unit Tests (PHP 8.2-8.4, TYPO3 13 & 14)
+- Unit and functional tests (PHP 8.2-8.4, TYPO3 13 & 14)
+- TER artefact check (classic mode, TYPO3 13 & 14)
+
+Publishing to the TER only happens for version tags (`.github/workflows/ter-publish.yaml`), which run the same checks first.
 
 ## Author
 

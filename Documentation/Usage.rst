@@ -13,17 +13,20 @@ This chapter explains how to access the LLM-optimized content.
 Accessing llms.txt
 ==================
 
-The llms.txt index file is available at the root of your website:
+The llms.txt index file is available at the root of your website, and below
+the base of every further language (see :ref:`usage-multi-language`):
 
 ..  code-block:: text
 
    https://example.com/llms.txt
+   https://example.com/en/llms.txt
 
 This file contains:
 
 -   Website metadata (title, description, domain)
 -   Page structure with descriptions and keywords
--   Instructions for accessing page content in Markdown format
+-   Instructions for accessing page content in Markdown format (if
+    :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` is enabled)
 
 ..  _usage-llms-txt-example:
 
@@ -41,37 +44,31 @@ Example llms.txt Output
    **Language:** de
    **Generated:** 2026-01-31 12:00:00
 
-   ## LLM-Optimized Content Access
+   This site provides LLM-friendly Markdown output for all pages.
 
-   This site provides LLM-friendly Markdown output for all pages:
+   **Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+   - **Example:** `https://example.com/about.md`
 
-   ### Markdown Format
-   Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
-   - **Example:** `https://example.com/page-slug.md`
+   ## Languages
 
-   ### Multi-Language Access
-   Use language-specific URL prefixes with the `.md` suffix:
-   - **Default language:** `https://example.com/page.md`
-   - **English:** `https://example.com/en/page.md`
+   - [English](https://example.com/en/llms.txt): en
 
    ## Page Structure
 
-   - **[Home](/)**
-     Welcome to our website with all important information.
-     [Markdown](/index.html.md)
+   - [Home](https://example.com/): Welcome to our website with all important information. [Markdown](https://example.com/index.html.md)
+     - [About](https://example.com/about): Learn about our company history and values. [Markdown](https://example.com/about.md)
+     - [Services](https://example.com/services): Professional services for your needs. Keywords: services, consulting, support. [Markdown](https://example.com/services.md)
+     - [Contact](https://example.com/contact): Get in touch with us via phone or email. [Markdown](https://example.com/contact.md)
 
-     - **[About](/about/)**
-       Learn about our company history and values.
-       [Markdown](/about.md)
+Each page is one line ``- [Title](url): notes`` as defined by
+`llmstxt.org <https://llmstxt.org/>`__. The notes contain the description,
+summary and keywords of the page and the link to its Markdown version, so the
+file can be read by llms.txt parsers. The ``## Languages`` section links to
+the llms.txt of the other languages; it is omitted on single-language sites.
 
-     - **[Services](/services/)**
-       Professional services for your needs.
-       *Keywords: services, consulting, support*
-       [Markdown](/services.md)
-
-   - **[Contact](/contact/)**
-     Get in touch with us via phone or email.
-     [Markdown](/contact.md)
+With :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` disabled, the
+Markdown hints (including the authentication hints) and the ``[Markdown](…)``
+links are omitted.
 
 ..  _usage-markdown:
 
@@ -84,6 +81,12 @@ YAML frontmatter.
 ..  code-block:: text
 
    https://example.com/about.md
+
+..  note::
+
+   The Markdown output is enabled by default. It can be turned off per site
+   with :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>`, ``.md`` URLs
+   then return a regular 404.
 
 ..  _usage-markdown-output:
 
@@ -150,6 +153,30 @@ Or simply:
 Multi-Language Access
 =====================
 
+Every enabled language of a site has its own llms.txt below its base:
+
+..  code-block:: text
+
+   # Default language
+   https://example.com/llms.txt
+
+   # English (base /en/)
+   https://example.com/en/llms.txt
+
+   # Language with its own domain
+   https://example.co.uk/llms.txt
+
+Each file lists the pages in its language, with translated titles,
+descriptions and URLs. With ``fallbackType: strict``, untranslated pages are
+left out. The ``## Languages`` section of each file links to the llms.txt of
+the other languages. A language without pages has no llms.txt (404).
+
+The intro comes from the field :ref:`llms.txt Intro <confval-language-intro>`
+of the language, or for the default language from
+:ref:`llmsTxt.intro <confval-intro>`. The API key
+(:ref:`llmsTxt.apiKey <confval-apiKey>`) protects the llms.txt of every
+language.
+
 Access page content in different languages using the language URL prefix
 with the ``.md`` suffix:
 
@@ -177,7 +204,8 @@ Caching
 
 The extension uses smart caching for optimal performance:
 
--   **llms.txt**: Cached and regenerated when TYPO3 cache is cleared
+-   **llms.txt**: Cached and regenerated when TYPO3 cache is cleared or the
+    ``llmsTxt.*`` site settings change
 -   **Markdown output**: Cached for 24 hours per page/language combination
 
 To force regeneration:

@@ -1,35 +1,25 @@
+# Labels and descriptions: labels.xlf (categories.<key>, settings.<key>, settings.description.<key>)
 categories:
-  llmstxt:
-    label: 'LLMs-Text'
+  llmstxt: {}
 
 settings:
-  llmsTxt.baseUrl:
-    type: string
-    default: ''
-    label: 'Base URL'
-    description: 'Full URL for llms.txt (e.g., https://example.com). Required for CLI generation.'
-    category: llmstxt
   llmsTxt.intro:
     type: text
     default: ''
-    label: 'Website Description'
-    description: 'Description text shown in the llms.txt intro section'
     category: llmstxt
   llmsTxt.excludePages:
     type: string
     default: ''
-    label: 'Exclude Pages'
-    description: 'Comma-separated page UIDs to exclude from llms.txt'
     category: llmstxt
   llmsTxt.includeHidden:
     type: bool
     default: false
-    label: 'Include Hidden Pages'
-    description: 'Include hidden pages in llms.txt generation'
+    category: llmstxt
+  llmsTxt.enableMarkdown:
+    type: bool
+    default: true
     category: llmstxt
   llmsTxt.apiKey:
     type: string
     default: ''
-    label: 'API Key for Format Access'
-    description: 'If set, ?format=clean/md requires this API key. Pass via query parameter (api_key=...) or header (X-LLM-API-Key). Leave empty for public access.'
     category: llmstxt

@@ -21,7 +21,7 @@ Concept
 
 This extension provides a two-tier approach for LLM content access:
 
-1.  **llms.txt Index File** - A single file containing:
+1.  **llms.txt Index File** - One file per language containing:
 
     -   Website metadata (title, description, domain)
     -   Page structure with SEO descriptions and keywords
@@ -35,18 +35,14 @@ This extension provides a two-tier approach for LLM content access:
 Multi-Language Support
 ======================
 
-Instead of generating separate ``llms.txt`` files per language, this extension
-uses a simpler approach:
-
--   **Single llms.txt** - Contains the site structure in the default language
+-   **One llms.txt per language** - Every enabled language has its own
+    llms.txt below its base, e.g. ``https://example.com/en/llms.txt``, with the
+    pages in this language and links to the llms.txt of the other languages.
 -   **Language-specific content** - Access any page in any language using the
     ``.md`` suffix with language URL prefix:
 
     -   Default: ``https://example.com/about.md``
     -   English: ``https://example.com/en/about.md``
-    -   German: ``https://example.com/de/ueber-uns.md``
-
-This approach follows how multi-language sites actually work in TYPO3.
 
 Features
 ========
@@ -55,8 +51,10 @@ Core Features
 -------------
 
 -   **Automatic llms.txt generation** with smart caching
--   **Markdown output** for all pages via ``.md`` URL suffix
--   **Multi-language support** via URL prefixes
+-   **Markdown output** for all pages via ``.md`` URL suffix (can be disabled
+    per site)
+-   **Multi-language support**: one llms.txt per language, linked to each
+    other
 -   **API key protection** for restricted access
 -   **YAML frontmatter** in Markdown output with page metadata
 
@@ -75,7 +73,7 @@ Technical Features
 -   **24-hour caching** for optimal performance
 -   **HTML-to-Markdown conversion** using League/html-to-markdown
 -   **Clean output** - removes scripts, styles, navigation elements
--   **UTF-8 BOM** for proper encoding detection
+-   **UTF-8 BOM** in the Markdown output for proper encoding detection
 -   **Backend notification** if robots.txt lacks llms.txt reference
 -   **Header link injection** (``<link rel="alternate">``) in HTML pages
 

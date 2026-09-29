@@ -15,26 +15,6 @@
                 <source>Page Structure</source>
                 <target>Seitenstruktur</target>
             </trans-unit>
-            <trans-unit id="settings.intro" resname="settings.intro">
-                <source>Website description for llms.txt intro section</source>
-                <target>Website-Beschreibung für den Einleitungstext der llms.txt</target>
-            </trans-unit>
-            <trans-unit id="settings.excludePages" resname="settings.excludePages">
-                <source>Comma-separated page UIDs to exclude from llms.txt</source>
-                <target>Komma-getrennte Seiten-UIDs, die von llms.txt ausgeschlossen werden</target>
-            </trans-unit>
-            <trans-unit id="settings.includeHidden" resname="settings.includeHidden">
-                <source>Include hidden pages in llms.txt</source>
-                <target>Versteckte Seiten in llms.txt einbeziehen</target>
-            </trans-unit>
-            <trans-unit id="settings.apiKey" resname="settings.apiKey">
-                <source>API Key for protected access to ?format=clean/md endpoints</source>
-                <target>API-Schlüssel für geschützten Zugriff auf ?format=clean/md Endpunkte</target>
-            </trans-unit>
-            <trans-unit id="settings.apiKey.description" resname="settings.apiKey.description">
-                <source>If set, the ?format=clean and ?format=md endpoints require this API key. Pass via X-LLM-API-Key header or api_key query parameter. Leave empty for public access.</source>
-                <target>Wenn gesetzt, erfordern die Endpunkte ?format=clean und ?format=md diesen API-Schlüssel. Übergabe via X-LLM-API-Key Header oder api_key Query-Parameter. Leer lassen für öffentlichen Zugriff.</target>
-            </trans-unit>
             <trans-unit id="notification.robotsTxt.title" resname="notification.robotsTxt.title">
                 <source>LLMs.txt: robots.txt configuration</source>
                 <target>LLMs.txt: robots.txt-Konfiguration</target>
@@ -60,8 +40,8 @@
                 <target>LLM-Zusammenfassung</target>
             </trans-unit>
             <trans-unit id="pages.tx_llmstxt_summary.description" resname="pages.tx_llmstxt_summary.description">
-                <source>Additional summary text for this page. Displayed as a quote block in llms.txt.</source>
-                <target>Zusätzlicher Zusammenfassungstext für diese Seite. Wird als Zitatblock in llms.txt angezeigt.</target>
+                <source>Additional summary text for this page. Added to the notes of the page in llms.txt.</source>
+                <target>Zusätzlicher Zusammenfassungstext für diese Seite. Wird in llms.txt in die Notiz der Seite übernommen.</target>
             </trans-unit>
             <trans-unit id="pages.tx_llmstxt_keywords" resname="pages.tx_llmstxt_keywords">
                 <source>LLM Keywords</source>
@@ -84,8 +64,16 @@
                 <target>LLM-Priorität</target>
             </trans-unit>
             <trans-unit id="pages.tx_llmstxt_priority.description" resname="pages.tx_llmstxt_priority.description">
-                <source>Priority for this page (0-100). Higher values appear first in llms.txt. Default is 0 (normal sorting by page tree).</source>
-                <target>Priorität für diese Seite (0-100). Höhere Werte erscheinen zuerst in llms.txt. Standard ist 0 (normale Sortierung nach Seitenbaum).</target>
+                <source>Priority for this page (0-100). In llms.txt, pages with higher values appear before the other pages with the same parent page. Default is 0 (normal sorting by page tree).</source>
+                <target>Priorität für diese Seite (0-100). In llms.txt erscheinen Seiten mit höheren Werten vor den anderen Seiten mit derselben Elternseite. Standard ist 0 (normale Sortierung nach Seitenbaum).</target>
+            </trans-unit>
+            <trans-unit id="site_language.llmsTxtIntro" resname="site_language.llmsTxtIntro">
+                <source>llms.txt Intro</source>
+                <target>llms.txt-Intro</target>
+            </trans-unit>
+            <trans-unit id="site_language.llmsTxtIntro.description" resname="site_language.llmsTxtIntro.description">
+                <source>Short description of the website, shown as a quote below the title of the llms.txt of this language. If empty, the default language uses the site setting "Website Description", other languages have no intro.</source>
+                <target>Kurze Beschreibung der Website, erscheint als Zitat unter dem Titel der llms.txt dieser Sprache. Ist das Feld leer, nutzt die Standardsprache die Site-Einstellung „Website-Beschreibung“, andere Sprachen haben kein Intro.</target>
             </trans-unit>
         </body>
     </file>

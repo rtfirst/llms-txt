@@ -79,7 +79,9 @@ How does the priority setting work?
 -----------------------------------
 
 Pages with higher priority values (0-100) appear earlier in the llms.txt
-page list. Use this to highlight important pages for AI crawlers:
+page list, before the other pages with the same parent page. The list follows
+the page tree, so a page never leaves its branch. Use this to highlight
+important pages for AI crawlers:
 
 -   80-100: Main landing pages
 -   50-70: Important content
@@ -93,6 +95,15 @@ Can I include hidden pages?
 
 Yes, enable ``llmsTxt.includeHidden`` in the Site Settings. This is useful
 for staging environments.
+
+..  _faq-disable-markdown:
+
+Can I disable the Markdown output?
+----------------------------------
+
+Yes, disable :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` in the
+Site Settings. ``.md`` URLs then return a regular 404, and llms.txt only lists
+the pages without the Markdown hints and the Markdown links.
 
 ..  _faq-usage:
 
@@ -115,7 +126,9 @@ Use ``/index.html.md`` or ``/.md``:
 How do I access translated pages?
 ---------------------------------
 
-Use the language prefix with the ``.md`` suffix:
+Every language has its own llms.txt below its base, e.g.
+``https://example.com/en/llms.txt``, which lists the translated pages. Use the
+language prefix with the ``.md`` suffix for the content of a page:
 
 ..  code-block:: text
 
@@ -141,6 +154,9 @@ Or in DDEV:
 ..  code-block:: bash
 
    ddev typo3 cache:flush
+
+Changes to the ``llmsTxt.*`` site settings are picked up by llms.txt
+automatically, without clearing the cache.
 
 ..  _faq-api-protection:
 

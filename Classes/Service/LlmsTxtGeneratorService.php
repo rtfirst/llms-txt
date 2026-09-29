@@ -6,6 +6,7 @@ namespace RTfirst\LlmsTxt\Service;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
+use RTfirst\LlmsTxt\Utility\LlmsTxtPath;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -25,21 +26,21 @@ final readonly class LlmsTxtGeneratorService
     ) {}
 
     /**
-     * Get llms.txt content for a specific site.
+     * Get llms.txt content for a site language.
      *
-     * Generates content for the default language (ID 0).
-     * Multi-language content is accessible via .md suffix
-     * on any page URL with the appropriate language prefix.
+     * Every language has its own llms.txt below its base (/llms.txt, /en/llms.txt, ...),
+     * which lists the pages in this language and links to the llms.txt of the other
+     * languages. Without a language, the default language is used.
      */
-    public function getContentForSite(Site $site): string
+    public function getContentForSite(Site $site, ?SiteLanguage $language = null): string
     {
-        $defaultLanguage = $site->getDefaultLanguage();
+        $language ??= $site->getDefaultLanguage();
         $settings = $this->getSettings($site);
         $excludePages = $this->parseExcludePages($settings['excludePages'] ?? '');
         $includeHidden = (bool)($settings['includeHidden'] ?? false);
-        $intro = trim((string)($settings['intro'] ?? ''));
+        $enableMarkdown = (bool)($settings['enableMarkdown'] ?? true);
 
-        $pages = $this->pageTreeService->getPages($site, $defaultLanguage, $excludePages, $includeHidden);
+        $pages = $this->pageTreeService->getPages($site, $language, $excludePages, $includeHidden);
 
         if ($pages === []) {
             $this->logger->log(
@@ -47,18 +48,20 @@ final readonly class LlmsTxtGeneratorService
                 'No pages found for site {site} language {language}',
                 [
                     'site' => $site->getIdentifier(),
-                    'language' => $defaultLanguage->getLocale()->getLanguageCode(),
+                    'language' => $language->getLocale()->getLanguageCode(),
                 ],
             );
 
             return '';
         }
 
-        $baseUrl = $this->getBaseUrl($site, $defaultLanguage);
+        $baseUrl = $this->getBaseUrl($language);
+        $intro = $this->getIntro($language, $settings);
+        $languageLinks = $this->buildLanguageLinks($site, $language, $excludePages, $includeHidden);
 
         $apiKey = trim((string)($settings['apiKey'] ?? ''));
 
-        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro, $apiKey);
+        return $this->buildContent($site, $language, $pages, $baseUrl, $intro, $apiKey, $enableMarkdown, $languageLinks);
     }
 
     /**
@@ -82,6 +85,7 @@ final readonly class LlmsTxtGeneratorService
      * Build the llms.txt content.
      *
      * @param array<int, array<string, mixed>> $pages
+     * @param list<string> $languageLinks
      */
     private function buildContent(
         Site $site,
@@ -90,11 +94,13 @@ final readonly class LlmsTxtGeneratorService
         string $baseUrl,
         string $intro,
         string $apiKey,
+        bool $enableMarkdown,
+        array $languageLinks,
     ): string {
         $lines = [];
 
-        // Sort pages by priority (higher first), then by original order
-        $sortedPages = $this->sortPagesByPriority($pages);
+        // Order pages as a tree, siblings by priority (higher first), then by original order
+        $pageDepths = $this->orderPagesAsTree($pages);
 
         // Site title
         $rootPage = $pages[$site->getRootPageId()] ?? reset($pages);
@@ -115,96 +121,159 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '**Generated:** ' . date('Y-m-d H:i:s');
         $lines[] = '';
 
-        // Find an example page (first non-root page for realistic examples)
-        $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
+        // LLM-optimized content access hints (spec-compliant with llmstxt.org)
+        // Plain text without headings: llmstxt.org parsers read every "##" line,
+        // including "###", as the start of a file list section.
+        // Omitted entirely when Markdown output is disabled for this site, including
+        // the authentication hints: llms.txt is then the only protected endpoint, and
+        // whoever can read these hints has already authenticated for it.
+        if ($enableMarkdown) {
+            // Find an example page (first non-root page for realistic examples)
+            $examplePageUrl = $this->findExamplePageUrl($site, $pageDepths, $language);
 
-        // LLM-optimized content access section (spec-compliant with llmstxt.org)
-        $lines[] = '## LLM-Optimized Content Access';
-        $lines[] = '';
-        $lines[] = 'This site provides LLM-friendly Markdown output for all pages:';
-        $lines[] = '';
-        $lines[] = '### Markdown Format';
-        $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
-        $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
-        $lines[] = '';
+            $lines[] = 'This site provides LLM-friendly Markdown output for all pages.';
+            $lines[] = '';
+            $lines[] = '**Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
+            $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
+            $lines[] = '';
 
-        // Add authentication section if API key is configured
-        if ($apiKey !== '') {
-            $lines[] = '### Authentication';
-            $lines[] = 'This site requires API key authentication for all LLM endpoints.';
+            // Add authentication hints if API key is configured
+            if ($apiKey !== '') {
+                $lines[] = '**Authentication:** This site requires API key authentication for all LLM endpoints.';
+                $lines[] = '';
+                $lines[] = '**HTTP Header (recommended):**';
+                $lines[] = '```';
+                $lines[] = 'X-LLM-API-Key: <your-api-key>';
+                $lines[] = '```';
+                $lines[] = '';
+                $lines[] = '**Query Parameter:**';
+                $lines[] = '```';
+                $lines[] = $baseUrl . '/page.md?api_key=<your-api-key>';
+                $lines[] = '```';
+                $lines[] = '';
+            }
+        }
+
+        // Links to the llms.txt of the other languages
+        if ($languageLinks !== []) {
+            $lines[] = '## ' . $this->getTranslation('languages');
             $lines[] = '';
-            $lines[] = '**HTTP Header (recommended):**';
-            $lines[] = '```';
-            $lines[] = 'X-LLM-API-Key: <your-api-key>';
-            $lines[] = '```';
-            $lines[] = '';
-            $lines[] = '**Query Parameter:**';
-            $lines[] = '```';
-            $lines[] = $baseUrl . '/page.md?api_key=<your-api-key>';
-            $lines[] = '```';
+            array_push($lines, ...$languageLinks);
             $lines[] = '';
         }
 
-        // Page structure with descriptions (sorted by priority for display)
+        // Page structure with descriptions (page tree, siblings sorted by priority)
         $lines[] = '## ' . $this->getTranslation('pageStructure');
         $lines[] = '';
 
-        // Build tree structure for display
-        foreach ($sortedPages as $pageUid => $page) {
+        // Build tree structure for display, one line per page as llmstxt.org
+        // defines it: "- [name](url): notes"
+        foreach ($pageDepths as $pageUid => $indent) {
+            $page = $pages[$pageUid];
             $pageTitle = (string)($page['title'] ?? '');
             $pageUrl = $this->pageTreeService->getPageUrl($site, $pageUid, $language);
-            $indent = $this->getIndentLevel($page, $pages);
-            $priority = (int)($page['tx_llmstxt_priority'] ?? 0);
 
-            // Page entry with URL (escape Markdown link syntax in title)
-            $escapedTitle = str_replace(['[', ']', '(', ')'], ['\[', '\]', '\(', '\)'], $pageTitle);
-            $lines[] = str_repeat('  ', $indent) . '- **[' . $escapedTitle . '](' . $pageUrl . ')**';
+            $line = str_repeat('  ', $indent) . '- [' . $this->escapeLinkText($pageTitle) . '](' . $pageUrl . ')';
 
-            // Add description if available
-            $description = $this->getPageDescription($page);
-            if ($description !== '') {
-                $lines[] = str_repeat('  ', $indent) . '  ' . $description;
+            $notes = $this->buildPageNotes($page, $pageUrl, $enableMarkdown);
+            if ($notes !== '') {
+                $line .= ': ' . $notes;
             }
-
-            // Add keywords if available
-            $keywords = trim((string)($page['tx_llmstxt_keywords'] ?? ''));
-            if ($keywords !== '') {
-                $lines[] = str_repeat('  ', $indent) . '  *' . $this->getTranslation('keywords') . ': ' . $keywords . '*';
-            }
-
-            // Add custom summary if available
-            $summary = trim((string)($page['tx_llmstxt_summary'] ?? ''));
-            if ($summary !== '') {
-                $lines[] = str_repeat('  ', $indent) . '  > ' . str_replace("\n", ' ', $summary);
-            }
-
-            // Add format access hints (spec-compliant .md suffix)
-            $mdUrl = $this->buildMarkdownUrl($pageUrl);
-            $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ')';
-            $lines[] = '';
+            $lines[] = $line;
         }
+        $lines[] = '';
 
         return implode("\n", $lines);
     }
 
     /**
-     * Sort pages by priority (higher values first).
+     * Build the notes after a page link: description, summary, keywords and the
+     * Markdown link (unless disabled), joined to a single line.
      *
-     * @param array<int, array<string, mixed>> $pages
-     * @return array<int, array<string, mixed>>
+     * @param array<string, mixed> $page
      */
-    private function sortPagesByPriority(array $pages): array
+    private function buildPageNotes(array $page, string $pageUrl, bool $enableMarkdown): string
     {
-        $sortedPages = $pages;
-        uasort($sortedPages, static function (array $a, array $b): int {
-            $priorityA = (int)($a['tx_llmstxt_priority'] ?? 0);
-            $priorityB = (int)($b['tx_llmstxt_priority'] ?? 0);
+        $texts = [
+            $this->getPageDescription($page),
+            (string)($page['tx_llmstxt_summary'] ?? ''),
+        ];
 
-            // Higher priority first
-            return $priorityB <=> $priorityA;
-        });
+        $keywords = $this->toSingleLine((string)($page['tx_llmstxt_keywords'] ?? ''));
+        if ($keywords !== '') {
+            $texts[] = $this->getTranslation('keywords') . ': ' . $keywords;
+        }
 
-        return $sortedPages;
+        $notes = [];
+        foreach ($texts as $text) {
+            $text = $this->toSingleLine($text);
+            if ($text === '') {
+                continue;
+            }
+            // End each text as a sentence, so the joined notes stay readable
+            if (preg_match('/[.!?…]$/u', $text) !== 1) {
+                $text .= '.';
+            }
+            $notes[] = $text;
+        }
+
+        // Add format access hint (spec-compliant .md suffix), unless disabled
+        if ($enableMarkdown) {
+            $notes[] = '[Markdown](' . $this->buildMarkdownUrl($pageUrl) . ')';
+        }
+
+        return implode(' ', $notes);
+    }
+
+    /**
+     * Collapse line breaks and repeated whitespace, as a page entry must fit on one line.
+     */
+    private function toSingleLine(string $text): string
+    {
+        return trim((string)preg_replace('/\s+/u', ' ', $text));
+    }
+
+    /**
+     * Order pages as a tree: every page is followed by its subpages, siblings
+     * are sorted by priority (higher values first).
+     *
+     * @param array<int, array<string, mixed>> $pages Page records in page tree order
+     * @return array<int, int> Depth of each page, indexed by UID, in output order
+     */
+    private function orderPagesAsTree(array $pages): array
+    {
+        $children = [];
+        foreach ($pages as $pageUid => $page) {
+            // Spacers are not listed, PageTreeService provides the parent above them
+            $parentUid = (int)($page['_LLMSTXT_PARENT'] ?? $page['pid'] ?? 0);
+            // Pages without a listed parent (site root, excluded root page) are top-level
+            $children[isset($pages[$parentUid]) ? $parentUid : 0][] = $pageUid;
+        }
+
+        $depths = [];
+        $this->addBranch(0, 0, $children, $pages, $depths);
+
+        return $depths;
+    }
+
+    /**
+     * Add the subpages of a page and their branches to the tree order.
+     *
+     * @param array<int, list<int>> $children Subpage UIDs by parent UID, in page tree order
+     * @param array<int, array<string, mixed>> $pages
+     * @param array<int, int> $depths
+     */
+    private function addBranch(int $parentUid, int $depth, array $children, array $pages, array &$depths): void
+    {
+        $siblings = $children[$parentUid] ?? [];
+
+        // Higher priority first; usort is stable, so equal priorities keep the page tree order
+        usort($siblings, static fn(int $a, int $b): int => (int)($pages[$b]['tx_llmstxt_priority'] ?? 0) <=> (int)($pages[$a]['tx_llmstxt_priority'] ?? 0));
+
+        foreach ($siblings as $pageUid) {
+            $depths[$pageUid] = $depth;
+            $this->addBranch($pageUid, $depth + 1, $children, $pages, $depths);
+        }
     }
 
     /**
@@ -231,30 +300,11 @@ final readonly class LlmsTxtGeneratorService
     }
 
     /**
-     * Calculate indent level for page in tree structure.
-     *
-     * @param array<string, mixed> $page
-     * @param array<int, array<string, mixed>> $pages
-     */
-    private function getIndentLevel(array $page, array $pages): int
-    {
-        $level = 0;
-        $pid = (int)($page['pid'] ?? 0);
-
-        while (isset($pages[$pid])) {
-            $level++;
-            $pid = (int)($pages[$pid]['pid'] ?? 0);
-        }
-
-        return $level;
-    }
-
-    /**
      * Find a suitable example page URL for documentation.
      *
      * Returns the first non-root page URL, or the root page URL if no other pages exist.
      *
-     * @param array<int, array<string, mixed>> $pages
+     * @param array<int, mixed> $pages Pages indexed by UID, in output order
      */
     private function findExamplePageUrl(Site $site, array $pages, SiteLanguage $language): string
     {
@@ -301,38 +351,89 @@ final readonly class LlmsTxtGeneratorService
     }
 
     /**
-     * Get the base URL for a site and language.
+     * Get the base URL of a language, without trailing slash (e.g. https://example.com/en).
      */
-    private function getBaseUrl(Site $site, SiteLanguage $language): string
+    private function getBaseUrl(SiteLanguage $language): string
     {
-        $languageId = $this->extractLanguageId($language);
-        $languageBase = (string)$language->getBase();
-        $languagePrefix = '';
-        if ($languageId > 0 && $languageBase !== '/' && $languageBase !== '') {
-            $languagePrefix = '/' . trim($languageBase, '/');
+        // 1. The language base already contains the site base if that is a full URL
+        $languageBase = $language->getBase();
+        if ($languageBase->getScheme() !== '' && $languageBase->getHost() !== '') {
+            return rtrim((string)$languageBase, '/');
         }
 
-        // 1. Check for configured base URL in site settings
-        $settings = $this->getSettings($site);
-        $configuredBaseUrl = trim((string)($settings['baseUrl'] ?? ''));
-        if ($configuredBaseUrl !== '') {
-            return rtrim($configuredBaseUrl, '/') . $languagePrefix;
-        }
+        $basePath = rtrim($languageBase->getPath(), '/');
 
-        // 2. Try site base if it's a full URL
-        $siteBase = (string)$site->getBase();
-        if (str_starts_with($siteBase, 'http://') || str_starts_with($siteBase, 'https://')) {
-            return rtrim($siteBase, '/') . $languagePrefix;
-        }
-
-        // 3. Try TYPO3_REQUEST_HOST environment variable
+        // 2. Try TYPO3_REQUEST_HOST environment variable
         $requestHost = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
         if (\is_string($requestHost) && $requestHost !== '' && $requestHost !== 'http:') {
-            return rtrim($requestHost, '/') . $languagePrefix;
+            return rtrim($requestHost, '/') . $basePath;
         }
 
-        // 4. Fallback: use relative path only
-        return $languagePrefix;
+        // 3. Fallback: use relative path only
+        return $basePath;
+    }
+
+    /**
+     * Get the intro of the llms.txt of a language.
+     *
+     * The intro of the language in the site configuration comes first. The site
+     * setting llmsTxt.intro is the fallback for the default language only, as it
+     * is written in one language.
+     *
+     * @param array<string, mixed> $settings
+     */
+    private function getIntro(SiteLanguage $language, array $settings): string
+    {
+        $languageIntro = trim((string)($language->toArray()['llmsTxtIntro'] ?? ''));
+        if ($languageIntro !== '') {
+            return $languageIntro;
+        }
+
+        if ($this->extractLanguageId($language) === 0) {
+            return trim((string)($settings['intro'] ?? ''));
+        }
+
+        return '';
+    }
+
+    /**
+     * Build the links to the llms.txt of the other enabled languages of the site.
+     *
+     * Languages without pages are left out, as their llms.txt does not exist.
+     *
+     * @param array<int> $excludePages
+     * @return list<string>
+     */
+    private function buildLanguageLinks(Site $site, SiteLanguage $currentLanguage, array $excludePages, bool $includeHidden): array
+    {
+        $currentLanguageId = $this->extractLanguageId($currentLanguage);
+        $links = [];
+
+        foreach ($site->getLanguages() as $language) {
+            if ($this->extractLanguageId($language) === $currentLanguageId) {
+                continue;
+            }
+            if ($this->pageTreeService->getPages($site, $language, $excludePages, $includeHidden) === []) {
+                continue;
+            }
+
+            $url = $this->getBaseUrl($language) . '/' . LlmsTxtPath::FILE_NAME;
+            $links[] = '- [' . $this->escapeLinkText($language->getNavigationTitle()) . '](' . $url . '): '
+                . $language->getLocale()->getLanguageCode();
+        }
+
+        return $links;
+    }
+
+    /**
+     * Escape Markdown link syntax in a link text.
+     *
+     * Brackets become entities, as llmstxt.org parsers end the link name at the
+     * first "]", even at "\]".
+     */
+    private function escapeLinkText(string $text): string
+    {
+        return str_replace(['[', ']', '(', ')'], ['&#91;', '&#93;', '\\(', '\\)'], $text);
     }
 
     /**
@@ -372,6 +473,7 @@ final readonly class LlmsTxtGeneratorService
         $translations = [
             'pageStructure' => 'Page Structure',
             'keywords' => 'Keywords',
+            'languages' => 'Languages',
         ];
 
         return $translations[$key] ?? $key;

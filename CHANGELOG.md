@@ -5,6 +5,35 @@ All notable changes to the rt_llms_txt extension will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-09-29
+
+### Added
+
+- New site setting `llmsTxt.enableMarkdown` (default: enabled) to turn off the `.md` Markdown variant per site. When disabled, `.md` URLs are left untouched by `UrlSuffixMiddleware` (so they 404 normally instead of being rewritten), `ContentFormatMiddleware` refuses to render Markdown as a safety net, and `llms.txt` no longer advertises the Markdown format (including the authentication hints for the API key) or lists per-page Markdown links.
+- One `llms.txt` per language (issue [#5](https://github.com/rtfirst/llms-txt/issues/5)): every enabled language of a site has its own `llms.txt` below its base, e.g. `/en/llms.txt` for the base `/en/`, or `/llms.txt` on the domain of a language with its own domain. It lists the pages in this language (with `fallbackType: strict` only translated pages) and links to the `llms.txt` of the other languages in a new `## Languages` section, which is omitted on single-language sites. A language without pages has no `llms.txt` (404). The `<link rel="alternate">` in the HTML header points to the `llms.txt` of the page language.
+- New field "llms.txt Intro" (`llmsTxtIntro`) for each language in the site configuration (Sites module). It takes precedence over the site setting `llmsTxt.intro`, which is now the fallback for the default language only.
+- `LlmsTxtGeneratorService::getContentForSite()` has an optional parameter for the language; without it, the default language is used as before.
+
+### Changed
+
+- The labels and descriptions of the site settings are now translatable: they moved from `settings.definitions.yaml` to `labels.xlf` of the site set (English and German), so the backend settings editor shows them in the backend language. The unused `settings.*` labels were removed from `locallang.xlf`.
+- Documentation: `llmsTxt.enableMarkdown` documented in README, Usage, API Protection, FAQ and Developer; the example `llms.txt` output matches the generated one again (absolute URLs, no "Multi-Language Access" section).
+- The page field "LLM Priority" now only sorts pages with the same parent page. Before, it sorted all pages of `llms.txt` at once, which broke the nesting of the page list (see Fixed). A page with a high priority deep in the page tree no longer moves to the top of the list, but to the top of its branch.
+- The page field "LLM Priority" is no longer translated: translations use the priority of the default language page, so the page list has the same order in every language. The field is not shown in translations anymore (`l10n_mode: exclude`).
+- CI (`.github/workflows/ci.yaml`) also runs for pushes to and pull requests against `develop`, without publishing to the TER. Outdated runs of a pull request are cancelled.
+
+### Removed
+
+- Site setting `llmsTxt.baseUrl`. It only affected the `**Domain:**` line and the API key example in `llms.txt`, while the page and Markdown links always came from the site configuration, so a different value led to inconsistent URLs. Both lines now use the base URL of the site configuration (or the request host if the site base is not a full URL). An existing value in `settings.yaml` is ignored.
+
+### Fixed
+
+- **Bug:** A changed `llmsTxt.*` site setting (e.g. saved in the backend settings editor) did not show up in `/llms.txt` until the pages cache was flushed or the cache entry expired after 24 hours, because saving the site settings only flushes the code cache. The cache entry of `llms.txt` now depends on these settings.
+- Outdated description of `llmsTxt.apiKey`: it still referred to the removed `?format=clean/md` endpoints.
+- README: `llms.txt` is served dynamically, not written to `public/`.
+- **Bug:** `llms.txt` could not be read by parsers that follow the [llmstxt.org](https://llmstxt.org/) format, such as the reference parser `llms_txt.parse_llms_file` (issue [#6](https://github.com/rtfirst/llms-txt/issues/6)). They expect every line of a `##` section to be a link `- [name](url): notes`, but the page links were bold, and the description, keywords, summary and Markdown link of a page each had a line of their own. Every page is now one line `- [Title](url): notes`, and the notes contain the description, summary, keywords and the Markdown link. The Markdown and authentication hints are plain text without headings above `## Page Structure`, as parsers read every `##`/`###` line as a new section. `[` and `]` in page titles are written as `&#91;` and `&#93;`, and the UTF-8 BOM in front of `llms.txt` was removed (the `Content-Type` header already declares UTF-8). The Markdown output of the pages keeps its BOM.
+- **Bug:** The nesting of the page list in `llms.txt` did not match the page tree. The pages were sorted by priority across the whole site but indented by their depth in the page tree, so a page appeared below whichever page happened to come before it (e.g. a subpage of "Services" below "News"). Subpages of spacers were always shown on the top level. The page list now follows the page tree: every page is followed by its subpages, and subpages of spacers take the place of the spacer.
+
 ## [1.0.13] - 2026-09-28
 
 ### Fixed
