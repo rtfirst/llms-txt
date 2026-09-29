@@ -297,11 +297,14 @@ ddev exec "cd packages/llms_txt && ../../vendor/bin/phpunit --bootstrap ../../ve
 
 ### CI Pipeline
 
-The extension includes a GitHub Actions workflow (`.github/workflows/ci.yaml`) that runs:
+The extension includes a GitHub Actions workflow (`.github/workflows/ci.yaml`) that runs for pushes to and pull requests against `main` and `develop`:
 - PHP-CS-Fixer (code style)
-- PHPStan Level 8 (static analysis)
+- PHPStan Level 8 (static analysis, TYPO3 13)
 - Rector (code modernization)
-- Unit Tests (PHP 8.2-8.4, TYPO3 13 & 14)
+- Unit and functional tests (PHP 8.2-8.4, TYPO3 13 & 14)
+- TER artefact check (classic mode, TYPO3 13 & 14)
+
+Publishing to the TER only happens for version tags (`.github/workflows/ter-publish.yaml`), which run the same checks first.
 
 ## Author
 
