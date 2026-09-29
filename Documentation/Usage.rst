@@ -23,7 +23,8 @@ This file contains:
 
 -   Website metadata (title, description, domain)
 -   Page structure with descriptions and keywords
--   Instructions for accessing page content in Markdown format
+-   Instructions for accessing page content in Markdown format (if
+    :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` is enabled)
 
 ..  _usage-llms-txt-example:
 
@@ -73,6 +74,10 @@ Example llms.txt Output
      Get in touch with us via phone or email.
      [Markdown](/contact.md)
 
+With :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` disabled, the
+"LLM-Optimized Content Access" section (including the authentication hints)
+and the ``[Markdown](…)`` links are omitted.
+
 ..  _usage-markdown:
 
 Accessing Markdown Content
@@ -84,6 +89,12 @@ YAML frontmatter.
 ..  code-block:: text
 
    https://example.com/about.md
+
+..  note::
+
+   The Markdown output is enabled by default. It can be turned off per site
+   with :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>`, ``.md`` URLs
+   then return a regular 404.
 
 ..  _usage-markdown-output:
 
@@ -177,7 +188,8 @@ Caching
 
 The extension uses smart caching for optimal performance:
 
--   **llms.txt**: Cached and regenerated when TYPO3 cache is cleared
+-   **llms.txt**: Cached and regenerated when TYPO3 cache is cleared or the
+    ``llmsTxt.*`` site settings change
 -   **Markdown output**: Cached for 24 hours per page/language combination
 
 To force regeneration:

@@ -159,7 +159,9 @@ When API key protection is enabled:
 1.  **llms.txt** requires authentication
 2.  **All .md endpoints** require authentication
 3.  The **HTML header link** (``<link rel="alternate">``) is automatically hidden
-4.  The llms.txt file includes **authentication instructions**
+4.  The llms.txt file includes **authentication instructions** (only if
+    :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` is enabled; without
+    Markdown output, llms.txt is the only protected endpoint)
 
 ..  _api-protection-disable:
 

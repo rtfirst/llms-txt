@@ -94,6 +94,16 @@ Can I include hidden pages?
 Yes, enable ``llmsTxt.includeHidden`` in the Site Settings. This is useful
 for staging environments.
 
+..  _faq-disable-markdown:
+
+Can I disable the Markdown output?
+----------------------------------
+
+Yes, disable :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` in the
+Site Settings. ``.md`` URLs then return a regular 404, and llms.txt only lists
+the pages without the "LLM-Optimized Content Access" section and the
+Markdown links.
+
 ..  _faq-usage:
 
 Usage Questions
@@ -141,6 +151,9 @@ Or in DDEV:
 ..  code-block:: bash
 
    ddev typo3 cache:flush
+
+Changes to the ``llmsTxt.*`` site settings are picked up by llms.txt
+automatically, without clearing the cache.
 
 ..  _faq-api-protection:
 

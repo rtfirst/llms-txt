@@ -22,6 +22,7 @@ The extension provides a two-tier approach for LLM content access:
 
 2. **Content Format** - Access page content via (spec-compliant with llmstxt.org):
    - `.md` suffix - Clean Markdown (e.g., `/page.md`)
+   - Enabled by default, can be turned off per site with `llmsTxt.enableMarkdown`
 
 ## Multi-Language Support
 
@@ -37,7 +38,7 @@ This approach is cleaner and follows how multi-language sites actually work.
 
 ## Features
 
-- **Automatic generation** of llms.txt when TYPO3 cache is cleared
+- **Automatic generation** of llms.txt when TYPO3 cache is cleared or the llms.txt site settings change
 - **Page properties tab**: Configure LLM-specific metadata for each page
 - **HTML header link**: Adds `<link rel="alternate">` to HTML pages
 - **Clean output formats**: Well-formatted HTML and Markdown without excessive whitespace
@@ -80,6 +81,7 @@ Add the Site Set "LLMs.txt Generator" to your site configuration, then configure
 | `llmsTxt.intro` | Website description shown in the intro section |
 | `llmsTxt.excludePages` | Comma-separated page UIDs to exclude |
 | `llmsTxt.includeHidden` | Include hidden pages (default: false) |
+| `llmsTxt.enableMarkdown` | Serve the `.md` Markdown variant and reference it in llms.txt (default: true). If disabled, `.md` URLs return 404 and llms.txt contains no Markdown section or links |
 | `llmsTxt.apiKey` | API key for protected access (empty = public access) |
 
 ### Page Properties (LLM Tab)
@@ -246,6 +248,8 @@ Use language-specific URL prefixes with the `.md` suffix:
   Get in touch with us via phone or email.
   [Markdown](/contact.md)
 ```
+
+With `llmsTxt.enableMarkdown` disabled, the "LLM-Optimized Content Access" section and the `[Markdown](…)` links are omitted.
 
 ## robots.txt Configuration
 
