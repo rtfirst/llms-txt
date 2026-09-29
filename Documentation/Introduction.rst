@@ -76,7 +76,7 @@ Technical Features
 -   **24-hour caching** for optimal performance
 -   **HTML-to-Markdown conversion** using League/html-to-markdown
 -   **Clean output** - removes scripts, styles, navigation elements
--   **UTF-8 BOM** for proper encoding detection
+-   **UTF-8 BOM** in the Markdown output for proper encoding detection
 -   **Backend notification** if robots.txt lacks llms.txt reference
 -   **Header link injection** (``<link rel="alternate">``) in HTML pages
 

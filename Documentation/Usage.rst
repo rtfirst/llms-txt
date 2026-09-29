@@ -42,36 +42,26 @@ Example llms.txt Output
    **Language:** de
    **Generated:** 2026-01-31 12:00:00
 
-   ## LLM-Optimized Content Access
+   This site provides LLM-friendly Markdown output for all pages.
 
-   This site provides LLM-friendly Markdown output for all pages:
-
-   ### Markdown Format
-   Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+   **Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
    - **Example:** `https://example.com/about.md`
 
    ## Page Structure
 
-   - **[Home](https://example.com/)**
-     Welcome to our website with all important information.
-     [Markdown](https://example.com/index.html.md)
+   - [Home](https://example.com/): Welcome to our website with all important information. [Markdown](https://example.com/index.html.md)
+     - [About](https://example.com/about): Learn about our company history and values. [Markdown](https://example.com/about.md)
+     - [Services](https://example.com/services): Professional services for your needs. Keywords: services, consulting, support. [Markdown](https://example.com/services.md)
+     - [Contact](https://example.com/contact): Get in touch with us via phone or email. [Markdown](https://example.com/contact.md)
 
-     - **[About](https://example.com/about)**
-       Learn about our company history and values.
-       [Markdown](https://example.com/about.md)
-
-     - **[Services](https://example.com/services)**
-       Professional services for your needs.
-       *Keywords: services, consulting, support*
-       [Markdown](https://example.com/services.md)
-
-     - **[Contact](https://example.com/contact)**
-       Get in touch with us via phone or email.
-       [Markdown](https://example.com/contact.md)
+Each page is one line ``- [Title](url): notes`` as defined by
+`llmstxt.org <https://llmstxt.org/>`__. The notes contain the description,
+summary and keywords of the page and the link to its Markdown version, so the
+file can be read by llms.txt parsers.
 
 With :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` disabled, the
-"LLM-Optimized Content Access" section (including the authentication hints)
-and the ``[Markdown](…)`` links are omitted.
+Markdown hints (including the authentication hints) and the ``[Markdown](…)``
+links are omitted.
 
 ..  _usage-markdown:
 

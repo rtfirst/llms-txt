@@ -98,11 +98,10 @@ final readonly class LlmsTxtMiddleware implements MiddlewareInterface
      */
     private function createResponse(string $content, bool $cacheHit): ResponseInterface
     {
-        // Add UTF-8 BOM for proper encoding detection
-        $utf8Bom = "\xEF\xBB\xBF";
-
+        // No UTF-8 BOM: the Content-Type header declares the encoding, and a BOM
+        // in front of the H1 breaks llmstxt.org parsers
         $response = new Response();
-        $response->getBody()->write($utf8Bom . $content);
+        $response->getBody()->write($content);
 
         return $response
             ->withHeader('Content-Type', 'text/plain; charset=utf-8')

@@ -90,9 +90,9 @@ Each page has an "LLM" tab with these fields:
 | Field | Description |
 |-------|-------------|
 | **Exclude from llms.txt** | Don't include this page in the index |
-| **LLM Priority** | Higher values (0-100) appear first in the list |
+| **LLM Priority** | Higher values (0-100) appear first among the pages with the same parent page |
 | **LLM Description** | Custom description (fallback: meta description) |
-| **LLM Summary** | Additional summary text shown as quote |
+| **LLM Summary** | Additional summary text, added to the notes of the page in llms.txt |
 | **LLM Keywords** | Comma-separated topics for this page |
 
 ## Output File
@@ -214,35 +214,20 @@ Invalid or missing API key returns `401 Unauthorized`:
 **Language:** de
 **Generated:** 2026-01-31 12:00:00
 
-## LLM-Optimized Content Access
+This site provides LLM-friendly Markdown output for all pages.
 
-This site provides LLM-friendly Markdown output for all pages:
-
-### Markdown Format
-Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+**Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
 - **Example:** `https://example.com/about.md`
 
 ## Page Structure
 
-- **[Home](https://example.com/)**
-  Welcome to our website with all important information.
-  [Markdown](https://example.com/index.html.md)
-
-  - **[About](https://example.com/about)**
-    Learn about our company history and values.
-    [Markdown](https://example.com/about.md)
-
-  - **[Services](https://example.com/services)**
-    Professional services for your needs.
-    *Keywords: services, consulting, support*
-    [Markdown](https://example.com/services.md)
-
-  - **[Contact](https://example.com/contact)**
-    Get in touch with us via phone or email.
-    [Markdown](https://example.com/contact.md)
+- [Home](https://example.com/): Welcome to our website with all important information. [Markdown](https://example.com/index.html.md)
+  - [About](https://example.com/about): Learn about our company history and values. [Markdown](https://example.com/about.md)
+  - [Services](https://example.com/services): Professional services for your needs. Keywords: services, consulting, support. [Markdown](https://example.com/services.md)
+  - [Contact](https://example.com/contact): Get in touch with us via phone or email. [Markdown](https://example.com/contact.md)
 ```
 
-With `llmsTxt.enableMarkdown` disabled, the "LLM-Optimized Content Access" section and the `[Markdown](…)` links are omitted.
+Each page is one line `- [Title](url): notes` as defined by [llmstxt.org](https://llmstxt.org/). The notes contain the description, summary and keywords of the page and the link to its Markdown version, so the file can be read by llms.txt parsers. With `llmsTxt.enableMarkdown` disabled, the Markdown hints and the `[Markdown](…)` links are omitted.
 
 ## robots.txt Configuration
 
