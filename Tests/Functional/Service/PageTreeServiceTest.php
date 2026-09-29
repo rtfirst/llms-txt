@@ -56,6 +56,23 @@ final class PageTreeServiceTest extends FunctionalTestCase
     }
 
     #[Test]
+    public function childrenOfSpacersGetTheParentOfTheSpacer(): void
+    {
+        $service = $this->get(PageTreeService::class);
+        \assert($service instanceof PageTreeService);
+
+        $site = $this->createSite();
+        $pages = $service->getPages($site, $site->getDefaultLanguage());
+
+        $parents = array_map(static fn(array $page): mixed => $page['_LLMSTXT_PARENT'] ?? null, $pages);
+        ksort($parents);
+
+        // Spacers (3, 6) are skipped: their children (4, 7) belong to the
+        // parent of the spacer (1). The grandchild (5) keeps its real parent.
+        self::assertSame([1 => 0, 2 => 1, 4 => 1, 5 => 4, 7 => 1], $parents);
+    }
+
+    #[Test]
     public function explicitlyExcludedPageIsRespected(): void
     {
         $service = $this->get(PageTreeService::class);

@@ -31,6 +31,9 @@ final readonly class PageTreeService
     /**
      * Get all visible pages for a site in a specific language.
      *
+     * Spacer pages are left out, so each record carries the UID of its nearest
+     * parent page that is not a spacer in "_LLMSTXT_PARENT".
+     *
      * @param array<int> $excludePageUids Page UIDs to exclude
      * @return array<int, array<string, mixed>> Page records indexed by UID
      */
@@ -48,11 +51,12 @@ final readonly class PageTreeService
         // First, add the root page itself
         $rootPage = $this->getPage($rootPageId, $languageId, $includeHidden);
         if ($rootPage !== null && !\in_array($rootPageId, $excludePageUids, true)) {
+            $rootPage['_LLMSTXT_PARENT'] = (int)($rootPage['pid'] ?? 0);
             $pages[$rootPageId] = $rootPage;
         }
 
         // Then collect all child pages recursively
-        $this->collectPages($rootPageId, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+        $this->collectPages($rootPageId, $rootPageId, $languageId, $excludePageUids, $includeHidden, $pages, $language);
 
         return $pages;
     }
@@ -100,11 +104,14 @@ final readonly class PageTreeService
     /**
      * Recursively collect pages from the page tree.
      *
+     * @param int $parentId Page whose subpages are collected
+     * @param int $treeParentId Nearest page above them that is not a spacer
      * @param array<int> $excludePageUids
      * @param array<int, array<string, mixed>> $pages
      */
     private function collectPages(
         int $parentId,
+        int $treeParentId,
         int $languageId,
         array $excludePageUids,
         bool $includeHidden,
@@ -155,9 +162,10 @@ final readonly class PageTreeService
             $pageUid = (int)$row['uid'];
 
             // Spacer pages are menu separators and are not output themselves,
-            // but their child pages must still be discovered.
+            // but their child pages must still be discovered. They take the
+            // place of the spacer in the tree.
             if ((int)$row['doktype'] === PageRepository::DOKTYPE_SPACER) {
-                $this->collectPages($pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+                $this->collectPages($pageUid, $treeParentId, $languageId, $excludePageUids, $includeHidden, $pages, $language);
                 continue;
             }
 
@@ -176,10 +184,11 @@ final readonly class PageTreeService
                 }
             }
 
+            $row['_LLMSTXT_PARENT'] = $treeParentId;
             $pages[$pageUid] = $row;
 
             // Recursively get child pages
-            $this->collectPages($pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
+            $this->collectPages($pageUid, $pageUid, $languageId, $excludePageUids, $includeHidden, $pages, $language);
         }
     }
 

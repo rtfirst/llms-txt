@@ -90,7 +90,7 @@ Each page has an "LLM" tab with these fields:
 | Field | Description |
 |-------|-------------|
 | **Exclude from llms.txt** | Don't include this page in the index |
-| **LLM Priority** | Higher values (0-100) appear first in the list |
+| **LLM Priority** | Higher values (0-100) appear first among the pages with the same parent page |
 | **LLM Description** | Custom description (fallback: meta description) |
 | **LLM Summary** | Additional summary text, added to the notes of the page in llms.txt |
 | **LLM Keywords** | Comma-separated topics for this page |

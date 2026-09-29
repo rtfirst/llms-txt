@@ -79,7 +79,9 @@ How does the priority setting work?
 -----------------------------------
 
 Pages with higher priority values (0-100) appear earlier in the llms.txt
-page list. Use this to highlight important pages for AI crawlers:
+page list, before the other pages with the same parent page. The list follows
+the page tree, so a page never leaves its branch. Use this to highlight
+important pages for AI crawlers:
 
 -   80-100: Main landing pages
 -   50-70: Important content

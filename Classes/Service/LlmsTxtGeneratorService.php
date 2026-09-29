@@ -95,8 +95,8 @@ final readonly class LlmsTxtGeneratorService
     ): string {
         $lines = [];
 
-        // Sort pages by priority (higher first), then by original order
-        $sortedPages = $this->sortPagesByPriority($pages);
+        // Order pages as a tree, siblings by priority (higher first), then by original order
+        $pageDepths = $this->orderPagesAsTree($pages);
 
         // Site title
         $rootPage = $pages[$site->getRootPageId()] ?? reset($pages);
@@ -125,7 +125,7 @@ final readonly class LlmsTxtGeneratorService
         // whoever can read these hints has already authenticated for it.
         if ($enableMarkdown) {
             // Find an example page (first non-root page for realistic examples)
-            $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
+            $examplePageUrl = $this->findExamplePageUrl($site, $pageDepths, $language);
 
             $lines[] = 'This site provides LLM-friendly Markdown output for all pages.';
             $lines[] = '';
@@ -150,16 +150,16 @@ final readonly class LlmsTxtGeneratorService
             }
         }
 
-        // Page structure with descriptions (sorted by priority for display)
+        // Page structure with descriptions (page tree, siblings sorted by priority)
         $lines[] = '## ' . $this->getTranslation('pageStructure');
         $lines[] = '';
 
         // Build tree structure for display, one line per page as llmstxt.org
         // defines it: "- [name](url): notes"
-        foreach ($sortedPages as $pageUid => $page) {
+        foreach ($pageDepths as $pageUid => $indent) {
+            $page = $pages[$pageUid];
             $pageTitle = (string)($page['title'] ?? '');
             $pageUrl = $this->pageTreeService->getPageUrl($site, $pageUid, $language);
-            $indent = $this->getIndentLevel($page, $pages);
 
             // Escape Markdown link syntax in title. Brackets become entities, as
             // llmstxt.org parsers end the link name at the first "]", even at "\]".
@@ -225,23 +225,46 @@ final readonly class LlmsTxtGeneratorService
     }
 
     /**
-     * Sort pages by priority (higher values first).
+     * Order pages as a tree: every page is followed by its subpages, siblings
+     * are sorted by priority (higher values first).
      *
-     * @param array<int, array<string, mixed>> $pages
-     * @return array<int, array<string, mixed>>
+     * @param array<int, array<string, mixed>> $pages Page records in page tree order
+     * @return array<int, int> Depth of each page, indexed by UID, in output order
      */
-    private function sortPagesByPriority(array $pages): array
+    private function orderPagesAsTree(array $pages): array
     {
-        $sortedPages = $pages;
-        uasort($sortedPages, static function (array $a, array $b): int {
-            $priorityA = (int)($a['tx_llmstxt_priority'] ?? 0);
-            $priorityB = (int)($b['tx_llmstxt_priority'] ?? 0);
+        $children = [];
+        foreach ($pages as $pageUid => $page) {
+            // Spacers are not listed, PageTreeService provides the parent above them
+            $parentUid = (int)($page['_LLMSTXT_PARENT'] ?? $page['pid'] ?? 0);
+            // Pages without a listed parent (site root, excluded root page) are top-level
+            $children[isset($pages[$parentUid]) ? $parentUid : 0][] = $pageUid;
+        }
 
-            // Higher priority first
-            return $priorityB <=> $priorityA;
-        });
+        $depths = [];
+        $this->addBranch(0, 0, $children, $pages, $depths);
 
-        return $sortedPages;
+        return $depths;
+    }
+
+    /**
+     * Add the subpages of a page and their branches to the tree order.
+     *
+     * @param array<int, list<int>> $children Subpage UIDs by parent UID, in page tree order
+     * @param array<int, array<string, mixed>> $pages
+     * @param array<int, int> $depths
+     */
+    private function addBranch(int $parentUid, int $depth, array $children, array $pages, array &$depths): void
+    {
+        $siblings = $children[$parentUid] ?? [];
+
+        // Higher priority first; usort is stable, so equal priorities keep the page tree order
+        usort($siblings, static fn(int $a, int $b): int => (int)($pages[$b]['tx_llmstxt_priority'] ?? 0) <=> (int)($pages[$a]['tx_llmstxt_priority'] ?? 0));
+
+        foreach ($siblings as $pageUid) {
+            $depths[$pageUid] = $depth;
+            $this->addBranch($pageUid, $depth + 1, $children, $pages, $depths);
+        }
     }
 
     /**
@@ -268,30 +291,11 @@ final readonly class LlmsTxtGeneratorService
     }
 
     /**
-     * Calculate indent level for page in tree structure.
-     *
-     * @param array<string, mixed> $page
-     * @param array<int, array<string, mixed>> $pages
-     */
-    private function getIndentLevel(array $page, array $pages): int
-    {
-        $level = 0;
-        $pid = (int)($page['pid'] ?? 0);
-
-        while (isset($pages[$pid])) {
-            $level++;
-            $pid = (int)($pages[$pid]['pid'] ?? 0);
-        }
-
-        return $level;
-    }
-
-    /**
      * Find a suitable example page URL for documentation.
      *
      * Returns the first non-root page URL, or the root page URL if no other pages exist.
      *
-     * @param array<int, array<string, mixed>> $pages
+     * @param array<int, mixed> $pages Pages indexed by UID, in output order
      */
     private function findExamplePageUrl(Site $site, array $pages, SiteLanguage $language): string
     {
