@@ -42,7 +42,7 @@ final readonly class ContentFormatMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // Check for format from URL suffix (.md) or query parameter (?format=)
+        // Check for format from URL suffix (.md, set by UrlSuffixMiddleware)
         $format = $this->detectFormat($request);
 
         // Only handle our special formats

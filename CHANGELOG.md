@@ -11,9 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New site setting `llmsTxt.enableMarkdown` (default: enabled) to turn off the `.md` Markdown variant per site. When disabled, `.md` URLs are left untouched by `UrlSuffixMiddleware` (so they 404 normally instead of being rewritten), `ContentFormatMiddleware` refuses to render Markdown as a safety net, and `llms.txt` no longer advertises the Markdown format (including the authentication hints for the API key) or lists per-page Markdown links.
 
+### Changed
+
+- The labels and descriptions of the site settings are now translatable: they moved from `settings.definitions.yaml` to `labels.xlf` of the site set (English and German), so the backend settings editor shows them in the backend language. The unused `settings.*` labels were removed from `locallang.xlf`.
+- Documentation: `llmsTxt.enableMarkdown` documented in README, Usage, API Protection, FAQ and Developer; the example `llms.txt` output matches the generated one again (absolute URLs, no "Multi-Language Access" section).
+
 ### Fixed
 
 - **Bug:** A changed `llmsTxt.*` site setting (e.g. saved in the backend settings editor) did not show up in `/llms.txt` until the pages cache was flushed or the cache entry expired after 24 hours, because saving the site settings only flushes the code cache. The cache entry of `llms.txt` now depends on these settings.
+- Outdated setting descriptions: `llmsTxt.apiKey` still referred to the removed `?format=clean/md` endpoints, `llmsTxt.baseUrl` to a CLI generation that does not exist.
+- README: `llms.txt` is served dynamically, not written to `public/`.
 
 ## [1.0.13] - 2026-09-28
 

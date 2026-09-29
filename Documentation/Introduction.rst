@@ -55,7 +55,8 @@ Core Features
 -------------
 
 -   **Automatic llms.txt generation** with smart caching
--   **Markdown output** for all pages via ``.md`` URL suffix
+-   **Markdown output** for all pages via ``.md`` URL suffix (can be disabled
+    per site)
 -   **Multi-language support** via URL prefixes
 -   **API key protection** for restricted access
 -   **YAML frontmatter** in Markdown output with page metadata

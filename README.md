@@ -22,6 +22,7 @@ The extension provides a two-tier approach for LLM content access:
 
 2. **Content Format** - Access page content via (spec-compliant with llmstxt.org):
    - `.md` suffix - Clean Markdown (e.g., `/page.md`)
+   - Enabled by default, can be turned off per site with `llmsTxt.enableMarkdown`
 
 ## Multi-Language Support
 
@@ -37,7 +38,7 @@ This approach is cleaner and follows how multi-language sites actually work.
 
 ## Features
 
-- **Automatic generation** of llms.txt when TYPO3 cache is cleared
+- **Automatic generation** of llms.txt when TYPO3 cache is cleared or the llms.txt site settings change
 - **Page properties tab**: Configure LLM-specific metadata for each page
 - **HTML header link**: Adds `<link rel="alternate">` to HTML pages
 - **Clean output formats**: Well-formatted HTML and Markdown without excessive whitespace
@@ -80,6 +81,7 @@ Add the Site Set "LLMs.txt Generator" to your site configuration, then configure
 | `llmsTxt.intro` | Website description shown in the intro section |
 | `llmsTxt.excludePages` | Comma-separated page UIDs to exclude |
 | `llmsTxt.includeHidden` | Include hidden pages (default: false) |
+| `llmsTxt.enableMarkdown` | Serve the `.md` Markdown variant and reference it in llms.txt (default: true). If disabled, `.md` URLs return 404 and llms.txt contains no Markdown section or links |
 | `llmsTxt.apiKey` | API key for protected access (empty = public access) |
 
 ### Page Properties (LLM Tab)
@@ -96,7 +98,7 @@ Each page has an "LLM" tab with these fields:
 
 ## Output File
 
-After cache flush, `llms.txt` is created in `public/`.
+`llms.txt` is not written to `public/`. The extension serves it dynamically at `/llms.txt` of each site and caches the generated content until the TYPO3 cache is flushed or the `llmsTxt.*` site settings change. A static `public/llms.txt` file would be delivered by the web server instead, so do not create one.
 
 ## Content Access Formats
 
@@ -219,33 +221,29 @@ This site provides LLM-friendly Markdown output for all pages:
 
 ### Markdown Format
 Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
-- **Example:** `https://example.com/page-slug.md`
-
-### Multi-Language Access
-Use language-specific URL prefixes with the `.md` suffix:
-- **Default language:** `https://example.com/page.md`
-- **English:** `https://example.com/en/page.md`
-- **Other languages:** Use configured prefix (e.g., `/de/page.md`, `/fr/page.md`)
+- **Example:** `https://example.com/about.md`
 
 ## Page Structure
 
-- **[Home](/)**
+- **[Home](https://example.com/)**
   Welcome to our website with all important information.
-  [Markdown](/index.html.md)
+  [Markdown](https://example.com/index.html.md)
 
-  - **[About](/about/)**
+  - **[About](https://example.com/about)**
     Learn about our company history and values.
-    [Markdown](/about.md)
+    [Markdown](https://example.com/about.md)
 
-  - **[Services](/services/)**
+  - **[Services](https://example.com/services)**
     Professional services for your needs.
     *Keywords: services, consulting, support*
-    [Markdown](/services.md)
+    [Markdown](https://example.com/services.md)
 
-- **[Contact](/contact/)**
-  Get in touch with us via phone or email.
-  [Markdown](/contact.md)
+  - **[Contact](https://example.com/contact)**
+    Get in touch with us via phone or email.
+    [Markdown](https://example.com/contact.md)
 ```
+
+With `llmsTxt.enableMarkdown` disabled, the "LLM-Optimized Content Access" section and the `[Markdown](…)` links are omitted.
 
 ## robots.txt Configuration
 

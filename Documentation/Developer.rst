@@ -30,6 +30,8 @@ Middleware Chain
       │
       ▼
    UrlSuffixMiddleware (before site resolver)
+      │  Matches the site and checks llmsTxt.enableMarkdown
+      │  (if disabled: leaves the URI untouched, TYPO3 returns 404)
       │  Strips .md suffix
       │  Sets request attribute 'llms_txt_format' = 'md'
       │  Rewrites URI to /about
@@ -45,6 +47,7 @@ Middleware Chain
       ▼
    ContentFormatMiddleware (after content-length-headers)
       │  Checks for 'llms_txt_format' attribute
+      │  (skipped if llmsTxt.enableMarkdown is disabled)
       │  Converts HTML response to Markdown
       ▼
    Response: Markdown with YAML frontmatter
@@ -201,9 +204,12 @@ Caching
 
 The extension uses two cache layers:
 
-1.  **llms.txt Index Cache** (``cache_pages``)
+1.  **llms.txt Index Cache** (``llms_txt_format``)
 
     -   Stores generated llms.txt content per site
+    -   The cache identifier contains a hash of the ``llmsTxt.*`` site
+        settings, so changed settings lead to a new entry (the backend
+        settings editor does not flush the ``pages`` cache group)
     -   Invalidated on cache flush
 
 2.  **Format Output Cache** (``llms_txt_format``)

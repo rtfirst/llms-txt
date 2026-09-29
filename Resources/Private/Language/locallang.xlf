@@ -12,21 +12,6 @@
             <trans-unit id="pageStructure" resname="pageStructure">
                 <source>Page Structure</source>
             </trans-unit>
-            <trans-unit id="settings.intro" resname="settings.intro">
-                <source>Website description for llms.txt intro section</source>
-            </trans-unit>
-            <trans-unit id="settings.excludePages" resname="settings.excludePages">
-                <source>Comma-separated page UIDs to exclude from llms.txt</source>
-            </trans-unit>
-            <trans-unit id="settings.includeHidden" resname="settings.includeHidden">
-                <source>Include hidden pages in llms.txt</source>
-            </trans-unit>
-            <trans-unit id="settings.apiKey" resname="settings.apiKey">
-                <source>API Key for protected access to ?format=clean/md endpoints</source>
-            </trans-unit>
-            <trans-unit id="settings.apiKey.description" resname="settings.apiKey.description">
-                <source>If set, the ?format=clean and ?format=md endpoints require this API key. Pass via X-LLM-API-Key header or api_key query parameter. Leave empty for public access.</source>
-            </trans-unit>
             <trans-unit id="notification.robotsTxt.title" resname="notification.robotsTxt.title">
                 <source>LLMs.txt: robots.txt configuration</source>
             </trans-unit>
