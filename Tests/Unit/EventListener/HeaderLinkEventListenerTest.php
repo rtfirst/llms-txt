@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace RTfirst\LlmsTxt\Tests\Unit\EventListener;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use RTfirst\LlmsTxt\EventListener\HeaderLinkEventListener;
+use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\Entity\SiteSettings;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 
@@ -42,8 +45,7 @@ final class HeaderLinkEventListenerTest extends TestCase
         $site = $this->createMock(Site::class);
         $site->method('getSettings')->willReturn($siteSettings);
 
-        $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getAttribute')->with('site')->willReturn($site);
+        $request = $this->createRequest($site);
 
         $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
 
@@ -65,8 +67,7 @@ final class HeaderLinkEventListenerTest extends TestCase
         $site = $this->createMock(Site::class);
         $site->method('getSettings')->willReturn($siteSettings);
 
-        $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getAttribute')->with('site')->willReturn($site);
+        $request = $this->createRequest($site);
 
         $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
 
@@ -81,8 +82,7 @@ final class HeaderLinkEventListenerTest extends TestCase
     #[Test]
     public function returnsEarlyWhenNoSiteAvailable(): void
     {
-        $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getAttribute')->with('site')->willReturn(null);
+        $request = $this->createRequest(null);
 
         $originalContent = '<html><head><title>Test</title></head><body></body></html>';
         $event = $this->createEvent($request, $originalContent);
@@ -102,8 +102,7 @@ final class HeaderLinkEventListenerTest extends TestCase
         $site = $this->createMock(Site::class);
         $site->method('getSettings')->willReturn($siteSettings);
 
-        $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getAttribute')->with('site')->willReturn($site);
+        $request = $this->createRequest($site);
 
         $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
 
@@ -111,6 +110,44 @@ final class HeaderLinkEventListenerTest extends TestCase
 
         self::assertMatchesRegularExpression(
             '/<link rel="alternate"[^>]+>\n<\/head>/',
+            $this->getContentFromEvent($event),
+        );
+    }
+
+    /**
+     * @return array<string, array{string, string}>
+     */
+    public static function languageBaseDataProvider(): array
+    {
+        return [
+            'default language' => ['/', '/llms.txt'],
+            'language with path prefix' => ['/en/', '/en/llms.txt'],
+            'language with path prefix without trailing slash' => ['/en', '/en/llms.txt'],
+            'language with full URL as base' => ['https://example.com/en/', '/en/llms.txt'],
+            'language with own domain' => ['https://example.co.uk/', '/llms.txt'],
+        ];
+    }
+
+    #[Test]
+    #[DataProvider('languageBaseDataProvider')]
+    public function linkPointsToLlmsTxtOfTheLanguage(string $languageBase, string $expectedHref): void
+    {
+        $siteSettings = SiteSettings::createFromSettingsTree([
+            'llmsTxt' => ['apiKey' => ''],
+        ]);
+
+        $site = $this->createStub(Site::class);
+        $site->method('getSettings')->willReturn($siteSettings);
+
+        $language = new SiteLanguage(1, 'en_US.UTF-8', new Uri($languageBase), []);
+        $request = $this->createRequest($site, $language);
+
+        $event = $this->createEvent($request, '<html><head><title>Test</title></head><body></body></html>');
+
+        ($this->subject)($event);
+
+        self::assertStringContainsString(
+            '<link rel="alternate" type="text/plain" href="' . $expectedHref . '" title="LLM Content Guide">',
             $this->getContentFromEvent($event),
         );
     }
@@ -125,8 +162,7 @@ final class HeaderLinkEventListenerTest extends TestCase
         $site = $this->createMock(Site::class);
         $site->method('getSettings')->willReturn($siteSettings);
 
-        $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getAttribute')->with('site')->willReturn($site);
+        $request = $this->createRequest($site);
 
         $originalContent = '<html><body>No head tag</body></html>';
         $event = $this->createEvent($request, $originalContent);
@@ -134,6 +170,23 @@ final class HeaderLinkEventListenerTest extends TestCase
         ($this->subject)($event);
 
         self::assertSame($originalContent, $this->getContentFromEvent($event));
+    }
+
+    /**
+     * Creates a request with the site and language attributes set by the site resolver.
+     */
+    private function createRequest(?Site $site, ?SiteLanguage $language = null): ServerRequestInterface
+    {
+        $request = $this->createStub(ServerRequestInterface::class);
+        $request->method('getAttribute')->willReturnCallback(
+            static fn(string $name): mixed => match ($name) {
+                'site' => $site,
+                'language' => $language,
+                default => null,
+            },
+        );
+
+        return $request;
     }
 
     /**

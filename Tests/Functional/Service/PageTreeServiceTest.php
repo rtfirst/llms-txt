@@ -85,6 +85,36 @@ final class PageTreeServiceTest extends FunctionalTestCase
         self::assertArrayHasKey(4, $pages, 'Children of spacer remain when an unrelated page is excluded');
     }
 
+    #[Test]
+    public function untranslatedRootPageIsMissingInStrictLanguage(): void
+    {
+        $service = $this->get(PageTreeService::class);
+        \assert($service instanceof PageTreeService);
+
+        $site = $this->createSite();
+        $pages = $service->getPages($site, $site->getLanguageById(1));
+
+        $uids = array_keys($pages);
+        sort($uids);
+
+        // Root (1) has no translation, like the other untranslated pages (5, 7).
+        // Its translated subpages (2, 4) are still collected.
+        self::assertSame([2, 4], $uids);
+    }
+
+    #[Test]
+    public function translatedPagesKeepThePriorityOfTheOriginalPage(): void
+    {
+        $service = $this->get(PageTreeService::class);
+        \assert($service instanceof PageTreeService);
+
+        $site = $this->createSite();
+        $pages = $service->getPages($site, $site->getLanguageById(1));
+
+        self::assertSame('Normal child EN', $pages[2]['title']);
+        self::assertSame(40, (int)$pages[2]['tx_llmstxt_priority']);
+    }
+
     private function createSite(): Site
     {
         return new Site('test', 1, [
@@ -95,6 +125,13 @@ final class PageTreeServiceTest extends FunctionalTestCase
                     'title' => 'Default',
                     'locale' => 'en_US.UTF-8',
                     'base' => '/',
+                ],
+                [
+                    'languageId' => 1,
+                    'title' => 'German',
+                    'locale' => 'de_DE.UTF-8',
+                    'base' => '/de/',
+                    'fallbackType' => 'strict',
                 ],
             ],
         ]);

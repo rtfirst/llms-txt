@@ -51,6 +51,12 @@
             <trans-unit id="pages.tx_llmstxt_priority.description" resname="pages.tx_llmstxt_priority.description">
                 <source>Priority for this page (0-100). In llms.txt, pages with higher values appear before the other pages with the same parent page. Default is 0 (normal sorting by page tree).</source>
             </trans-unit>
+            <trans-unit id="site_language.llmsTxtIntro" resname="site_language.llmsTxtIntro">
+                <source>llms.txt Intro</source>
+            </trans-unit>
+            <trans-unit id="site_language.llmsTxtIntro.description" resname="site_language.llmsTxtIntro.description">
+                <source>Short description of the website, shown as a quote below the title of the llms.txt of this language. If empty, the default language uses the site setting "Website Description", other languages have no intro.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

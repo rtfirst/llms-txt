@@ -10,7 +10,7 @@
                 <source>Website Description</source>
             </trans-unit>
             <trans-unit id="settings.description.llmsTxt.intro" resname="settings.description.llmsTxt.intro">
-                <source>Description text shown in the llms.txt intro section</source>
+                <source>Description text shown in the llms.txt intro section of the default language. The field "llms.txt Intro" of a language in the site configuration takes precedence, and is the only intro for the other languages.</source>
             </trans-unit>
             <trans-unit id="settings.llmsTxt.excludePages" resname="settings.llmsTxt.excludePages">
                 <source>Exclude Pages</source>

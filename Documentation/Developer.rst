@@ -80,7 +80,9 @@ LlmsTxtGeneratorService
 
 ``RTfirst\LlmsTxt\Service\LlmsTxtGeneratorService``
 
-Generates the llms.txt content for a site.
+Generates the llms.txt content for a site language:
+``getContentForSite(Site $site, ?SiteLanguage $language = null)``. Without a
+language, the default language is used.
 
 ..  _developer-converters:
 
@@ -190,7 +192,8 @@ Invalidates llms.txt cache when TYPO3 caches are flushed.
 HeaderLinkEventListener
 -----------------------
 
-Injects the ``<link rel="alternate">`` tag into HTML responses.
+Injects the ``<link rel="alternate">`` tag to the llms.txt of the page
+language into HTML responses.
 
 BackendNotificationEventListener
 --------------------------------
@@ -206,10 +209,11 @@ The extension uses two cache layers:
 
 1.  **llms.txt Index Cache** (``llms_txt_format``)
 
-    -   Stores generated llms.txt content per site
+    -   Stores generated llms.txt content per site and language
     -   The cache identifier contains a hash of the ``llmsTxt.*`` site
-        settings, so changed settings lead to a new entry (the backend
-        settings editor does not flush the ``pages`` cache group)
+        settings and the site languages, so changed settings or languages
+        lead to a new entry (saving them in the backend does not flush the
+        ``pages`` cache group)
     -   Invalidated on cache flush
 
 2.  **Format Output Cache** (``llms_txt_format``)

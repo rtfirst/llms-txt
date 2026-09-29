@@ -126,7 +126,9 @@ Use ``/index.html.md`` or ``/.md``:
 How do I access translated pages?
 ---------------------------------
 
-Use the language prefix with the ``.md`` suffix:
+Every language has its own llms.txt below its base, e.g.
+``https://example.com/en/llms.txt``, which lists the translated pages. Use the
+language prefix with the ``.md`` suffix for the content of a page:
 
 ..  code-block:: text
 

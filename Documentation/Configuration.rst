@@ -31,6 +31,10 @@ you can configure the extension in **Site Management > Settings**.
    This text appears as a blockquote below the site title and helps AI
    crawlers understand the purpose of your website.
 
+   It is used for the llms.txt of the default language. The field
+   :ref:`llms.txt Intro <confval-language-intro>` of a language takes
+   precedence and is the only intro for the other languages.
+
    Example::
 
       Your expert for tires, wheels, and automotive services since 1985.
@@ -86,6 +90,37 @@ you can configure the extension in **Site Management > Settings**.
 
    See :ref:`api-protection` for details on how to use API key protection.
 
+..  _configuration-site-languages:
+
+Site Languages
+==============
+
+Every enabled language of a site has its own llms.txt below its base, see
+:ref:`usage-multi-language`. In **Site Management > Sites**, each language
+has an additional field:
+
+.. _confval-language-intro:
+
+.. confval:: llms.txt Intro
+
+   :type: text
+   :Default: (empty)
+   :Key: ``llmsTxtIntro`` (per language in ``config/sites/<site>/config.yaml``)
+
+   Website description shown in the intro section of the llms.txt of this
+   language. It takes precedence over :ref:`llmsTxt.intro <confval-intro>`,
+   which is the fallback for the default language only. Other languages
+   without this field have no intro.
+
+   Example::
+
+      languages:
+        -
+          languageId: 1
+          title: English
+          base: /en/
+          llmsTxtIntro: 'Your expert for tires, wheels, and automotive services since 1985.'
+
 ..  _configuration-page-properties:
 
 Page Properties
@@ -120,6 +155,10 @@ Each page has an **LLM** tab in the page properties with the following fields:
    follows the page tree, so a page never leaves its branch. Pages with the
    same priority keep the order of the page tree. Use this to highlight
    important pages for AI crawlers.
+
+   The priority is the same in every language: translations use the
+   priority of the default language page, and the field is not shown in
+   translations.
 
    **Recommendations:**
 
@@ -191,6 +230,8 @@ lines to your ``public/robots.txt``:
    User-agent: Google-Extended
    Allow: /llms.txt
 
+Add the llms.txt of further languages as well, e.g. ``Allow: /en/llms.txt``.
+
 ..  note::
 
    The extension shows a notification in the TYPO3 Backend if your robots.txt
@@ -207,6 +248,9 @@ AI crawlers discover the llms.txt file:
 ..  code-block:: html
 
    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">
+
+The link points to the llms.txt of the page language, e.g. ``/en/llms.txt``
+on English pages.
 
 ..  note::
 
