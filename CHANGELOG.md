@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Bug:** A changed `llmsTxt.*` site setting (e.g. saved in the backend settings editor) did not show up in `/llms.txt` until the pages cache was flushed or the cache entry expired after 24 hours, because saving the site settings only flushes the code cache. The cache entry of `llms.txt` now depends on these settings.
 - Outdated description of `llmsTxt.apiKey`: it still referred to the removed `?format=clean/md` endpoints.
 - README: `llms.txt` is served dynamically, not written to `public/`.
+- **Bug:** `llms.txt` could not be read by parsers that follow the [llmstxt.org](https://llmstxt.org/) format, such as the reference parser `llms_txt.parse_llms_file` (issue [#6](https://github.com/rtfirst/llms-txt/issues/6)). They expect every line of a `##` section to be a link `- [name](url): notes`, but the page links were bold, and the description, keywords, summary and Markdown link of a page each had a line of their own. Every page is now one line `- [Title](url): notes`, and the notes contain the description, summary, keywords and the Markdown link. The Markdown and authentication hints are plain text without headings above `## Page Structure`, as parsers read every `##`/`###` line as a new section. `[` and `]` in page titles are written as `&#91;` and `&#93;`, and the UTF-8 BOM in front of `llms.txt` was removed (the `Content-Type` header already declares UTF-8). The Markdown output of the pages keeps its BOM.
 
 ## [1.0.13] - 2026-09-28
 

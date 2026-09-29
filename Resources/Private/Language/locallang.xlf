@@ -31,7 +31,7 @@
                 <source>LLM Summary</source>
             </trans-unit>
             <trans-unit id="pages.tx_llmstxt_summary.description" resname="pages.tx_llmstxt_summary.description">
-                <source>Additional summary text for this page. Displayed as a quote block in llms.txt.</source>
+                <source>Additional summary text for this page. Added to the notes of the page in llms.txt.</source>
             </trans-unit>
             <trans-unit id="pages.tx_llmstxt_keywords" resname="pages.tx_llmstxt_keywords">
                 <source>LLM Keywords</source>

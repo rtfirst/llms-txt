@@ -101,8 +101,7 @@ Can I disable the Markdown output?
 
 Yes, disable :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` in the
 Site Settings. ``.md`` URLs then return a regular 404, and llms.txt only lists
-the pages without the "LLM-Optimized Content Access" section and the
-Markdown links.
+the pages without the Markdown hints and the Markdown links.
 
 ..  _faq-usage:
 

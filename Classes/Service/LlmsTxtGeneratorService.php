@@ -117,7 +117,9 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '**Generated:** ' . date('Y-m-d H:i:s');
         $lines[] = '';
 
-        // LLM-optimized content access section (spec-compliant with llmstxt.org)
+        // LLM-optimized content access hints (spec-compliant with llmstxt.org)
+        // Plain text without headings: llmstxt.org parsers read every "##" line,
+        // including "###", as the start of a file list section.
         // Omitted entirely when Markdown output is disabled for this site, including
         // the authentication hints: llms.txt is then the only protected endpoint, and
         // whoever can read these hints has already authenticated for it.
@@ -125,19 +127,15 @@ final readonly class LlmsTxtGeneratorService
             // Find an example page (first non-root page for realistic examples)
             $examplePageUrl = $this->findExamplePageUrl($site, $sortedPages, $language);
 
-            $lines[] = '## LLM-Optimized Content Access';
+            $lines[] = 'This site provides LLM-friendly Markdown output for all pages.';
             $lines[] = '';
-            $lines[] = 'This site provides LLM-friendly Markdown output for all pages:';
-            $lines[] = '';
-            $lines[] = '### Markdown Format';
-            $lines[] = 'Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
+            $lines[] = '**Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
             $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
             $lines[] = '';
 
-            // Add authentication section if API key is configured
+            // Add authentication hints if API key is configured
             if ($apiKey !== '') {
-                $lines[] = '### Authentication';
-                $lines[] = 'This site requires API key authentication for all LLM endpoints.';
+                $lines[] = '**Authentication:** This site requires API key authentication for all LLM endpoints.';
                 $lines[] = '';
                 $lines[] = '**HTTP Header (recommended):**';
                 $lines[] = '```';
@@ -156,44 +154,74 @@ final readonly class LlmsTxtGeneratorService
         $lines[] = '## ' . $this->getTranslation('pageStructure');
         $lines[] = '';
 
-        // Build tree structure for display
+        // Build tree structure for display, one line per page as llmstxt.org
+        // defines it: "- [name](url): notes"
         foreach ($sortedPages as $pageUid => $page) {
             $pageTitle = (string)($page['title'] ?? '');
             $pageUrl = $this->pageTreeService->getPageUrl($site, $pageUid, $language);
             $indent = $this->getIndentLevel($page, $pages);
-            $priority = (int)($page['tx_llmstxt_priority'] ?? 0);
 
-            // Page entry with URL (escape Markdown link syntax in title)
-            $escapedTitle = str_replace(['[', ']', '(', ')'], ['\[', '\]', '\(', '\)'], $pageTitle);
-            $lines[] = str_repeat('  ', $indent) . '- **[' . $escapedTitle . '](' . $pageUrl . ')**';
+            // Escape Markdown link syntax in title. Brackets become entities, as
+            // llmstxt.org parsers end the link name at the first "]", even at "\]".
+            $escapedTitle = str_replace(['[', ']', '(', ')'], ['&#91;', '&#93;', '\(', '\)'], $pageTitle);
+            $line = str_repeat('  ', $indent) . '- [' . $escapedTitle . '](' . $pageUrl . ')';
 
-            // Add description if available
-            $description = $this->getPageDescription($page);
-            if ($description !== '') {
-                $lines[] = str_repeat('  ', $indent) . '  ' . $description;
+            $notes = $this->buildPageNotes($page, $pageUrl, $enableMarkdown);
+            if ($notes !== '') {
+                $line .= ': ' . $notes;
             }
-
-            // Add keywords if available
-            $keywords = trim((string)($page['tx_llmstxt_keywords'] ?? ''));
-            if ($keywords !== '') {
-                $lines[] = str_repeat('  ', $indent) . '  *' . $this->getTranslation('keywords') . ': ' . $keywords . '*';
-            }
-
-            // Add custom summary if available
-            $summary = trim((string)($page['tx_llmstxt_summary'] ?? ''));
-            if ($summary !== '') {
-                $lines[] = str_repeat('  ', $indent) . '  > ' . str_replace("\n", ' ', $summary);
-            }
-
-            // Add format access hints (spec-compliant .md suffix), unless disabled
-            if ($enableMarkdown) {
-                $mdUrl = $this->buildMarkdownUrl($pageUrl);
-                $lines[] = str_repeat('  ', $indent) . '  [Markdown](' . $mdUrl . ')';
-            }
-            $lines[] = '';
+            $lines[] = $line;
         }
+        $lines[] = '';
 
         return implode("\n", $lines);
+    }
+
+    /**
+     * Build the notes after a page link: description, summary, keywords and the
+     * Markdown link (unless disabled), joined to a single line.
+     *
+     * @param array<string, mixed> $page
+     */
+    private function buildPageNotes(array $page, string $pageUrl, bool $enableMarkdown): string
+    {
+        $texts = [
+            $this->getPageDescription($page),
+            (string)($page['tx_llmstxt_summary'] ?? ''),
+        ];
+
+        $keywords = $this->toSingleLine((string)($page['tx_llmstxt_keywords'] ?? ''));
+        if ($keywords !== '') {
+            $texts[] = $this->getTranslation('keywords') . ': ' . $keywords;
+        }
+
+        $notes = [];
+        foreach ($texts as $text) {
+            $text = $this->toSingleLine($text);
+            if ($text === '') {
+                continue;
+            }
+            // End each text as a sentence, so the joined notes stay readable
+            if (preg_match('/[.!?…]$/u', $text) !== 1) {
+                $text .= '.';
+            }
+            $notes[] = $text;
+        }
+
+        // Add format access hint (spec-compliant .md suffix), unless disabled
+        if ($enableMarkdown) {
+            $notes[] = '[Markdown](' . $this->buildMarkdownUrl($pageUrl) . ')';
+        }
+
+        return implode(' ', $notes);
+    }
+
+    /**
+     * Collapse line breaks and repeated whitespace, as a page entry must fit on one line.
+     */
+    private function toSingleLine(string $text): string
+    {
+        return trim((string)preg_replace('/\s+/u', ' ', $text));
     }
 
     /**

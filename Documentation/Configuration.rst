@@ -69,9 +69,9 @@ you can configure the extension in **Site Management > Settings**.
 
    If disabled, the ``.md`` Markdown variant is no longer served for any
    page on this site: ``.md`` URLs are left untouched and resolve as a
-   normal 404 instead of being rewritten, and llms.txt no longer lists the
-   "LLM-Optimized Content Access" section (including the authentication
-   hints for ``llmsTxt.apiKey``) or per-page Markdown links.
+   normal 404 instead of being rewritten, and llms.txt no longer contains the
+   Markdown hints (including the authentication hints for
+   ``llmsTxt.apiKey``) or per-page Markdown links.
 
 .. _confval-apiKey:
 
@@ -146,7 +146,8 @@ Each page has an **LLM** tab in the page properties with the following fields:
    :Default: (empty)
    :Max length: 2000 characters
 
-   Additional summary text shown as a blockquote in the llms.txt index.
+   Additional summary text, added to the notes of the page in the llms.txt
+   index.
    Use this for longer explanations that don't fit in the description.
 
 .. _confval-keywords:
