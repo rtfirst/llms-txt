@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:rt_llms_txt/Configuration/Sets/LlmsTxt/labels.xlf" date="2026-09-29T00:00:00Z">
+        <header/>
+        <body>
+            <trans-unit id="categories.llmstxt" resname="categories.llmstxt">
+                <source>LLMs-Text</source>
+            </trans-unit>
+            <trans-unit id="settings.llmsTxt.baseUrl" resname="settings.llmsTxt.baseUrl">
+                <source>Base URL</source>
+            </trans-unit>
+            <trans-unit id="settings.description.llmsTxt.baseUrl" resname="settings.description.llmsTxt.baseUrl">
+                <source>Full URL of the website used in llms.txt (e.g. https://example.com). If empty, the base URL from the site configuration is used.</source>
+            </trans-unit>
+            <trans-unit id="settings.llmsTxt.intro" resname="settings.llmsTxt.intro">
+                <source>Website Description</source>
+            </trans-unit>
+            <trans-unit id="settings.description.llmsTxt.intro" resname="settings.description.llmsTxt.intro">
+                <source>Description text shown in the llms.txt intro section</source>
+            </trans-unit>
+            <trans-unit id="settings.llmsTxt.excludePages" resname="settings.llmsTxt.excludePages">
+                <source>Exclude Pages</source>
+            </trans-unit>
+            <trans-unit id="settings.description.llmsTxt.excludePages" resname="settings.description.llmsTxt.excludePages">
+                <source>Comma-separated page UIDs to exclude from llms.txt</source>
+            </trans-unit>
+            <trans-unit id="settings.llmsTxt.includeHidden" resname="settings.llmsTxt.includeHidden">
+                <source>Include Hidden Pages</source>
+            </trans-unit>
+            <trans-unit id="settings.description.llmsTxt.includeHidden" resname="settings.description.llmsTxt.includeHidden">
+                <source>Include hidden pages in llms.txt generation</source>
+            </trans-unit>
+            <trans-unit id="settings.llmsTxt.enableMarkdown" resname="settings.llmsTxt.enableMarkdown">
+                <source>Enable Markdown output</source>
+            </trans-unit>
+            <trans-unit id="settings.description.llmsTxt.enableMarkdown" resname="settings.description.llmsTxt.enableMarkdown">
+                <source>Serve the .md Markdown variant for pages and reference it from llms.txt. If disabled, .md URLs are left untouched (404) and no Markdown links are listed in llms.txt.</source>
+            </trans-unit>
+            <trans-unit id="settings.llmsTxt.apiKey" resname="settings.llmsTxt.apiKey">
+                <source>API Key for Format Access</source>
+            </trans-unit>
+            <trans-unit id="settings.description.llmsTxt.apiKey" resname="settings.description.llmsTxt.apiKey">
+                <source>If set, /llms.txt and the .md URLs require this API key. Pass it via header (X-LLM-API-Key) or query parameter (api_key=...). Leave empty for public access.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
