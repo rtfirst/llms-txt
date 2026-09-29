@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation: `llmsTxt.enableMarkdown` documented in README, Usage, API Protection, FAQ and Developer; the example `llms.txt` output matches the generated one again (absolute URLs, no "Multi-Language Access" section).
 - The page field "LLM Priority" now only sorts pages with the same parent page. Before, it sorted all pages of `llms.txt` at once, which broke the nesting of the page list (see Fixed). A page with a high priority deep in the page tree no longer moves to the top of the list, but to the top of its branch.
 - The page field "LLM Priority" is no longer translated: translations use the priority of the default language page, so the page list has the same order in every language. The field is not shown in translations anymore (`l10n_mode: exclude`).
+- CI (`.github/workflows/ci.yaml`) also runs for pushes to and pull requests against `develop`, without publishing to the TER. Outdated runs of a pull request are cancelled.
 
 ### Removed
 
