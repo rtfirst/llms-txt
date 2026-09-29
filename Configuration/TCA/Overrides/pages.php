@@ -54,6 +54,8 @@ $llmsTxtColumns = [
     'tx_llmstxt_priority' => [
         'label' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_priority',
         'description' => 'LLL:EXT:rt_llms_txt/Resources/Private/Language/locallang.xlf:pages.tx_llmstxt_priority.description',
+        // Same order in every language: translations use the priority of the default language page
+        'l10n_mode' => 'exclude',
         'config' => [
             'type' => 'number',
             'size' => 5,
