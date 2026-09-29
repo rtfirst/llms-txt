@@ -48,31 +48,26 @@ Example llms.txt Output
 
    ### Markdown Format
    Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
-   - **Example:** `https://example.com/page-slug.md`
-
-   ### Multi-Language Access
-   Use language-specific URL prefixes with the `.md` suffix:
-   - **Default language:** `https://example.com/page.md`
-   - **English:** `https://example.com/en/page.md`
+   - **Example:** `https://example.com/about.md`
 
    ## Page Structure
 
-   - **[Home](/)**
+   - **[Home](https://example.com/)**
      Welcome to our website with all important information.
-     [Markdown](/index.html.md)
+     [Markdown](https://example.com/index.html.md)
 
-     - **[About](/about/)**
+     - **[About](https://example.com/about)**
        Learn about our company history and values.
-       [Markdown](/about.md)
+       [Markdown](https://example.com/about.md)
 
-     - **[Services](/services/)**
+     - **[Services](https://example.com/services)**
        Professional services for your needs.
        *Keywords: services, consulting, support*
-       [Markdown](/services.md)
+       [Markdown](https://example.com/services.md)
 
-   - **[Contact](/contact/)**
-     Get in touch with us via phone or email.
-     [Markdown](/contact.md)
+     - **[Contact](https://example.com/contact)**
+       Get in touch with us via phone or email.
+       [Markdown](https://example.com/contact.md)
 
 With :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` disabled, the
 "LLM-Optimized Content Access" section (including the authentication hints)
