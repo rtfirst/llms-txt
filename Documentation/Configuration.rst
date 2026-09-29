@@ -20,17 +20,6 @@ you can configure the extension in **Site Management > Settings**.
    :display: table
    :type:
 
-.. _confval-baseUrl:
-
-.. confval:: llmsTxt.baseUrl
-
-   :type: string
-   :Default: (empty)
-
-   Full URL of the website (e.g., ``https://example.com``). This is used as
-   the base URL in the generated llms.txt file. If empty, the site's base URL
-   from the site configuration is used.
-
 .. _confval-intro:
 
 .. confval:: llmsTxt.intro

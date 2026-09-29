@@ -77,7 +77,6 @@ Add the Site Set "LLMs.txt Generator" to your site configuration, then configure
 
 | Setting | Description |
 |---------|-------------|
-| `llmsTxt.baseUrl` | Full URL of the website (e.g., `https://example.com`) |
 | `llmsTxt.intro` | Website description shown in the intro section |
 | `llmsTxt.excludePages` | Comma-separated page UIDs to exclude |
 | `llmsTxt.includeHidden` | Include hidden pages (default: false) |
