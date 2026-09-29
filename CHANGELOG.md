@@ -10,12 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New site setting `llmsTxt.enableMarkdown` (default: enabled) to turn off the `.md` Markdown variant per site. When disabled, `.md` URLs are left untouched by `UrlSuffixMiddleware` (so they 404 normally instead of being rewritten), `ContentFormatMiddleware` refuses to render Markdown as a safety net, and `llms.txt` no longer advertises the Markdown format (including the authentication hints for the API key) or lists per-page Markdown links.
+- One `llms.txt` per language (issue [#5](https://github.com/rtfirst/llms-txt/issues/5)): every enabled language of a site has its own `llms.txt` below its base, e.g. `/en/llms.txt` for the base `/en/`, or `/llms.txt` on the domain of a language with its own domain. It lists the pages in this language (with `fallbackType: strict` only translated pages) and links to the `llms.txt` of the other languages in a new `## Languages` section, which is omitted on single-language sites. A language without pages has no `llms.txt` (404). The `<link rel="alternate">` in the HTML header points to the `llms.txt` of the page language.
+- New field "llms.txt Intro" (`llmsTxtIntro`) for each language in the site configuration (Sites module). It takes precedence over the site setting `llmsTxt.intro`, which is now the fallback for the default language only.
+- `LlmsTxtGeneratorService::getContentForSite()` has an optional parameter for the language; without it, the default language is used as before.
 
 ### Changed
 
 - The labels and descriptions of the site settings are now translatable: they moved from `settings.definitions.yaml` to `labels.xlf` of the site set (English and German), so the backend settings editor shows them in the backend language. The unused `settings.*` labels were removed from `locallang.xlf`.
 - Documentation: `llmsTxt.enableMarkdown` documented in README, Usage, API Protection, FAQ and Developer; the example `llms.txt` output matches the generated one again (absolute URLs, no "Multi-Language Access" section).
 - The page field "LLM Priority" now only sorts pages with the same parent page. Before, it sorted all pages of `llms.txt` at once, which broke the nesting of the page list (see Fixed). A page with a high priority deep in the page tree no longer moves to the top of the list, but to the top of its branch.
+- The page field "LLM Priority" is no longer translated: translations use the priority of the default language page, so the page list has the same order in every language. The field is not shown in translations anymore (`l10n_mode: exclude`).
 
 ### Removed
 

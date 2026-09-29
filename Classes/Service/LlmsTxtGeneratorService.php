@@ -6,6 +6,7 @@ namespace RTfirst\LlmsTxt\Service;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
+use RTfirst\LlmsTxt\Utility\LlmsTxtPath;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -25,22 +26,21 @@ final readonly class LlmsTxtGeneratorService
     ) {}
 
     /**
-     * Get llms.txt content for a specific site.
+     * Get llms.txt content for a site language.
      *
-     * Generates content for the default language (ID 0).
-     * Multi-language content is accessible via .md suffix
-     * on any page URL with the appropriate language prefix.
+     * Every language has its own llms.txt below its base (/llms.txt, /en/llms.txt, ...),
+     * which lists the pages in this language and links to the llms.txt of the other
+     * languages. Without a language, the default language is used.
      */
-    public function getContentForSite(Site $site): string
+    public function getContentForSite(Site $site, ?SiteLanguage $language = null): string
     {
-        $defaultLanguage = $site->getDefaultLanguage();
+        $language ??= $site->getDefaultLanguage();
         $settings = $this->getSettings($site);
         $excludePages = $this->parseExcludePages($settings['excludePages'] ?? '');
         $includeHidden = (bool)($settings['includeHidden'] ?? false);
-        $intro = trim((string)($settings['intro'] ?? ''));
         $enableMarkdown = (bool)($settings['enableMarkdown'] ?? true);
 
-        $pages = $this->pageTreeService->getPages($site, $defaultLanguage, $excludePages, $includeHidden);
+        $pages = $this->pageTreeService->getPages($site, $language, $excludePages, $includeHidden);
 
         if ($pages === []) {
             $this->logger->log(
@@ -48,18 +48,20 @@ final readonly class LlmsTxtGeneratorService
                 'No pages found for site {site} language {language}',
                 [
                     'site' => $site->getIdentifier(),
-                    'language' => $defaultLanguage->getLocale()->getLanguageCode(),
+                    'language' => $language->getLocale()->getLanguageCode(),
                 ],
             );
 
             return '';
         }
 
-        $baseUrl = $this->getBaseUrl($site, $defaultLanguage);
+        $baseUrl = $this->getBaseUrl($language);
+        $intro = $this->getIntro($language, $settings);
+        $languageLinks = $this->buildLanguageLinks($site, $language, $excludePages, $includeHidden);
 
         $apiKey = trim((string)($settings['apiKey'] ?? ''));
 
-        return $this->buildContent($site, $defaultLanguage, $pages, $baseUrl, $intro, $apiKey, $enableMarkdown);
+        return $this->buildContent($site, $language, $pages, $baseUrl, $intro, $apiKey, $enableMarkdown, $languageLinks);
     }
 
     /**
@@ -83,6 +85,7 @@ final readonly class LlmsTxtGeneratorService
      * Build the llms.txt content.
      *
      * @param array<int, array<string, mixed>> $pages
+     * @param list<string> $languageLinks
      */
     private function buildContent(
         Site $site,
@@ -92,6 +95,7 @@ final readonly class LlmsTxtGeneratorService
         string $intro,
         string $apiKey,
         bool $enableMarkdown,
+        array $languageLinks,
     ): string {
         $lines = [];
 
@@ -150,6 +154,14 @@ final readonly class LlmsTxtGeneratorService
             }
         }
 
+        // Links to the llms.txt of the other languages
+        if ($languageLinks !== []) {
+            $lines[] = '## ' . $this->getTranslation('languages');
+            $lines[] = '';
+            array_push($lines, ...$languageLinks);
+            $lines[] = '';
+        }
+
         // Page structure with descriptions (page tree, siblings sorted by priority)
         $lines[] = '## ' . $this->getTranslation('pageStructure');
         $lines[] = '';
@@ -161,10 +173,7 @@ final readonly class LlmsTxtGeneratorService
             $pageTitle = (string)($page['title'] ?? '');
             $pageUrl = $this->pageTreeService->getPageUrl($site, $pageUid, $language);
 
-            // Escape Markdown link syntax in title. Brackets become entities, as
-            // llmstxt.org parsers end the link name at the first "]", even at "\]".
-            $escapedTitle = str_replace(['[', ']', '(', ')'], ['&#91;', '&#93;', '\(', '\)'], $pageTitle);
-            $line = str_repeat('  ', $indent) . '- [' . $escapedTitle . '](' . $pageUrl . ')';
+            $line = str_repeat('  ', $indent) . '- [' . $this->escapeLinkText($pageTitle) . '](' . $pageUrl . ')';
 
             $notes = $this->buildPageNotes($page, $pageUrl, $enableMarkdown);
             if ($notes !== '') {
@@ -342,31 +351,89 @@ final readonly class LlmsTxtGeneratorService
     }
 
     /**
-     * Get the base URL for a site and language.
+     * Get the base URL of a language, without trailing slash (e.g. https://example.com/en).
      */
-    private function getBaseUrl(Site $site, SiteLanguage $language): string
+    private function getBaseUrl(SiteLanguage $language): string
     {
-        $languageId = $this->extractLanguageId($language);
-        $languageBase = (string)$language->getBase();
-        $languagePrefix = '';
-        if ($languageId > 0 && $languageBase !== '/' && $languageBase !== '') {
-            $languagePrefix = '/' . trim($languageBase, '/');
+        // 1. The language base already contains the site base if that is a full URL
+        $languageBase = $language->getBase();
+        if ($languageBase->getScheme() !== '' && $languageBase->getHost() !== '') {
+            return rtrim((string)$languageBase, '/');
         }
 
-        // 1. Use the site base from the site configuration if it's a full URL
-        $siteBase = (string)$site->getBase();
-        if (str_starts_with($siteBase, 'http://') || str_starts_with($siteBase, 'https://')) {
-            return rtrim($siteBase, '/') . $languagePrefix;
-        }
+        $basePath = rtrim($languageBase->getPath(), '/');
 
         // 2. Try TYPO3_REQUEST_HOST environment variable
         $requestHost = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
         if (\is_string($requestHost) && $requestHost !== '' && $requestHost !== 'http:') {
-            return rtrim($requestHost, '/') . $languagePrefix;
+            return rtrim($requestHost, '/') . $basePath;
         }
 
         // 3. Fallback: use relative path only
-        return $languagePrefix;
+        return $basePath;
+    }
+
+    /**
+     * Get the intro of the llms.txt of a language.
+     *
+     * The intro of the language in the site configuration comes first. The site
+     * setting llmsTxt.intro is the fallback for the default language only, as it
+     * is written in one language.
+     *
+     * @param array<string, mixed> $settings
+     */
+    private function getIntro(SiteLanguage $language, array $settings): string
+    {
+        $languageIntro = trim((string)($language->toArray()['llmsTxtIntro'] ?? ''));
+        if ($languageIntro !== '') {
+            return $languageIntro;
+        }
+
+        if ($this->extractLanguageId($language) === 0) {
+            return trim((string)($settings['intro'] ?? ''));
+        }
+
+        return '';
+    }
+
+    /**
+     * Build the links to the llms.txt of the other enabled languages of the site.
+     *
+     * Languages without pages are left out, as their llms.txt does not exist.
+     *
+     * @param array<int> $excludePages
+     * @return list<string>
+     */
+    private function buildLanguageLinks(Site $site, SiteLanguage $currentLanguage, array $excludePages, bool $includeHidden): array
+    {
+        $currentLanguageId = $this->extractLanguageId($currentLanguage);
+        $links = [];
+
+        foreach ($site->getLanguages() as $language) {
+            if ($this->extractLanguageId($language) === $currentLanguageId) {
+                continue;
+            }
+            if ($this->pageTreeService->getPages($site, $language, $excludePages, $includeHidden) === []) {
+                continue;
+            }
+
+            $url = $this->getBaseUrl($language) . '/' . LlmsTxtPath::FILE_NAME;
+            $links[] = '- [' . $this->escapeLinkText($language->getNavigationTitle()) . '](' . $url . '): '
+                . $language->getLocale()->getLanguageCode();
+        }
+
+        return $links;
+    }
+
+    /**
+     * Escape Markdown link syntax in a link text.
+     *
+     * Brackets become entities, as llmstxt.org parsers end the link name at the
+     * first "]", even at "\]".
+     */
+    private function escapeLinkText(string $text): string
+    {
+        return str_replace(['[', ']', '(', ')'], ['&#91;', '&#93;', '\\(', '\\)'], $text);
     }
 
     /**
@@ -406,6 +473,7 @@ final readonly class LlmsTxtGeneratorService
         $translations = [
             'pageStructure' => 'Page Structure',
             'keywords' => 'Keywords',
+            'languages' => 'Languages',
         ];
 
         return $translations[$key] ?? $key;

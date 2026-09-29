@@ -12,8 +12,8 @@
                 <target>Website-Beschreibung</target>
             </trans-unit>
             <trans-unit id="settings.description.llmsTxt.intro" resname="settings.description.llmsTxt.intro">
-                <source>Description text shown in the llms.txt intro section</source>
-                <target>Beschreibungstext für den Einleitungsabschnitt der llms.txt</target>
+                <source>Description text shown in the llms.txt intro section of the default language. The field "llms.txt Intro" of a language in the site configuration takes precedence, and is the only intro for the other languages.</source>
+                <target>Beschreibungstext für den Einleitungsabschnitt der llms.txt der Standardsprache. Das Feld „llms.txt-Intro“ einer Sprache in der Site-Konfiguration hat Vorrang und ist für die anderen Sprachen das einzige Intro.</target>
             </trans-unit>
             <trans-unit id="settings.llmsTxt.excludePages" resname="settings.llmsTxt.excludePages">
                 <source>Exclude Pages</source>

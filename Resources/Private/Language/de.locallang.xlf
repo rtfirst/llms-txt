@@ -67,6 +67,14 @@
                 <source>Priority for this page (0-100). In llms.txt, pages with higher values appear before the other pages with the same parent page. Default is 0 (normal sorting by page tree).</source>
                 <target>Priorität für diese Seite (0-100). In llms.txt erscheinen Seiten mit höheren Werten vor den anderen Seiten mit derselben Elternseite. Standard ist 0 (normale Sortierung nach Seitenbaum).</target>
             </trans-unit>
+            <trans-unit id="site_language.llmsTxtIntro" resname="site_language.llmsTxtIntro">
+                <source>llms.txt Intro</source>
+                <target>llms.txt-Intro</target>
+            </trans-unit>
+            <trans-unit id="site_language.llmsTxtIntro.description" resname="site_language.llmsTxtIntro.description">
+                <source>Short description of the website, shown as a quote below the title of the llms.txt of this language. If empty, the default language uses the site setting "Website Description", other languages have no intro.</source>
+                <target>Kurze Beschreibung der Website, erscheint als Zitat unter dem Titel der llms.txt dieser Sprache. Ist das Feld leer, nutzt die Standardsprache die Site-Einstellung „Website-Beschreibung“, andere Sprachen haben kein Intro.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

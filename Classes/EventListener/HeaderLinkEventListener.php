@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace RTfirst\LlmsTxt\EventListener;
 
+use RTfirst\LlmsTxt\Utility\LlmsTxtPath;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 
 /**
- * Adds <link rel="alternate"> to llms.txt in HTML header.
+ * Adds <link rel="alternate"> to the llms.txt of the page language in HTML header.
  * Only active when no API key is configured (public access).
  */
 final class HeaderLinkEventListener
 {
-    private const HEADER_LINK = '<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Guide">';
+    private const HEADER_LINK = '<link rel="alternate" type="text/plain" href="%s" title="LLM Content Guide">';
 
     public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
     {
@@ -30,6 +32,12 @@ final class HeaderLinkEventListener
             return;
         }
 
+        $language = $request->getAttribute('language');
+        $headerLink = \sprintf(
+            self::HEADER_LINK,
+            htmlspecialchars(LlmsTxtPath::forLanguage($language instanceof SiteLanguage ? $language : null)),
+        );
+
         // TYPO3 14: use getContent()/setContent(), TYPO3 13: use getController()->content
         // @phpstan-ignore function.impossibleType (runtime check for TYPO3 version compatibility)
         if (method_exists($event, 'getContent')) {
@@ -38,7 +46,7 @@ final class HeaderLinkEventListener
             if (str_contains($content, '</head>')) {
                 $event->setContent(str_replace(
                     '</head>',
-                    self::HEADER_LINK . "\n</head>",
+                    $headerLink . "\n</head>",
                     $content,
                 ));
             }
@@ -49,7 +57,7 @@ final class HeaderLinkEventListener
             if (str_contains($content, '</head>')) {
                 $controller->content = str_replace(
                     '</head>',
-                    self::HEADER_LINK . "\n</head>",
+                    $headerLink . "\n</head>",
                     $content,
                 );
             }

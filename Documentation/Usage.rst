@@ -13,11 +13,13 @@ This chapter explains how to access the LLM-optimized content.
 Accessing llms.txt
 ==================
 
-The llms.txt index file is available at the root of your website:
+The llms.txt index file is available at the root of your website, and below
+the base of every further language (see :ref:`usage-multi-language`):
 
 ..  code-block:: text
 
    https://example.com/llms.txt
+   https://example.com/en/llms.txt
 
 This file contains:
 
@@ -47,6 +49,10 @@ Example llms.txt Output
    **Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
    - **Example:** `https://example.com/about.md`
 
+   ## Languages
+
+   - [English](https://example.com/en/llms.txt): en
+
    ## Page Structure
 
    - [Home](https://example.com/): Welcome to our website with all important information. [Markdown](https://example.com/index.html.md)
@@ -57,7 +63,8 @@ Example llms.txt Output
 Each page is one line ``- [Title](url): notes`` as defined by
 `llmstxt.org <https://llmstxt.org/>`__. The notes contain the description,
 summary and keywords of the page and the link to its Markdown version, so the
-file can be read by llms.txt parsers.
+file can be read by llms.txt parsers. The ``## Languages`` section links to
+the llms.txt of the other languages; it is omitted on single-language sites.
 
 With :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` disabled, the
 Markdown hints (including the authentication hints) and the ``[Markdown](…)``
@@ -145,6 +152,30 @@ Or simply:
 
 Multi-Language Access
 =====================
+
+Every enabled language of a site has its own llms.txt below its base:
+
+..  code-block:: text
+
+   # Default language
+   https://example.com/llms.txt
+
+   # English (base /en/)
+   https://example.com/en/llms.txt
+
+   # Language with its own domain
+   https://example.co.uk/llms.txt
+
+Each file lists the pages in its language, with translated titles,
+descriptions and URLs. With ``fallbackType: strict``, untranslated pages are
+left out. The ``## Languages`` section of each file links to the llms.txt of
+the other languages. A language without pages has no llms.txt (404).
+
+The intro comes from the field :ref:`llms.txt Intro <confval-language-intro>`
+of the language, or for the default language from
+:ref:`llmsTxt.intro <confval-intro>`. The API key
+(:ref:`llmsTxt.apiKey <confval-apiKey>`) protects the llms.txt of every
+language.
 
 Access page content in different languages using the language URL prefix
 with the ``.md`` suffix:
