@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- PHP 8.5 support for TYPO3 14, including unit and functional CI coverage.
+- PHP 8.5 support for TYPO3 13/14, including unit and functional CI coverage.
 
 ## [1.1.0] - 2026-09-29
 
