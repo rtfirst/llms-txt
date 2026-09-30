@@ -301,7 +301,7 @@ The extension includes a GitHub Actions workflow (`.github/workflows/ci.yaml`) t
 - PHP-CS-Fixer (code style)
 - PHPStan Level 8 (static analysis, TYPO3 13)
 - Rector (code modernization)
-- Unit and functional tests (PHP 8.2-8.4, TYPO3 13 & 14)
+- Unit and functional tests (PHP 8.2-8.5, TYPO3 13 & 14)
 - TER artefact check (classic mode, TYPO3 13 & 14)
 
 Publishing to the TER only happens for version tags (`.github/workflows/ter-publish.yaml`), which run the same checks first.
