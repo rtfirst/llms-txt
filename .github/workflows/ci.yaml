@@ -41,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.2', '8.3', '8.4']
+        php-version: ['8.2', '8.3', '8.4', '8.5']
         typo3-version: ['^13.4']
         # Note: TYPO3 14 excluded until saschaegerer/phpstan-typo3 supports it
     steps:
@@ -116,7 +116,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.2', '8.3', '8.4']
+        php-version: ['8.2', '8.3', '8.4', '8.5']
         typo3-version: ['^13.4', '^14.0']
         exclude:
           # TYPO3 14 requires PHP 8.3+
@@ -166,7 +166,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.2', '8.3', '8.4']
+        php-version: ['8.2', '8.3', '8.4', '8.5']
         typo3-version: ['^13.4', '^14.0']
         exclude:
           # TYPO3 14 requires PHP 8.3+
