@@ -62,6 +62,25 @@ final readonly class PageTreeService
     }
 
     /**
+     * Whether the frontend redirects a page to its target instead of rendering
+     * it (links and shortcuts). These pages have no content of their own, so
+     * there is no Markdown version of them.
+     *
+     * Mount points are rendered at their own URL, also with the content of the
+     * mounted page.
+     *
+     * @param array<string, mixed> $page
+     */
+    public function isRedirectPage(array $page): bool
+    {
+        return \in_array(
+            (int)($page['doktype'] ?? 0),
+            [PageRepository::DOKTYPE_LINK, PageRepository::DOKTYPE_SHORTCUT],
+            true,
+        );
+    }
+
+    /**
      * Get a single page record.
      *
      * @return array<string, mixed>|null

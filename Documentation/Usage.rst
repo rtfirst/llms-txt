@@ -44,9 +44,9 @@ Example llms.txt Output
    **Language:** de
    **Generated:** 2026-01-31 12:00:00
 
-   This site provides LLM-friendly Markdown output for all pages.
+   This site provides LLM-friendly Markdown output for all content pages.
 
-   **Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.
+   **Markdown Format:** Append `.md` to a page URL to get plain Markdown with YAML frontmatter. Pages that only redirect to another URL have no Markdown version.
    - **Example:** `https://example.com/about.md`
 
    ## Languages
@@ -59,12 +59,16 @@ Example llms.txt Output
      - [About](https://example.com/about): Learn about our company history and values. [Markdown](https://example.com/about.md)
      - [Services](https://example.com/services): Professional services for your needs. Keywords: services, consulting, support. [Markdown](https://example.com/services.md)
      - [Contact](https://example.com/contact): Get in touch with us via phone or email. [Markdown](https://example.com/contact.md)
+     - [Partner](https://example.com/partner): Our partner for logistics.
 
 Each page is one line ``- [Title](url): notes`` as defined by
 `llmstxt.org <https://llmstxt.org/>`__. The notes contain the description,
 summary and keywords of the page and the link to its Markdown version, so the
-file can be read by llms.txt parsers. The ``## Languages`` section links to
-the llms.txt of the other languages; it is omitted on single-language sites.
+file can be read by llms.txt parsers. Pages that TYPO3 only redirects to
+their target (page types "Link" and "Shortcut") have no content of their own
+and are listed without the Markdown link. The ``## Languages`` section links
+to the llms.txt of the other languages; it is omitted on single-language
+sites.
 
 With :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` disabled, the
 Markdown hints (including the authentication hints) and the ``[Markdown](…)``
@@ -81,6 +85,9 @@ YAML frontmatter.
 ..  code-block:: text
 
    https://example.com/about.md
+
+Pages of type "Link" or "Shortcut" have no content of their own: their
+``.md`` URL redirects to the target like the page itself.
 
 ..  note::
 

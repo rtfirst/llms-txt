@@ -1,0 +1,8 @@
+"pages"
+,"uid","pid","sys_language_uid","l10n_parent","title","doktype","slug","sorting","hidden","deleted","tx_llmstxt_exclude","tx_llmstxt_description","shortcut","shortcut_mode","mount_pid","mount_pid_ol"
+,1,0,0,0,"Root",1,"/",1,0,0,0,"",0,0,0,0
+,2,1,0,0,"Services",4,"/services",1,0,0,0,"",0,1,0,0
+,3,2,0,0,"Consulting",1,"/services/consulting",1,0,0,0,"",0,0,0,0
+,4,1,0,0,"Partner",3,"/partner",2,0,0,0,"Our partner company",0,0,0,0
+,5,1,0,0,"Shared content",7,"/shared-content",3,0,0,0,"",0,0,3,1
+,6,1,0,0,"Own content",7,"/own-content",4,0,0,0,"",0,0,3,0
