@@ -134,7 +134,7 @@ final readonly class LlmsTxtGeneratorService
             $lines[] = 'This site provides LLM-friendly Markdown output for all content pages.';
             $lines[] = '';
             $lines[] = '**Markdown Format:** Append `.md` to a page URL to get plain Markdown with YAML frontmatter.'
-                . ' Pages that only redirect to another URL have no Markdown version.';
+                . ' Pages that only link to another page or URL are listed without a Markdown link.';
             $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
             $lines[] = '';
 
@@ -220,8 +220,8 @@ final readonly class LlmsTxtGeneratorService
         }
 
         // Add format access hint (spec-compliant .md suffix), unless disabled or
-        // the page is redirected by the frontend and has no content of its own
-        if ($enableMarkdown && !$this->pageTreeService->isRedirectPage($page)) {
+        // the page is a link or shortcut without content of its own
+        if ($enableMarkdown && !$this->pageTreeService->isLinkOrShortcut($page)) {
             $notes[] = '[Markdown](' . $this->buildMarkdownUrl($pageUrl) . ')';
         }
 
@@ -315,9 +315,9 @@ final readonly class LlmsTxtGeneratorService
     {
         $rootPageId = $site->getRootPageId();
 
-        // Find first non-root page, skipping pages redirected by the frontend
+        // Find first non-root page, skipping links and shortcuts
         foreach (array_keys($pageDepths) as $pageUid) {
-            if ($pageUid !== $rootPageId && !$this->pageTreeService->isRedirectPage($pages[$pageUid])) {
+            if ($pageUid !== $rootPageId && !$this->pageTreeService->isLinkOrShortcut($pages[$pageUid])) {
                 return $this->pageTreeService->getPageUrl($site, $pageUid, $language);
             }
         }

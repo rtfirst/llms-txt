@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Bug:** `llms.txt` linked a Markdown version for pages that TYPO3 does not render but redirects (issue [#23](https://github.com/rtfirst/llms-txt/issues/23)): pages of type "Link" (external or internal target) and "Shortcut". Their `.md` URL only redirected to the HTML of the target or to an external site. These pages are now listed without the `[Markdown](…)` link; their description, summary and keywords remain. The Markdown example in the header of `llms.txt` skips these pages, and the header says that Markdown is available for content pages. Mount points and page types of other extensions keep their Markdown link.
+- **Bug:** `llms.txt` linked a Markdown version for pages of type "Link" (external or internal target) and "Shortcut" (issue [#23](https://github.com/rtfirst/llms-txt/issues/23)). These pages only point to another page or URL and have no content of their own: their `.md` URL redirected to the HTML of the target or to an external site, or showed the content of the target page (TYPO3 14, "Link" to a page). They are now listed without the `[Markdown](…)` link; their description, summary and keywords remain. The Markdown example in the header of `llms.txt` skips these pages, and the header says that Markdown is available for content pages. Mount points and page types of other extensions keep their Markdown link.
 
 ## [1.1.1] - 2026-09-30
 

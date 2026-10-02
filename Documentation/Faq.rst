@@ -110,10 +110,14 @@ the pages without the Markdown hints and the Markdown links.
 Why do some pages have no Markdown link in llms.txt?
 ----------------------------------------------------
 
-TYPO3 does not render pages of type "Link" or "Shortcut", but redirects them
-to their target. They have no content of their own, so llms.txt lists them
-without the Markdown link. The target page has its own entry if it belongs to
-the site.
+Pages of type "Link" or "Shortcut" only point to another page or URL and have
+no content of their own, so llms.txt lists them without the Markdown link.
+TYPO3 redirects them to their target, or shows the target page for a "Link" to
+a page in TYPO3 14. The target page has its own entry if it belongs to the
+site.
+
+Mount points keep their Markdown link: they bring the content of the mounted
+page into the site, which may not be listed anywhere else.
 
 ..  _faq-usage:
 

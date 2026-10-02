@@ -26,7 +26,7 @@ final class LlmsTxtGeneratorServiceTest extends FunctionalTestCase
     }
 
     #[Test]
-    public function pagesRedirectedByTheFrontendHaveNoMarkdownLink(): void
+    public function linkAndShortcutPagesHaveNoMarkdownLink(): void
     {
         $lines = explode("\n", $this->generate());
 
@@ -46,7 +46,7 @@ final class LlmsTxtGeneratorServiceTest extends FunctionalTestCase
     }
 
     #[Test]
-    public function markdownExampleIsNoPageRedirectedByTheFrontend(): void
+    public function markdownExampleIsNoLinkOrShortcut(): void
     {
         // The first page below the root page is the shortcut "Services"
         self::assertStringContainsString(

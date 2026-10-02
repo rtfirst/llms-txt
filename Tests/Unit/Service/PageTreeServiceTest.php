@@ -41,8 +41,8 @@ final class PageTreeServiceTest extends TestCase
      */
     #[Test]
     #[DataProvider('pageProvider')]
-    public function isRedirectPageDetectsPagesTheFrontendRedirects(array $page, bool $expected): void
+    public function isLinkOrShortcutDetectsLinkAndShortcutPages(array $page, bool $expected): void
     {
-        self::assertSame($expected, $this->service->isRedirectPage($page));
+        self::assertSame($expected, $this->service->isLinkOrShortcut($page));
     }
 }

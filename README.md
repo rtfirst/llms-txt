@@ -228,7 +228,7 @@ Invalid or missing API key returns `401 Unauthorized`:
 
 This site provides LLM-friendly Markdown output for all content pages.
 
-**Markdown Format:** Append `.md` to a page URL to get plain Markdown with YAML frontmatter. Pages that only redirect to another URL have no Markdown version.
+**Markdown Format:** Append `.md` to a page URL to get plain Markdown with YAML frontmatter. Pages that only link to another page or URL are listed without a Markdown link.
 - **Example:** `https://example.com/about.md`
 
 ## Languages
@@ -244,7 +244,7 @@ This site provides LLM-friendly Markdown output for all content pages.
   - [Partner](https://example.com/partner): Our partner for logistics.
 ```
 
-Each page is one line `- [Title](url): notes` as defined by [llmstxt.org](https://llmstxt.org/). The notes contain the description, summary and keywords of the page and the link to its Markdown version, so the file can be read by llms.txt parsers. Pages that TYPO3 only redirects to their target (page types "Link" and "Shortcut") have no content of their own and are listed without the Markdown link. The `## Languages` section links to the `llms.txt` of the other languages; it is omitted on single-language sites. With `llmsTxt.enableMarkdown` disabled, the Markdown hints and the `[Markdown](…)` links are omitted.
+Each page is one line `- [Title](url): notes` as defined by [llmstxt.org](https://llmstxt.org/). The notes contain the description, summary and keywords of the page and the link to its Markdown version, so the file can be read by llms.txt parsers. Pages of type "Link" and "Shortcut" only point to another page or URL and have no content of their own, so they are listed without the Markdown link. The `## Languages` section links to the `llms.txt` of the other languages; it is omitted on single-language sites. With `llmsTxt.enableMarkdown` disabled, the Markdown hints and the `[Markdown](…)` links are omitted.
 
 ## robots.txt Configuration
 

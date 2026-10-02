@@ -62,16 +62,17 @@ final readonly class PageTreeService
     }
 
     /**
-     * Whether the frontend redirects a page to its target instead of rendering
-     * it (links and shortcuts). These pages have no content of their own, so
-     * there is no Markdown version of them.
+     * Whether a page is a link or a shortcut. These pages only point to another
+     * page or URL and have no content of their own, so there is no Markdown
+     * version of them: the frontend redirects them to their target, or shows
+     * the target page (TYPO3 14, link to a page).
      *
-     * Mount points are rendered at their own URL, also with the content of the
-     * mounted page.
+     * Mount points are no such pages: they bring the content of the mounted
+     * page into the site, which may not be listed anywhere else.
      *
      * @param array<string, mixed> $page
      */
-    public function isRedirectPage(array $page): bool
+    public function isLinkOrShortcut(array $page): bool
     {
         return \in_array(
             (int)($page['doktype'] ?? 0),
