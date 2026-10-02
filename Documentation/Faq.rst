@@ -105,6 +105,20 @@ Yes, disable :ref:`llmsTxt.enableMarkdown <confval-enableMarkdown>` in the
 Site Settings. ``.md`` URLs then return a regular 404, and llms.txt only lists
 the pages without the Markdown hints and the Markdown links.
 
+..  _faq-no-markdown-link:
+
+Why do some pages have no Markdown link in llms.txt?
+----------------------------------------------------
+
+Pages of type "Link" or "Shortcut" only point to another page or URL and have
+no content of their own, so llms.txt lists them without the Markdown link.
+TYPO3 redirects them to their target, or shows the target page for a "Link" to
+a page in TYPO3 14. The target page has its own entry if it belongs to the
+site.
+
+Mount points keep their Markdown link: they bring the content of the mounted
+page into the site, which may not be listed anywhere else.
+
 ..  _faq-usage:
 
 Usage Questions

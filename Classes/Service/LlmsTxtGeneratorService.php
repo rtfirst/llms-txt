@@ -128,12 +128,13 @@ final readonly class LlmsTxtGeneratorService
         // the authentication hints: llms.txt is then the only protected endpoint, and
         // whoever can read these hints has already authenticated for it.
         if ($enableMarkdown) {
-            // Find an example page (first non-root page for realistic examples)
-            $examplePageUrl = $this->findExamplePageUrl($site, $pageDepths, $language);
+            // Find an example page (first non-root page with a Markdown version)
+            $examplePageUrl = $this->findExamplePageUrl($site, $pages, $pageDepths, $language);
 
-            $lines[] = 'This site provides LLM-friendly Markdown output for all pages.';
+            $lines[] = 'This site provides LLM-friendly Markdown output for all content pages.';
             $lines[] = '';
-            $lines[] = '**Markdown Format:** Append `.md` to any page URL to get plain Markdown with YAML frontmatter.';
+            $lines[] = '**Markdown Format:** Append `.md` to a page URL to get plain Markdown with YAML frontmatter.'
+                . ' Pages that only link to another page or URL are listed without a Markdown link.';
             $lines[] = '- **Example:** `' . $this->buildMarkdownUrl($examplePageUrl) . '`';
             $lines[] = '';
 
@@ -188,7 +189,8 @@ final readonly class LlmsTxtGeneratorService
 
     /**
      * Build the notes after a page link: description, summary, keywords and the
-     * Markdown link (unless disabled), joined to a single line.
+     * Markdown link (unless disabled or the page has no Markdown version), joined
+     * to a single line.
      *
      * @param array<string, mixed> $page
      */
@@ -217,8 +219,9 @@ final readonly class LlmsTxtGeneratorService
             $notes[] = $text;
         }
 
-        // Add format access hint (spec-compliant .md suffix), unless disabled
-        if ($enableMarkdown) {
+        // Add format access hint (spec-compliant .md suffix), unless disabled or
+        // the page is a link or shortcut without content of its own
+        if ($enableMarkdown && !$this->pageTreeService->isLinkOrShortcut($page)) {
             $notes[] = '[Markdown](' . $this->buildMarkdownUrl($pageUrl) . ')';
         }
 
@@ -302,22 +305,24 @@ final readonly class LlmsTxtGeneratorService
     /**
      * Find a suitable example page URL for documentation.
      *
-     * Returns the first non-root page URL, or the root page URL if no other pages exist.
+     * Returns the URL of the first non-root page with a Markdown version, or the
+     * root page URL if there is no such page.
      *
-     * @param array<int, mixed> $pages Pages indexed by UID, in output order
+     * @param array<int, array<string, mixed>> $pages
+     * @param array<int, int> $pageDepths Depth of each page, indexed by UID, in output order
      */
-    private function findExamplePageUrl(Site $site, array $pages, SiteLanguage $language): string
+    private function findExamplePageUrl(Site $site, array $pages, array $pageDepths, SiteLanguage $language): string
     {
         $rootPageId = $site->getRootPageId();
 
-        // Find first non-root page
-        foreach (array_keys($pages) as $pageUid) {
-            if ($pageUid !== $rootPageId) {
+        // Find first non-root page, skipping links and shortcuts
+        foreach (array_keys($pageDepths) as $pageUid) {
+            if ($pageUid !== $rootPageId && !$this->pageTreeService->isLinkOrShortcut($pages[$pageUid])) {
                 return $this->pageTreeService->getPageUrl($site, $pageUid, $language);
             }
         }
 
-        // Fallback to root page if no other pages exist
+        // Fallback to root page if no other page has a Markdown version
         return $this->pageTreeService->getPageUrl($site, $rootPageId, $language);
     }
 
