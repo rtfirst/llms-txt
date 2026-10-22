@@ -95,7 +95,7 @@ final class MarkdownRendererService
         if (preg_match('/<title[^>]*>([^<]+)<\/title>/i', $html, $matches)) {
             $title = trim(html_entity_decode($matches[1], ENT_QUOTES, 'UTF-8'));
             // Remove site name suffix if present (e.g., "Page Title | Site Name")
-            $title = preg_replace('/\s*[|–-]\s*[^|–-]+$/', '', $title) ?? $title;
+            $title = preg_replace('/\s*[|–-]\s*[^|–-]+$/u', '', $title) ?? $title;
             return $title;
         }
 

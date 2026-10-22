@@ -5,6 +5,12 @@ All notable changes to the rt_llms_txt extension will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **Bug:** The `title` in the YAML front matter and the H1 of the Markdown output contained invalid UTF-8 when the `<title>` of the page ended with a site name after an en dash, for example `Our Services – Example Site` (issue [#27](https://github.com/rtfirst/llms-txt/issues/27)). The pattern that removes the site name now matches whole characters instead of bytes. Site names with other multi-byte characters, for example `Café Ólafur`, typographic quotes or `™`, are no longer cut in the middle of a character or at the wrong place either. Titles without such characters give the same result as before.
+
 ## [1.1.2] - 2026-10-02
 
 ### Fixed
