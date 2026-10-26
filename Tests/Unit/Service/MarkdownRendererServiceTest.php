@@ -31,6 +31,36 @@ final class MarkdownRendererServiceTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('titleWithSiteNameProvider')]
+    public function renderStripsSiteNameSuffixFromTitle(string $htmlTitle, string $expectedTitle): void
+    {
+        $html = '<html><head><title>' . $htmlTitle . '</title></head><body><main><p>Content</p></main></body></html>';
+
+        $result = $this->service->render($html, 1, null, 'https://example.com');
+
+        self::assertTrue(mb_check_encoding($result, 'UTF-8'), 'Markdown output is not valid UTF-8');
+        self::assertStringContainsString('title: "' . $expectedTitle . '"' . "\n", $result);
+        self::assertStringContainsString("\n# " . $expectedTitle . "\n", $result);
+    }
+
+    /**
+     * Multi-byte characters in the separator or the site name must be matched as whole characters
+     *
+     * @return array<string, array{0: string, 1: string}>
+     */
+    public static function titleWithSiteNameProvider(): array
+    {
+        return [
+            'pipe separator' => ['About | Example Site', 'About'],
+            'hyphen separator' => ['Über uns - Example Site', 'Über uns'],
+            'en dash separator' => ['Our Services – Example Site', 'Our Services'],
+            'en dash separator and umlauts in site name' => ['Über uns – Müller & Söhne', 'Über uns'],
+            'multi-byte character in site name' => ['Startseite | Café Ólafur', 'Startseite'],
+            'typographic quotes in site name' => ['Startseite - Bäckerei „Brot“', 'Startseite'],
+        ];
+    }
+
+    #[Test]
     public function renderExtractsMetaDescription(): void
     {
         $html = '<html><head><title>Test</title><meta name="description" content="Test description"></head><body></body></html>';
